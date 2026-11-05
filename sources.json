@@ -98,6 +98,9 @@
         "meta:gemini"
       ]
     },
+    "ai-other": {
+      "take": "meta:category-ai-!cn"
+    },
     "telegram": {
       "union": [
         "senshinya:Telegram",

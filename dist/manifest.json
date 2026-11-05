@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T19:18:12.965Z",
+  "generated_at": "2026-11-05T19:23:26.132Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
@@ -348,6 +348,26 @@
       },
       "srs_sha256": "129d108829f3e412cc1ee2b3139bbf01e4e4eb91e33ebf52fc159fd2150a5ba5",
       "srs_bytes": 219
+    },
+    "ai-other": {
+      "sources": [
+        {
+          "ref": "meta:category-ai-!cn",
+          "counts": {
+            "domain": 213,
+            "domain_suffix": 179,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 213,
+      "counts": {
+        "domain": 34,
+        "domain_suffix": 179
+      },
+      "srs_sha256": "ba9ad505b18e4558460cc4f1f8bd404b5bd73665a9c1c565c40338700957eff5",
+      "srs_bytes": 2062
     },
     "telegram": {
       "sources": [
