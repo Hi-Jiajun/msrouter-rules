@@ -56,3 +56,50 @@ FORCE_FETCH=1 node tools/build.mjs
 `.github/workflows/build.yml` 每天北京时间 04:00 构建，产出滚动 release `rules-YYYYMMDD`，资产为 `dist/srs/*.srs` + `dist/manifest.json`。
 
 消费端**不使用** sing-box 的 `type: remote`（会形成「拉规则要代理、代理要规则」的鸡生蛋），而是保持 `type: local`，由路由器上的定时任务拉 release → 校验 sha256 → 原子替换 → 重载。
+
+## 消费端：怎么把 .srs 送到网关
+
+sing-box 侧用 `type: local`（不用 `remote`，避免「拉规则要代理、代理要规则」的鸡生蛋）。
+
+在运行 sing-box 的容器/主机上加一个定时任务：
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+RULES_DIR=/etc/sing-box/rules
+TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
+
+TAG=$(gh release list --repo Hi-Jiajun/msrouter-rules --limit 1 --json tagName --jq '.[0].tagName')
+gh release download "$TAG" --repo Hi-Jiajun/msrouter-rules --pattern '*.srs' --pattern 'manifest.json' --dir "$TMP"
+
+cd "$TMP"
+if ! sha256sum -c <(jq -r '.rule_sets | to_entries[] | "\(.value.srs_sha256)  \(.key).srs"' manifest.json); then
+  echo "校验失败，放弃本次更新"; exit 1
+fi
+
+mkdir -p "$RULES_DIR"
+cp ./*.srs "$RULES_DIR/"
+sing-box check -c /etc/sing-box/config.json
+systemctl reload-or-restart sing-box   # 或 docker restart
+```
+
+要点：
+
+1. **先校验 sha256 再替换**，`manifest.json` 里每个 `.srs` 都有 `srs_sha256`。
+2. **替换前跑一次 `sing-box check`**。
+3. 规则集更新不频繁（上游每日构建，但分类变化是周级），定时任务一天一次足够。
+
+## 构建产物的可审计性
+
+`dist/manifest.json` 记录：
+
+- 每个 `rule_set` 的 `sources`（ref + 上游 URL + 上游文件 `sha256`）
+- 条目数、`.srs` 的 `sha256` 与字节数
+- 构建时的 sing-box 版本
+- 断言与阈值检查结果
+
+要回答「这个版本里的 netflix 集是从哪来的、有多少条」，看这一个文件就够。
+
+## 回归防护
+
+`tests/thresholds.json` 给每个规则集设了条目数下限（当前值的 70%）。上游某天把某个分类清空、或者格式变化导致解析出 0 条时，**光靠域名断言是发现不了的**（那几个测试域名可能还在），阈值检查会直接让构建失败。

@@ -1,11 +1,13 @@
 {
-  "generated_at": "2026-11-05T19:40:11.557Z",
+  "generated_at": "2026-11-05T22:32:59.112Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
       "sources": [
         {
           "ref": "senshinya:ChinaMax",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "8f2d15cd9d924ee3929f4edbbdbf39eb06c8291b443eb31a6829abff7c1c3cfc",
           "counts": {
             "domain": 271,
             "domain_suffix": 110207,
@@ -27,6 +29,8 @@
       "sources": [
         {
           "ref": "senshinya:Netflix",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "f93a17710532ac3f1f46eab07eff687edd5198e960148c6cf970cf780faa4c18",
           "counts": {
             "domain": 3,
             "domain_suffix": 30,
@@ -36,6 +40,8 @@
         },
         {
           "ref": "meta:netflix",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 24,
             "domain_suffix": 24,
@@ -57,6 +63,8 @@
       "sources": [
         {
           "ref": "senshinya:Disney",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "25f44232634e6a05f3987d512120880083bb4de7ba14bc6c09cef3b52363e229",
           "counts": {
             "domain": 0,
             "domain_suffix": 172,
@@ -66,6 +74,8 @@
         },
         {
           "ref": "meta:disney",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 224,
             "domain_suffix": 218,
@@ -86,6 +96,8 @@
       "sources": [
         {
           "ref": "senshinya:HBO",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "ab46a97664de2876fba35d65ed8c03d8ed7c6ca838a58c5e18b9940031bdb670",
           "counts": {
             "domain": 0,
             "domain_suffix": 47,
@@ -95,6 +107,8 @@
         },
         {
           "ref": "meta:hbo",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 64,
             "domain_suffix": 65,
@@ -114,6 +128,8 @@
       "sources": [
         {
           "ref": "senshinya:Hulu",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "b2f079c8aa3c6a3579f1fb2fc548d726677fd84ded551f9b818795c2a72945fd",
           "counts": {
             "domain": 1,
             "domain_suffix": 57,
@@ -123,6 +139,8 @@
         },
         {
           "ref": "meta:hulu",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 48,
             "domain_suffix": 47,
@@ -143,6 +161,8 @@
       "sources": [
         {
           "ref": "senshinya:PrimeVideo",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "0c83138f0892decc9f7f7960c60eb7c7db88884a270ba95f0a5fa59c0c74e072",
           "counts": {
             "domain": 9,
             "domain_suffix": 6,
@@ -152,6 +172,8 @@
         },
         {
           "ref": "meta:primevideo",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 24,
             "domain_suffix": 14,
@@ -173,6 +195,8 @@
       "sources": [
         {
           "ref": "senshinya:AppleTV",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "af222c8014de0d2d8d264be44892e1e7c8c1841e77a7ee3e54f14912c5feccf9",
           "counts": {
             "domain": 6,
             "domain_suffix": 1,
@@ -193,6 +217,8 @@
       "sources": [
         {
           "ref": "senshinya:YouTube",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "1e0af713679e20085994835e43319436f96ef4ef00bfd25ba7178ff84de13408",
           "counts": {
             "domain": 0,
             "domain_suffix": 179,
@@ -202,6 +228,8 @@
         },
         {
           "ref": "meta:youtube",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 177,
             "domain_suffix": 177,
@@ -223,6 +251,8 @@
       "sources": [
         {
           "ref": "senshinya:TikTok",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "d731d645aefedc196be5dd23aa2e525bbc1708dd1a8c6dbe15964c9ff2d198d0",
           "counts": {
             "domain": 4,
             "domain_suffix": 28,
@@ -232,6 +262,8 @@
         },
         {
           "ref": "meta:tiktok",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 40,
             "domain_suffix": 34,
@@ -253,6 +285,8 @@
       "sources": [
         {
           "ref": "meta:category-ai-!cn",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 213,
             "domain_suffix": 179,
@@ -262,6 +296,8 @@
         },
         {
           "ref": "local:ai",
+          "url": "file://supplements/{cat}.list",
+          "upstream_sha256": "9e599043962fff2e0b0d276f5be9bde943613e82083baa54ff65a3ca1799be92",
           "counts": {
             "domain": 0,
             "domain_suffix": 9,
@@ -282,6 +318,8 @@
       "sources": [
         {
           "ref": "senshinya:Telegram",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "ed9f13c52867be425dc8ab4f1cced3ded006863343a562ea6a4b92787bd0643b",
           "counts": {
             "domain": 2,
             "domain_suffix": 22,
@@ -291,6 +329,8 @@
         },
         {
           "ref": "meta:telegram",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 21,
             "domain_suffix": 21,
@@ -312,6 +352,8 @@
       "sources": [
         {
           "ref": "senshinya:Twitter",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "a0c05533c7aea0a9f48b1c44615effa04a10fb0b0cc33a8ffed768c86c809ab5",
           "counts": {
             "domain": 0,
             "domain_suffix": 26,
@@ -321,6 +363,8 @@
         },
         {
           "ref": "meta:twitter",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 24,
             "domain_suffix": 24,
@@ -341,6 +385,8 @@
       "sources": [
         {
           "ref": "senshinya:Facebook",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "e083848cbd875cfc762960452bc7b469aa3949a0ee1bb17bfe155c2030f43960",
           "counts": {
             "domain": 0,
             "domain_suffix": 544,
@@ -350,6 +396,8 @@
         },
         {
           "ref": "meta:facebook",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 397,
             "domain_suffix": 396,
@@ -370,6 +418,8 @@
       "sources": [
         {
           "ref": "senshinya:Instagram",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "b02de2e460fa0af611304affab774328dc310f10f96601545567e554c17bfb82",
           "counts": {
             "domain": 0,
             "domain_suffix": 3,
@@ -379,6 +429,8 @@
         },
         {
           "ref": "meta:instagram",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 74,
             "domain_suffix": 74,
@@ -399,6 +451,8 @@
       "sources": [
         {
           "ref": "senshinya:GitHub",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "1f3be38e5771d8df47613800739962efd6294aaf3002e92074c870fd3dbbeb32",
           "counts": {
             "domain": 0,
             "domain_suffix": 30,
@@ -408,6 +462,8 @@
         },
         {
           "ref": "meta:github",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 65,
             "domain_suffix": 33,
@@ -429,6 +485,8 @@
       "sources": [
         {
           "ref": "senshinya:Spotify",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "982b1d05ab56492089771655a7df853fa6918798d08c3ad2d2b1608aa465ed01",
           "counts": {
             "domain": 6,
             "domain_suffix": 20,
@@ -438,6 +496,8 @@
         },
         {
           "ref": "meta:spotify",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 28,
             "domain_suffix": 18,
@@ -459,6 +519,8 @@
       "sources": [
         {
           "ref": "senshinya:PayPal",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "1956b31cbe2c48cd067ec726a186f2d1a87ae304be3db876333299c82ef54e87",
           "counts": {
             "domain": 0,
             "domain_suffix": 246,
@@ -468,6 +530,8 @@
         },
         {
           "ref": "meta:paypal",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 245,
             "domain_suffix": 244,
@@ -488,6 +552,8 @@
       "sources": [
         {
           "ref": "senshinya:Speedtest",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "3deae7142a121cef6355efaa0e03aec161a302545a05c7f42804f829d51820b7",
           "counts": {
             "domain": 0,
             "domain_suffix": 7,
@@ -497,6 +563,8 @@
         },
         {
           "ref": "meta:speedtest",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 20,
             "domain_suffix": 19,
@@ -518,6 +586,8 @@
       "sources": [
         {
           "ref": "senshinya:Apple",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "47f7bb93080d38450e15d2bfeecb5fe3a49ac53a193e4763f68b2ba67fd5eb15",
           "counts": {
             "domain": 9,
             "domain_suffix": 1550,
@@ -527,6 +597,8 @@
         },
         {
           "ref": "meta:apple",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 1789,
             "domain_suffix": 1540,
@@ -548,6 +620,8 @@
       "sources": [
         {
           "ref": "senshinya:Microsoft",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "385ca6a43c4a8a1fc7f11dae69a303345d71bc91bcd1073657735562b1f99f09",
           "counts": {
             "domain": 1,
             "domain_suffix": 663,
@@ -557,6 +631,8 @@
         },
         {
           "ref": "meta:microsoft",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 743,
             "domain_suffix": 637,
@@ -578,6 +654,8 @@
       "sources": [
         {
           "ref": "senshinya:Google",
+          "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+          "upstream_sha256": "058a65e8c9d00f2d54f754de3ac0f7478e89dbb26fecb19e65ddba5408cf6869",
           "counts": {
             "domain": 1,
             "domain_suffix": 684,
@@ -587,6 +665,8 @@
         },
         {
           "ref": "meta:google",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
           "counts": {
             "domain": 1038,
             "domain_suffix": 839,
@@ -608,6 +688,8 @@
       "sources": [
         {
           "ref": "aethersailor:Custom_Direct",
+          "url": "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/{cat}.list",
+          "upstream_sha256": "6fd4bd1c93ee115b89c75b2bfafbc289f444c80d0b8a7c69b8afb6bb7fe047e6",
           "counts": {
             "domain": 0,
             "domain_suffix": 1134,
@@ -617,6 +699,8 @@
         },
         {
           "ref": "local:force-direct",
+          "url": "file://supplements/{cat}.list",
+          "upstream_sha256": "d4ed684e72e1b030eaf13cee250f2fc9c22178b622d11f5790880bbcba313d70",
           "counts": {
             "domain": 0,
             "domain_suffix": 2,
@@ -637,6 +721,8 @@
       "sources": [
         {
           "ref": "aethersailor:Custom_Proxy",
+          "url": "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/{cat}.list",
+          "upstream_sha256": "d7a1b7b5f40e7bf40a28ea925a26f8b5cd1c6303ee2974f934b845bc032c7333",
           "counts": {
             "domain": 0,
             "domain_suffix": 17,
@@ -646,6 +732,8 @@
         },
         {
           "ref": "loyalsoldier:gfw",
+          "url": "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/{cat}.txt",
+          "upstream_sha256": "3163a5fa53aedf10425414d08039f332543801567db75182407f1c330be57c98",
           "counts": {
             "domain": 0,
             "domain_suffix": 4452,
@@ -665,6 +753,8 @@
       "sources": [
         {
           "ref": "aethersailor:Game_Download_CDN",
+          "url": "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/{cat}.list",
+          "upstream_sha256": "7bc5063b8cac136b51071988b9eaddca521dba54982df0eb90c46fa06150431e",
           "counts": {
             "domain": 489,
             "domain_suffix": 5,
@@ -674,6 +764,8 @@
         },
         {
           "ref": "aethersailor:Steam_CDN",
+          "url": "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/{cat}.list",
+          "upstream_sha256": "536e8a9395f0e43e9dbb17c925216bdd999906532f9d702c2eec0cbdc9821d47",
           "counts": {
             "domain": 0,
             "domain_suffix": 3,
@@ -694,6 +786,8 @@
       "sources": [
         {
           "ref": "aethersailor:Encrypted_DNS",
+          "url": "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/{cat}.list",
+          "upstream_sha256": "53c6283d631a0980fa8e367531a879321e0676c7dcc824b9a46a7b985124c170",
           "counts": {
             "domain": 10,
             "domain_suffix": 3573,
@@ -710,6 +804,10 @@
       "srs_sha256": "32c660e52a058273c7c7070c2c90bc441f5613de87d4674a00abb78e27189af3",
       "srs_bytes": 31810
     }
+  },
+  "thresholds": {
+    "checked": 25,
+    "failed": 0
   },
   "tests": {
     "pass": 17,

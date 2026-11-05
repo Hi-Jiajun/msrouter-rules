@@ -4,6 +4,14 @@ on:
   schedule:
     - cron: '0 20 * * *'   # 北京时间 04:00
   workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+
+# 钉死版本：不同日期的 .srs 必须能装进同一个客户端，不能今天 1.14 明天 1.15
+env:
+  SING_BOX_VERSION: v1.14.4
+  KEEP_RELEASES: 30
 
 jobs:
   build:
@@ -14,24 +22,46 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: '20' }
 
-      - name: 安装 sing-box
+      - name: 安装 sing-box ${{ env.SING_BOX_VERSION }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TAG=$(gh release view --repo SagerNet/sing-box --json tagName -q .tagName)
-          gh release download "$TAG" --repo SagerNet/sing-box \
-            --pattern "sing-box-${TAG#v}-linux-amd64.tar.gz" --dir /tmp/sb
+          V="${SING_BOX_VERSION#v}"
+          gh release download "$SING_BOX_VERSION" --repo SagerNet/sing-box \
+            --pattern "sing-box-${V}-linux-amd64.tar.gz" --dir /tmp/sb
           tar -xzf /tmp/sb/*.tar.gz -C /tmp/sb
-          echo "SING_BOX=$(find /tmp/sb -type f -name sing-box -perm -u+x | head -1)" >> "$GITHUB_ENV"
+          BIN=$(find /tmp/sb -type f -name sing-box -perm -u+x | head -1)
+          echo "SING_BOX=$BIN" >> "$GITHUB_ENV"
+          "$BIN" version | head -1
 
-      - name: 构建
+      - name: 构建 + 断言 + 阈值检查
         run: node tools/build.mjs
 
+      - name: 上传产物（供排查）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rules-${{ github.run_id }}
+          path: |
+            dist/srs/
+            dist/manifest.json
+          retention-days: 7
+
       - name: 发布
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           STAMP=$(date +%Y%m%d)
           gh release create "rules-$STAMP" dist/srs/*.srs dist/manifest.json \
-            --title "rules $STAMP" --notes "自动构建，来源见 manifest.json" || \
+            --title "rules $STAMP" --notes "sing-box $SING_BOX_VERSION；来源与条目数见 manifest.json" || \
           gh release upload "rules-$STAMP" dist/srs/*.srs dist/manifest.json --clobber
+
+      - name: 清理旧 release（保留最近 ${{ env.KEEP_RELEASES }} 个）
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release list --limit 200 --json tagName,createdAt \
+            --jq 'sort_by(.createdAt) | reverse | .[env.KEEP_RELEASES:] | .[].tagName' \
+          | while read -r tag; do [ -n "$tag" ] && gh release delete "$tag" --yes --cleanup-tag; done

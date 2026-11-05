@@ -105,7 +105,11 @@ async function main() {
       const { up, cat, file } = fetchRef(ref);
       const set = adapters[up.kind](up, cat, file);
       if (!set) { log(`  ! ${tag}: 上游 ${ref} 没有该分类，跳过`); continue; }
-      sources.push({ ref, counts: Object.fromEntries(TYPES.map(t => [t, set[t]?.size || 0])) });
+      const upSha = (up.kind === 'geosite-db')
+        ? crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')
+        : crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+      sources.push({ ref, url: up.url, upstream_sha256: upSha,
+                     counts: Object.fromEntries(TYPES.map(t => [t, set[t]?.size || 0])) });
       for (const t of TYPES) if (merged[t]) for (const v of set[t] || []) merged[t].add(v);
     }
 
@@ -131,6 +135,17 @@ async function main() {
     log(`  ✓ ${tag.padEnd(14)} ${String(total).padStart(6)} 条  ${String(manifest.rule_sets[tag].srs_bytes).padStart(7)} B  ← ${refs.join(' + ')}`);
   }
 
+  // ── 条目数阈值：防止上游把某个分类几乎清空却仍能通过域名断言 ──
+  const thresholds = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests', 'thresholds.json'), 'utf8'));
+  let thin = 0;
+  for (const [tag, min] of Object.entries(thresholds)) {
+    const got = manifest.rule_sets[tag]?.total;
+    if (got === undefined) { log(`  ✗ 阈值表里的 ${tag} 本次没有产出`); thin++; }
+    else if (got < min) { log(`  ✗ ${tag} 只有 ${got} 条，低于阈值 ${min}`); thin++; }
+  }
+  manifest.thresholds = { checked: Object.keys(thresholds).length, failed: thin };
+  if (thin) log(`\n⚠ ${thin} 个规则集条目数低于阈值\n`);
+
   // ── 断言 ──
   const cases = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests', 'cases.json'), 'utf8'));
   let pass = 0, fail = 0;
@@ -144,7 +159,7 @@ async function main() {
   manifest.tests = { pass, fail };
   fs.writeFileSync(path.join(DIST, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
   log(`\n断言 ${pass} 通过 / ${fail} 失败`);
-  if (fail) process.exit(1);
+  if (fail || thin) process.exit(1);
 }
 
 main().catch(e => { console.error('构建失败:', e.message); process.exit(1); });
