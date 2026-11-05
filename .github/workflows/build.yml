@@ -16,6 +16,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # 发布 release 与清理旧 release 需要
     steps:
       - uses: actions/checkout@v4
 
