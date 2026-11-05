@@ -1,0 +1,15 @@
+# 本地补充：category-ai-!cn 没收录、但属于境外 AI 服务的域名
+# 收录范围只放「确实是 AI 服务本身」的，不把 OpenAI 站点引用的第三方 SaaS 拖进来
+
+# Meta AI / Llama（meta.ai 已被上游收录，这里补企业侧与模型站）
+DOMAIN-SUFFIX,ai.meta.com
+DOMAIN-SUFFIX,llama.com
+DOMAIN-SUFFIX,llama.meta.com
+
+# 新兴 AI 服务
+DOMAIN-SUFFIX,character.ai
+DOMAIN-SUFFIX,together.ai
+DOMAIN-SUFFIX,replicate.com
+DOMAIN-SUFFIX,stability.ai
+DOMAIN-SUFFIX,phind.com
+DOMAIN-SUFFIX,you.com

@@ -78,7 +78,10 @@
       ]
     },
     "ai": {
-      "take": "meta:category-ai-!cn"
+      "union": [
+        "meta:category-ai-!cn",
+        "local:ai"
+      ]
     },
     "telegram": {
       "union": [
