@@ -1,0 +1,6 @@
+# 本地补充：上游没有覆盖、但应当直连的域名
+# 格式同 Clash 规则（DOMAIN / DOMAIN-SUFFIX / DOMAIN-KEYWORD）
+
+# Windows Update 下载 CDN：走代理纯属浪费带宽，直连在国内可达
+DOMAIN-SUFFIX,windowsupdate.com
+DOMAIN-SUFFIX,delivery.mp.microsoft.com

@@ -63,6 +63,7 @@ const adapters = {
     }
     return out;
   },
+  'local': (up, cat, file) => adapters['clash-list'](up, cat, file),
   'geosite-db': (up, cat, file) => {
     const out = blank();
     const json = path.join(CACHE, 'meta', `${cat}.export.json`);
@@ -79,6 +80,7 @@ function fetchRef(ref) {
   const [upName, cat] = ref.split(':');
   const up = CFG.upstreams[upName];
   if (!up) throw new Error(`未知上游: ${upName}`);
+  if (up.kind === 'local') { const f = path.join(ROOT, 'supplements', cat + '.list'); return { up, cat, file: f }; }
   const url = up.url.replaceAll('{cat}', encodeURIComponent(cat)).replaceAll('{file}', cat);
   const file = path.join(CACHE, upName, path.extname(url) && up.kind === 'geosite-db'
     ? 'geosite.db' : `${cat}.${up.kind === 'singbox-json' ? 'json' : up.kind === 'clash-list' ? 'list' : 'txt'}`);

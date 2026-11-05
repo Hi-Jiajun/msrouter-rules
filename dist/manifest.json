@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T19:11:09.376Z",
+  "generated_at": "2026-11-05T19:18:12.965Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
@@ -685,15 +685,24 @@
             "domain_keyword": 3,
             "domain_regex": 0
           }
+        },
+        {
+          "ref": "local:force-direct",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 2,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
         }
       ],
-      "total": 1137,
+      "total": 1139,
       "counts": {
-        "domain_suffix": 1134,
+        "domain_suffix": 1136,
         "domain_keyword": 3
       },
-      "srs_sha256": "c5fd75a134048f464dec0fd58ae648feca397ffe6858e52eb5cabf98d346856d",
-      "srs_bytes": 7606
+      "srs_sha256": "9d58dca9b68c4e6242e8997da19766269cb411b6891fbc2385d68e428bb9c5d0",
+      "srs_bytes": 7665
     },
     "force-proxy": {
       "sources": [
