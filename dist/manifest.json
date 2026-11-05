@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T19:23:26.132Z",
+  "generated_at": "2026-11-05T19:29:22.433Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
@@ -249,8 +249,17 @@
       "srs_sha256": "159deab3ce481c20f43737ae40f441fb58907c6c9f08331c0a3854e917730ea1",
       "srs_bytes": 713
     },
-    "openai": {
+    "ai-other": {
       "sources": [
+        {
+          "ref": "meta:category-ai-!cn",
+          "counts": {
+            "domain": 213,
+            "domain_suffix": 179,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        },
         {
           "ref": "senshinya:OpenAI",
           "counts": {
@@ -261,31 +270,37 @@
           }
         },
         {
-          "ref": "meta:openai",
-          "counts": {
-            "domain": 24,
-            "domain_suffix": 14,
-            "domain_keyword": 0,
-            "domain_regex": 0
-          }
-        }
-      ],
-      "total": 43,
-      "counts": {
-        "domain": 11,
-        "domain_suffix": 31,
-        "domain_keyword": 1
-      },
-      "srs_sha256": "98b34749e4280948951c2d70feb094ca99377336381554c1192b3413cd3d38aa",
-      "srs_bytes": 595
-    },
-    "anthropic": {
-      "sources": [
-        {
           "ref": "senshinya:Anthropic",
           "counts": {
             "domain": 1,
             "domain_suffix": 2,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "senshinya:Claude",
+          "counts": {
+            "domain": 1,
+            "domain_suffix": 2,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "senshinya:Gemini",
+          "counts": {
+            "domain": 3,
+            "domain_suffix": 7,
+            "domain_keyword": 3,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:openai",
+          "counts": {
+            "domain": 24,
+            "domain_suffix": 14,
             "domain_keyword": 0,
             "domain_regex": 0
           }
@@ -300,74 +315,14 @@
           }
         }
       ],
-      "total": 19,
+      "total": 237,
       "counts": {
-        "domain": 1,
-        "domain_suffix": 18
+        "domain": 36,
+        "domain_suffix": 197,
+        "domain_keyword": 4
       },
-      "srs_sha256": "38c418a09ab9e17187a9e71a9e0fc6af060131ee5704d7d05ccd8426cc78ab09",
-      "srs_bytes": 272
-    },
-    "claude": {
-      "sources": [
-        {
-          "ref": "senshinya:Claude",
-          "counts": {
-            "domain": 1,
-            "domain_suffix": 2,
-            "domain_keyword": 0,
-            "domain_regex": 0
-          }
-        }
-      ],
-      "total": 3,
-      "counts": {
-        "domain": 1,
-        "domain_suffix": 2
-      },
-      "srs_sha256": "5da36ff2112363d1ecceb0768c5ec3eace1b062b4594d4680d3915653e88450b",
-      "srs_bytes": 81
-    },
-    "gemini": {
-      "sources": [
-        {
-          "ref": "senshinya:Gemini",
-          "counts": {
-            "domain": 3,
-            "domain_suffix": 7,
-            "domain_keyword": 3,
-            "domain_regex": 0
-          }
-        }
-      ],
-      "total": 13,
-      "counts": {
-        "domain": 3,
-        "domain_suffix": 7,
-        "domain_keyword": 3
-      },
-      "srs_sha256": "129d108829f3e412cc1ee2b3139bbf01e4e4eb91e33ebf52fc159fd2150a5ba5",
-      "srs_bytes": 219
-    },
-    "ai-other": {
-      "sources": [
-        {
-          "ref": "meta:category-ai-!cn",
-          "counts": {
-            "domain": 213,
-            "domain_suffix": 179,
-            "domain_keyword": 0,
-            "domain_regex": 0
-          }
-        }
-      ],
-      "total": 213,
-      "counts": {
-        "domain": 34,
-        "domain_suffix": 179
-      },
-      "srs_sha256": "ba9ad505b18e4558460cc4f1f8bd404b5bd73665a9c1c565c40338700957eff5",
-      "srs_bytes": 2062
+      "srs_sha256": "0667005931742ed1d768105e917592a11f114e0b8eb385c884ab76627b25a8c3",
+      "srs_bytes": 2254
     },
     "telegram": {
       "sources": [

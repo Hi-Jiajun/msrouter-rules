@@ -77,29 +77,17 @@
         "meta:tiktok"
       ]
     },
-    "openai": {
+    "ai-other": {
       "union": [
+        "meta:category-ai-!cn",
         "senshinya:OpenAI",
-        "meta:openai"
-      ]
-    },
-    "anthropic": {
-      "union": [
         "senshinya:Anthropic",
-        "meta:anthropic"
-      ]
-    },
-    "claude": {
-      "take": "senshinya:Claude"
-    },
-    "gemini": {
-      "union": [
+        "senshinya:Claude",
         "senshinya:Gemini",
+        "meta:openai",
+        "meta:anthropic",
         "meta:gemini"
       ]
-    },
-    "ai-other": {
-      "take": "meta:category-ai-!cn"
     },
     "telegram": {
       "union": [
