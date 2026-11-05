@@ -26,6 +26,18 @@
       "kind": "local",
       "url": "file://supplements/{cat}.list",
       "note": "本地补充，仓库内维护"
+    },
+    "telegram": {
+      "kind": "cidr-list",
+      "url": "https://core.telegram.org/resources/cidr.txt",
+      "family": "inet",
+      "note": "Telegram 官方 CIDR；客户端多按 IP 直连，无域名可匹配"
+    },
+    "ripe": {
+      "kind": "ripe-asn",
+      "url": "https://stat.ripe.net/data/announced-prefixes/data.json?resource={cat}",
+      "family": "inet",
+      "note": "RIPE Stat 的 AS 前缀表，用于按 ASN 生成 IP 规则集"
     }
   },
   "rule_sets": {
@@ -37,6 +49,9 @@
         "senshinya:Netflix",
         "meta:netflix"
       ]
+    },
+    "netflix-ip": {
+      "take": "ripe:AS2906"
     },
     "disney": {
       "union": [
@@ -88,6 +103,9 @@
         "senshinya:Telegram",
         "meta:telegram"
       ]
+    },
+    "telegram-ip": {
+      "take": "telegram:cidr"
     },
     "twitter": {
       "union": [

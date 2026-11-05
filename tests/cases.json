@@ -1,21 +1,107 @@
 [
-  { "domain": "baidu.com",                 "set": "cn-domains",    "expect": "in"  },
-  { "domain": "qq.com",                    "set": "cn-domains",    "expect": "in"  },
-  { "domain": "netflix.com",               "set": "cn-domains",    "expect": "out" },
-  { "domain": "fonts.googleapis.com",      "set": "cn-domains",    "expect": "out" },
-  { "domain": "clientservices.googleapis.com", "set": "cn-domains", "expect": "out" },
-
-  { "domain": "netflix.com",               "set": "netflix",       "expect": "in"  },
-  { "domain": "baidu.com",                 "set": "netflix",       "expect": "out" },
-  { "domain": "openai.com",                "set": "openai",        "expect": "in"  },
-  { "domain": "claude.ai",                 "set": "anthropic",     "expect": "in"  },
-  { "domain": "grok.com",                  "set": "twitter",       "expect": "in"  },
-  { "domain": "steamcdn-a.akamaihd.net",   "set": "direct-extra",  "expect": "in"  },
-
-  { "domain": "github.com",                "set": "force-proxy",   "expect": "in"  },
-  { "domain": "x.ai",                      "set": "force-proxy",   "expect": "in"  },
-  { "domain": "googleapis.cn",             "set": "force-proxy",   "expect": "in"  },
-  { "domain": "baidu.com",                 "set": "force-proxy",   "expect": "out" },
-  { "domain": "dns.google",                "set": "encrypted-dns", "expect": "in"  },
-  { "domain": "baidu.com",                 "set": "encrypted-dns", "expect": "out" }
+  {
+    "domain": "baidu.com",
+    "set": "cn-domains",
+    "expect": "in"
+  },
+  {
+    "domain": "qq.com",
+    "set": "cn-domains",
+    "expect": "in"
+  },
+  {
+    "domain": "netflix.com",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "fonts.googleapis.com",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "clientservices.googleapis.com",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "netflix.com",
+    "set": "netflix",
+    "expect": "in"
+  },
+  {
+    "domain": "baidu.com",
+    "set": "netflix",
+    "expect": "out"
+  },
+  {
+    "domain": "openai.com",
+    "set": "openai",
+    "expect": "in"
+  },
+  {
+    "domain": "claude.ai",
+    "set": "anthropic",
+    "expect": "in"
+  },
+  {
+    "domain": "grok.com",
+    "set": "twitter",
+    "expect": "in"
+  },
+  {
+    "domain": "steamcdn-a.akamaihd.net",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "github.com",
+    "set": "force-proxy",
+    "expect": "in"
+  },
+  {
+    "domain": "x.ai",
+    "set": "force-proxy",
+    "expect": "in"
+  },
+  {
+    "domain": "googleapis.cn",
+    "set": "force-proxy",
+    "expect": "in"
+  },
+  {
+    "domain": "baidu.com",
+    "set": "force-proxy",
+    "expect": "out"
+  },
+  {
+    "domain": "dns.google",
+    "set": "encrypted-dns",
+    "expect": "in"
+  },
+  {
+    "domain": "baidu.com",
+    "set": "encrypted-dns",
+    "expect": "out"
+  },
+  {
+    "domain": "149.154.167.51",
+    "set": "telegram-ip",
+    "expect": "in"
+  },
+  {
+    "domain": "8.8.8.8",
+    "set": "telegram-ip",
+    "expect": "out"
+  },
+  {
+    "domain": "45.57.0.1",
+    "set": "netflix-ip",
+    "expect": "in"
+  },
+  {
+    "domain": "223.5.5.5",
+    "set": "netflix-ip",
+    "expect": "out"
+  }
 ]

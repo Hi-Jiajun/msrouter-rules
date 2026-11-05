@@ -11,7 +11,7 @@ const DIST = path.join(ROOT, 'dist');
 const SING_BOX = process.env.SING_BOX || 'sing-box';
 const CFG = JSON.parse(fs.readFileSync(path.join(ROOT, 'sources.json'), 'utf8'));
 const DROP = new Set(CFG.options?.drop_types || []);
-const TYPES = ['domain', 'domain_suffix', 'domain_keyword', 'domain_regex'];
+const TYPES = ['domain', 'domain_suffix', 'domain_keyword', 'domain_regex', 'ip_cidr'];
 
 const log = (...a) => console.log(...a);
 const mkdir = d => fs.mkdirSync(d, { recursive: true });
@@ -30,7 +30,7 @@ function singbox(args, opts = {}) {
   return out;
 }
 const strip = v => String(v).replace(/^\+\./, '').replace(/^\*\./, '').replace(/^\./, '').toLowerCase();
-const blank = () => ({ domain: new Set(), domain_suffix: new Set(), domain_keyword: new Set() });
+const blank = () => ({ domain: new Set(), domain_suffix: new Set(), domain_keyword: new Set(), ip_cidr: new Set() });
 
 // ── 上游适配器：返回 blank() 形状的集合 ──────────────────────────
 const adapters = {
@@ -64,6 +64,25 @@ const adapters = {
     return out;
   },
   'local': (up, cat, file) => adapters['clash-list'](up, cat, file),
+  'cidr-list': (up, cat, file) => {
+    const out = blank();
+    for (let l of fs.readFileSync(file, 'utf8').split('\n')) {
+      l = l.trim();
+      if (!l || l.startsWith('#') || !l.includes('/')) continue;
+      if (up.family === 'inet' && l.includes(':')) continue;   // 默认只留 v4
+      out.ip_cidr.add(l);
+    }
+    return out;
+  },
+  'ripe-asn': (up, cat, file) => {
+    const out = blank();
+    const d = JSON.parse(fs.readFileSync(file, 'utf8'));
+    for (const p of d.data?.prefixes || []) {
+      if (up.family === 'inet' && p.prefix.includes(':')) continue;
+      out.ip_cidr.add(p.prefix);
+    }
+    return out;
+  },
   'geosite-db': (up, cat, file) => {
     const out = blank();
     const json = path.join(CACHE, 'meta', `${cat}.export.json`);

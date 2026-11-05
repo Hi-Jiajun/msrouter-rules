@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T22:32:59.112Z",
+  "generated_at": "2026-11-05T23:12:49.545Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
@@ -12,18 +12,20 @@
             "domain": 271,
             "domain_suffix": 110207,
             "domain_keyword": 13,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 12753
           }
         }
       ],
-      "total": 110491,
+      "total": 123244,
       "counts": {
         "domain": 271,
         "domain_suffix": 110207,
-        "domain_keyword": 13
+        "domain_keyword": 13,
+        "ip_cidr": 12753
       },
-      "srs_sha256": "7bdeef15fc245cf554709d5c7b2bd262536092e43967fd3db37ac0832256eb76",
-      "srs_bytes": 442964
+      "srs_sha256": "59a73c1957a0cf24a44a4df10a5e9d12bdd419d334168d7c6b438098d8905bb9",
+      "srs_bytes": 495647
     },
     "netflix": {
       "sources": [
@@ -35,7 +37,8 @@
             "domain": 3,
             "domain_suffix": 30,
             "domain_keyword": 4,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 1119
           }
         },
         {
@@ -46,18 +49,42 @@
             "domain": 24,
             "domain_suffix": 24,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
-      "total": 36,
+      "total": 1155,
       "counts": {
         "domain": 2,
         "domain_suffix": 30,
-        "domain_keyword": 4
+        "domain_keyword": 4,
+        "ip_cidr": 1119
       },
-      "srs_sha256": "d07e7cff1b36e21f2ee9d8d1c76210942163a320267d84021fc80b8b227556f2",
-      "srs_bytes": 422
+      "srs_sha256": "98f6d1e930996cb5072bcdf765ba7db72dff2753e2c7a0939658175598b716eb",
+      "srs_bytes": 5304
+    },
+    "netflix-ip": {
+      "sources": [
+        {
+          "ref": "ripe:AS2906",
+          "url": "https://stat.ripe.net/data/announced-prefixes/data.json?resource={cat}",
+          "upstream_sha256": "4fc4c77211159f3df67ab1edee859eb820bfdafc58280113b7afcc5cc52a1c3d",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 0,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 251
+          }
+        }
+      ],
+      "total": 251,
+      "counts": {
+        "ip_cidr": 251
+      },
+      "srs_sha256": "08b29277209399b10603404d3fdeb020e86c38dfbc99f1fa033167f3e4d193dc",
+      "srs_bytes": 160
     },
     "disney": {
       "sources": [
@@ -69,7 +96,8 @@
             "domain": 0,
             "domain_suffix": 172,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -80,7 +108,8 @@
             "domain": 224,
             "domain_suffix": 218,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -102,7 +131,8 @@
             "domain": 0,
             "domain_suffix": 47,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -113,7 +143,8 @@
             "domain": 64,
             "domain_suffix": 65,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -134,7 +165,8 @@
             "domain": 1,
             "domain_suffix": 57,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -145,7 +177,8 @@
             "domain": 48,
             "domain_suffix": 47,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -167,7 +200,8 @@
             "domain": 9,
             "domain_suffix": 6,
             "domain_keyword": 1,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -178,7 +212,8 @@
             "domain": 24,
             "domain_suffix": 14,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -201,7 +236,8 @@
             "domain": 6,
             "domain_suffix": 1,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -223,7 +259,8 @@
             "domain": 0,
             "domain_suffix": 179,
             "domain_keyword": 1,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 3
           }
         },
         {
@@ -234,18 +271,20 @@
             "domain": 177,
             "domain_suffix": 177,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
-      "total": 182,
+      "total": 185,
       "counts": {
         "domain": 1,
         "domain_suffix": 180,
-        "domain_keyword": 1
+        "domain_keyword": 1,
+        "ip_cidr": 3
       },
-      "srs_sha256": "befc169ad5a9ede08f6b2ade35ee92bcce95aa999863a0124dc1cec6edef135b",
-      "srs_bytes": 1169
+      "srs_sha256": "c525463863ec51bb49331c8425ae3678ecef950e3c7dca357fdb7817a9341ea3",
+      "srs_bytes": 1213
     },
     "tiktok": {
       "sources": [
@@ -257,7 +296,8 @@
             "domain": 4,
             "domain_suffix": 28,
             "domain_keyword": 2,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -268,7 +308,8 @@
             "domain": 40,
             "domain_suffix": 34,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -291,7 +332,8 @@
             "domain": 213,
             "domain_suffix": 179,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -302,7 +344,8 @@
             "domain": 0,
             "domain_suffix": 9,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -324,7 +367,8 @@
             "domain": 2,
             "domain_suffix": 22,
             "domain_keyword": 1,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 26
           }
         },
         {
@@ -335,18 +379,42 @@
             "domain": 21,
             "domain_suffix": 21,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
-      "total": 28,
+      "total": 54,
       "counts": {
         "domain": 2,
         "domain_suffix": 25,
-        "domain_keyword": 1
+        "domain_keyword": 1,
+        "ip_cidr": 26
       },
-      "srs_sha256": "abbec3a531b6962eac78ae279900d8c85537af65962ff05047e68ebfd4b62e59",
-      "srs_bytes": 299
+      "srs_sha256": "abd3022506b7f27d6e8eba09c6e412ea49e5525918860a35b4ecd990d065625a",
+      "srs_bytes": 444
+    },
+    "telegram-ip": {
+      "sources": [
+        {
+          "ref": "telegram:cidr",
+          "url": "https://core.telegram.org/resources/cidr.txt",
+          "upstream_sha256": "3ecd072cedf72eceee6961b18a51e37f905d5ce4a656a5d24cf5fea63e6ec651",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 0,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 9
+          }
+        }
+      ],
+      "total": 9,
+      "counts": {
+        "ip_cidr": 9
+      },
+      "srs_sha256": "0b58a1393ec2d447a8debbd0cd26327d85bcb6381bc4c3f6c4a2a9352b9239af",
+      "srs_bytes": 71
     },
     "twitter": {
       "sources": [
@@ -358,7 +426,8 @@
             "domain": 0,
             "domain_suffix": 26,
             "domain_keyword": 1,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 6
           }
         },
         {
@@ -369,17 +438,19 @@
             "domain": 24,
             "domain_suffix": 24,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
-      "total": 28,
+      "total": 34,
       "counts": {
         "domain_suffix": 27,
-        "domain_keyword": 1
+        "domain_keyword": 1,
+        "ip_cidr": 6
       },
-      "srs_sha256": "c8ab0d45ed4844a7f749ed2fd868e8649961b3da83b7b94090a9ab0a393deb5c",
-      "srs_bytes": 310
+      "srs_sha256": "60123171c174f954bb21db263f983e931ab689423bba1e4ceca76ff663e14a58",
+      "srs_bytes": 390
     },
     "facebook": {
       "sources": [
@@ -391,7 +462,8 @@
             "domain": 0,
             "domain_suffix": 544,
             "domain_keyword": 2,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 55
           }
         },
         {
@@ -402,17 +474,19 @@
             "domain": 397,
             "domain_suffix": 396,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
-      "total": 552,
+      "total": 607,
       "counts": {
         "domain_suffix": 550,
-        "domain_keyword": 2
+        "domain_keyword": 2,
+        "ip_cidr": 55
       },
-      "srs_sha256": "8aaf8194815280b9809662b244c9e6afc7e454d985f87eb200283633f0bb0ec6",
-      "srs_bytes": 4321
+      "srs_sha256": "0394946f8cf45fde7099c8b7fc3f307db6ae33591f180d21789ef18139308482",
+      "srs_bytes": 4753
     },
     "instagram": {
       "sources": [
@@ -424,7 +498,8 @@
             "domain": 0,
             "domain_suffix": 3,
             "domain_keyword": 1,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -435,7 +510,8 @@
             "domain": 74,
             "domain_suffix": 74,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -457,7 +533,8 @@
             "domain": 0,
             "domain_suffix": 30,
             "domain_keyword": 1,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -468,7 +545,8 @@
             "domain": 65,
             "domain_suffix": 33,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -491,7 +569,8 @@
             "domain": 6,
             "domain_suffix": 20,
             "domain_keyword": 1,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 2
           }
         },
         {
@@ -502,18 +581,20 @@
             "domain": 28,
             "domain_suffix": 18,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
-      "total": 33,
+      "total": 35,
       "counts": {
         "domain": 8,
         "domain_suffix": 24,
-        "domain_keyword": 1
+        "domain_keyword": 1,
+        "ip_cidr": 2
       },
-      "srs_sha256": "b5a07a03315763cf4d141076822790533f7358b117abe14a8e6fdaee4097c074",
-      "srs_bytes": 438
+      "srs_sha256": "f67a6d7caee3d2bfc9ae38327f1ce8466973b941e127f6d7c4cf5f3616859449",
+      "srs_bytes": 460
     },
     "paypal": {
       "sources": [
@@ -525,7 +606,8 @@
             "domain": 0,
             "domain_suffix": 246,
             "domain_keyword": 1,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -536,7 +618,8 @@
             "domain": 245,
             "domain_suffix": 244,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -558,7 +641,8 @@
             "domain": 0,
             "domain_suffix": 7,
             "domain_keyword": 1,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -569,7 +653,8 @@
             "domain": 20,
             "domain_suffix": 19,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -592,7 +677,8 @@
             "domain": 9,
             "domain_suffix": 1550,
             "domain_keyword": 7,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 13
           }
         },
         {
@@ -603,18 +689,20 @@
             "domain": 1789,
             "domain_suffix": 1540,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
-      "total": 1820,
+      "total": 1833,
       "counts": {
         "domain": 254,
         "domain_suffix": 1559,
-        "domain_keyword": 7
+        "domain_keyword": 7,
+        "ip_cidr": 13
       },
-      "srs_sha256": "c0c4f0563cecbb72c08f2a5f54abb75d23d8585d423a03a0c548a0a80f95c9e9",
-      "srs_bytes": 15962
+      "srs_sha256": "03997d4d8878f27dd069a139661b16e7d975409ca6123014d8216a6dee57c89b",
+      "srs_bytes": 16151
     },
     "microsoft": {
       "sources": [
@@ -626,7 +714,8 @@
             "domain": 1,
             "domain_suffix": 663,
             "domain_keyword": 4,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -637,7 +726,8 @@
             "domain": 743,
             "domain_suffix": 637,
             "domain_keyword": 3,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -660,7 +750,8 @@
             "domain": 1,
             "domain_suffix": 684,
             "domain_keyword": 5,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 5
           }
         },
         {
@@ -671,18 +762,20 @@
             "domain": 1038,
             "domain_suffix": 839,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
-      "total": 1101,
+      "total": 1106,
       "counts": {
         "domain": 185,
         "domain_suffix": 911,
-        "domain_keyword": 5
+        "domain_keyword": 5,
+        "ip_cidr": 5
       },
-      "srs_sha256": "80d35f659d0cb3270e4be06461ad77a57a110dd1d084f8febadf7869ef2516b1",
-      "srs_bytes": 8285
+      "srs_sha256": "7a637fa608d7dce93b09a2404d7cf81a3f72388becf11fc2851c0bda377e0ebb",
+      "srs_bytes": 8350
     },
     "force-direct": {
       "sources": [
@@ -694,7 +787,8 @@
             "domain": 0,
             "domain_suffix": 1134,
             "domain_keyword": 3,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -705,7 +799,8 @@
             "domain": 0,
             "domain_suffix": 2,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -727,7 +822,8 @@
             "domain": 0,
             "domain_suffix": 17,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -738,7 +834,8 @@
             "domain": 0,
             "domain_suffix": 4452,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -759,7 +856,8 @@
             "domain": 489,
             "domain_suffix": 5,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         },
         {
@@ -770,7 +868,8 @@
             "domain": 0,
             "domain_suffix": 3,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -792,7 +891,8 @@
             "domain": 10,
             "domain_suffix": 3573,
             "domain_keyword": 0,
-            "domain_regex": 0
+            "domain_regex": 0,
+            "ip_cidr": 0
           }
         }
       ],
@@ -806,11 +906,11 @@
     }
   },
   "thresholds": {
-    "checked": 25,
+    "checked": 27,
     "failed": 0
   },
   "tests": {
-    "pass": 17,
+    "pass": 21,
     "fail": 0
   }
 }
