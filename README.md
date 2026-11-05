@@ -103,3 +103,38 @@ systemctl reload-or-restart sing-box   # 或 docker restart
 ## 回归防护
 
 `tests/thresholds.json` 给每个规则集设了条目数下限（当前值的 70%）。上游某天把某个分类清空、或者格式变化导致解析出 0 条时，**光靠域名断言是发现不了的**（那几个测试域名可能还在），阈值检查会直接让构建失败。
+
+## sing-box 侧：remote 直拉（推荐）
+
+仓库已公开，sing-box 可以直接按 tag 拉取，无需任何凭据：
+
+```json
+{
+  "http_clients": [ { "tag": "via-proxy", "detour": "🐟 漏网之鱼" } ],
+  "route": {
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "netflix",
+        "format": "binary",
+        "url": "https://github.com/Hi-Jiajun/msrouter-rules/releases/latest/download/netflix.srs",
+        "initial_path": "rules/netflix.srs",
+        "update_interval": "24h",
+        "http_client": "via-proxy"
+      }
+    ]
+  }
+}
+```
+
+**`initial_path` 不是可选项**。`route/rule/rule_set_remote.go` 的 `StartContext`：既无缓存、又无 `initial_path` 时，首次下载失败会 `return E.Cause(err, "initial rule-set: ")`，**sing-box 直接启动失败**。带上本地文件后，首次启动读本地、跳过下载，之后按 `update_interval` 热更新。
+
+`http_client.detour` 指向代理组是必要的：容器内直连 GitHub 通常不通。注意**不能指向 `direct` 出站**——sing-box 会报 `detour to an empty direct outbound makes no sense`，直连场景应该干脆不写 `http_client`。
+
+### 资源地址规律
+
+```
+https://github.com/Hi-Jiajun/msrouter-rules/releases/latest/download/<tag>.srs
+```
+
+`<tag>` 与 `sources.json` 里 `rule_sets` 的键一致，共 25 个。
