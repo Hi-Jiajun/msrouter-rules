@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T23:12:49.545Z",
+  "generated_at": "2026-11-05T23:19:10.422Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
@@ -75,16 +75,16 @@
             "domain_suffix": 0,
             "domain_keyword": 0,
             "domain_regex": 0,
-            "ip_cidr": 251
+            "ip_cidr": 519
           }
         }
       ],
-      "total": 251,
+      "total": 519,
       "counts": {
-        "ip_cidr": 251
+        "ip_cidr": 519
       },
-      "srs_sha256": "08b29277209399b10603404d3fdeb020e86c38dfbc99f1fa033167f3e4d193dc",
-      "srs_bytes": 160
+      "srs_sha256": "570d800d8c4c14c3f867048b1b9c2ad3760782a6b15da9ed04a4b6b72949bf07",
+      "srs_bytes": 212
     },
     "disney": {
       "sources": [
@@ -405,16 +405,16 @@
             "domain_suffix": 0,
             "domain_keyword": 0,
             "domain_regex": 0,
-            "ip_cidr": 9
+            "ip_cidr": 14
           }
         }
       ],
-      "total": 9,
+      "total": 14,
       "counts": {
-        "ip_cidr": 9
+        "ip_cidr": 14
       },
-      "srs_sha256": "0b58a1393ec2d447a8debbd0cd26327d85bcb6381bc4c3f6c4a2a9352b9239af",
-      "srs_bytes": 71
+      "srs_sha256": "95a0011cd94f862f0a4f8ae801d24b153bc632f97c80f73220a704ef09167217",
+      "srs_bytes": 117
     },
     "twitter": {
       "sources": [

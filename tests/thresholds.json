@@ -24,6 +24,6 @@
   "force-proxy": 3124,
   "direct-extra": 345,
   "encrypted-dns": 2508,
-  "telegram-ip": 6,
-  "netflix-ip": 100
+  "telegram-ip": 9,
+  "netflix-ip": 300
 }
