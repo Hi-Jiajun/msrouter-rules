@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "note": "唯一真相源：每个 rule_set 由哪些上游、哪些分类、怎么合成。改这里，不要改脚本。",
+  "upstreams": {
+    "senshinya": {
+      "kind": "singbox-json",
+      "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/{cat}/{cat}.json",
+      "note": "blackmatrix7 的 sing-box 镜像，每日同步"
+    },
+    "meta": {
+      "kind": "geosite-db",
+      "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+      "note": "先下载 geosite.db，再用 sing-box geosite export 逐类导出"
+    },
+    "aethersailor": {
+      "kind": "clash-list",
+      "url": "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/{cat}.list",
+      "note": "网关实战补丁"
+    },
+    "loyalsoldier": {
+      "kind": "clash-payload",
+      "url": "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/{cat}.txt",
+      "note": "release 分支，只有大桶没有服务分类"
+    }
+  },
+  "rule_sets": {
+    "cn-domains":    { "take": "senshinya:ChinaMax" },
+
+    "netflix":       { "union": ["senshinya:Netflix",      "meta:netflix"] },
+    "disney":        { "union": ["senshinya:Disney",       "meta:disney"] },
+    "hbo":           { "union": ["senshinya:HBO",          "meta:hbo"] },
+    "hulu":          { "union": ["senshinya:Hulu",         "meta:hulu"] },
+    "primevideo":    { "union": ["senshinya:PrimeVideo",   "meta:primevideo"] },
+    "appletv":       { "take":  "senshinya:AppleTV" },
+    "youtube":       { "union": ["senshinya:YouTube",      "meta:youtube"] },
+    "tiktok":        { "union": ["senshinya:TikTok",       "meta:tiktok"] },
+    "openai":        { "union": ["senshinya:OpenAI",       "meta:openai"] },
+    "anthropic":     { "union": ["senshinya:Anthropic",    "meta:anthropic"] },
+    "claude":        { "take":  "senshinya:Claude" },
+    "gemini":        { "union": ["senshinya:Gemini",       "meta:gemini"] },
+    "telegram":      { "union": ["senshinya:Telegram",     "meta:telegram"] },
+    "twitter":       { "union": ["senshinya:Twitter",      "meta:twitter"] },
+    "facebook":      { "union": ["senshinya:Facebook",     "meta:facebook"] },
+    "instagram":     { "union": ["senshinya:Instagram",    "meta:instagram"] },
+    "github":        { "union": ["senshinya:GitHub",       "meta:github"] },
+    "spotify":       { "union": ["senshinya:Spotify",      "meta:spotify"] },
+    "paypal":        { "union": ["senshinya:PayPal",       "meta:paypal"] },
+    "speedtest":     { "union": ["senshinya:Speedtest",    "meta:speedtest"] },
+    "apple":         { "union": ["senshinya:Apple",        "meta:apple"] },
+    "microsoft":     { "union": ["senshinya:Microsoft",    "meta:microsoft"] },
+    "google":        { "union": ["senshinya:Google",       "meta:google"] },
+
+    "force-direct":  { "take":  "aethersailor:Custom_Direct" },
+    "force-proxy":   { "union": ["aethersailor:Custom_Proxy", "loyalsoldier:gfw"] },
+    "direct-extra":  { "union": ["aethersailor:Game_Download_CDN", "aethersailor:Steam_CDN"] },
+    "encrypted-dns": { "take":  "aethersailor:Encrypted_DNS" }
+  },
+  "options": {
+    "drop_types": ["domain_regex"],
+    "note": "domain_regex 在 meta 导出的是逐字符垃圾，且 Go RE2 与 Clash 正则不兼容，一律丢弃"
+  }
+}

@@ -1,0 +1,37 @@
+name: build rules
+
+on:
+  schedule:
+    - cron: '0 20 * * *'   # 北京时间 04:00
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+
+      - name: 安装 sing-box
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=$(gh release view --repo SagerNet/sing-box --json tagName -q .tagName)
+          gh release download "$TAG" --repo SagerNet/sing-box \
+            --pattern "sing-box-${TAG#v}-linux-amd64.tar.gz" --dir /tmp/sb
+          tar -xzf /tmp/sb/*.tar.gz -C /tmp/sb
+          echo "SING_BOX=$(find /tmp/sb -type f -name sing-box -perm -u+x | head -1)" >> "$GITHUB_ENV"
+
+      - name: 构建
+        run: node tools/build.mjs
+
+      - name: 发布
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          STAMP=$(date +%Y%m%d)
+          gh release create "rules-$STAMP" dist/srs/*.srs dist/manifest.json \
+            --title "rules $STAMP" --notes "自动构建，来源见 manifest.json" || \
+          gh release upload "rules-$STAMP" dist/srs/*.srs dist/manifest.json --clobber

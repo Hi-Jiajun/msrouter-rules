@@ -1,0 +1,780 @@
+{
+  "generated_at": "2026-11-05T19:11:09.376Z",
+  "sing_box": "sing-box version 1.14.4",
+  "rule_sets": {
+    "cn-domains": {
+      "sources": [
+        {
+          "ref": "senshinya:ChinaMax",
+          "counts": {
+            "domain": 271,
+            "domain_suffix": 110207,
+            "domain_keyword": 13,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 110491,
+      "counts": {
+        "domain": 271,
+        "domain_suffix": 110207,
+        "domain_keyword": 13
+      },
+      "srs_sha256": "7bdeef15fc245cf554709d5c7b2bd262536092e43967fd3db37ac0832256eb76",
+      "srs_bytes": 442964
+    },
+    "netflix": {
+      "sources": [
+        {
+          "ref": "senshinya:Netflix",
+          "counts": {
+            "domain": 3,
+            "domain_suffix": 30,
+            "domain_keyword": 4,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:netflix",
+          "counts": {
+            "domain": 24,
+            "domain_suffix": 24,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 36,
+      "counts": {
+        "domain": 2,
+        "domain_suffix": 30,
+        "domain_keyword": 4
+      },
+      "srs_sha256": "d07e7cff1b36e21f2ee9d8d1c76210942163a320267d84021fc80b8b227556f2",
+      "srs_bytes": 422
+    },
+    "disney": {
+      "sources": [
+        {
+          "ref": "senshinya:Disney",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 172,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:disney",
+          "counts": {
+            "domain": 224,
+            "domain_suffix": 218,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 236,
+      "counts": {
+        "domain": 2,
+        "domain_suffix": 234
+      },
+      "srs_sha256": "2b49f94f3b2dce6409f38b074525439fc7403516eb7af2a5476af17cdc04cc65",
+      "srs_bytes": 2352
+    },
+    "hbo": {
+      "sources": [
+        {
+          "ref": "senshinya:HBO",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 47,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:hbo",
+          "counts": {
+            "domain": 64,
+            "domain_suffix": 65,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 90,
+      "counts": {
+        "domain_suffix": 90
+      },
+      "srs_sha256": "a5ac2e4f0f54e8982ea29912f935f3a90d3a81cdefbad246484716f7bac34148",
+      "srs_bytes": 924
+    },
+    "hulu": {
+      "sources": [
+        {
+          "ref": "senshinya:Hulu",
+          "counts": {
+            "domain": 1,
+            "domain_suffix": 57,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:hulu",
+          "counts": {
+            "domain": 48,
+            "domain_suffix": 47,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 58,
+      "counts": {
+        "domain": 1,
+        "domain_suffix": 57
+      },
+      "srs_sha256": "a16f74805556276b136352fd9f681b7427922d0c3cec6fc16dfa9e599358070b",
+      "srs_bytes": 601
+    },
+    "primevideo": {
+      "sources": [
+        {
+          "ref": "senshinya:PrimeVideo",
+          "counts": {
+            "domain": 9,
+            "domain_suffix": 6,
+            "domain_keyword": 1,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:primevideo",
+          "counts": {
+            "domain": 24,
+            "domain_suffix": 14,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 31,
+      "counts": {
+        "domain": 14,
+        "domain_suffix": 16,
+        "domain_keyword": 1
+      },
+      "srs_sha256": "0ffdc298b06f2f2322b71d3e4af5dcabbc814d8293dec353612b255d46708d0e",
+      "srs_bytes": 449
+    },
+    "appletv": {
+      "sources": [
+        {
+          "ref": "senshinya:AppleTV",
+          "counts": {
+            "domain": 6,
+            "domain_suffix": 1,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 7,
+      "counts": {
+        "domain": 6,
+        "domain_suffix": 1
+      },
+      "srs_sha256": "3ee2fb8bf1796fac7f5ad29a447631ae825397a20634248250642a946c96cd2c",
+      "srs_bytes": 111
+    },
+    "youtube": {
+      "sources": [
+        {
+          "ref": "senshinya:YouTube",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 179,
+            "domain_keyword": 1,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:youtube",
+          "counts": {
+            "domain": 177,
+            "domain_suffix": 177,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 182,
+      "counts": {
+        "domain": 1,
+        "domain_suffix": 180,
+        "domain_keyword": 1
+      },
+      "srs_sha256": "befc169ad5a9ede08f6b2ade35ee92bcce95aa999863a0124dc1cec6edef135b",
+      "srs_bytes": 1169
+    },
+    "tiktok": {
+      "sources": [
+        {
+          "ref": "senshinya:TikTok",
+          "counts": {
+            "domain": 4,
+            "domain_suffix": 28,
+            "domain_keyword": 2,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:tiktok",
+          "counts": {
+            "domain": 40,
+            "domain_suffix": 34,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 62,
+      "counts": {
+        "domain": 9,
+        "domain_suffix": 51,
+        "domain_keyword": 2
+      },
+      "srs_sha256": "159deab3ce481c20f43737ae40f441fb58907c6c9f08331c0a3854e917730ea1",
+      "srs_bytes": 713
+    },
+    "openai": {
+      "sources": [
+        {
+          "ref": "senshinya:OpenAI",
+          "counts": {
+            "domain": 7,
+            "domain_suffix": 24,
+            "domain_keyword": 1,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:openai",
+          "counts": {
+            "domain": 24,
+            "domain_suffix": 14,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 43,
+      "counts": {
+        "domain": 11,
+        "domain_suffix": 31,
+        "domain_keyword": 1
+      },
+      "srs_sha256": "98b34749e4280948951c2d70feb094ca99377336381554c1192b3413cd3d38aa",
+      "srs_bytes": 595
+    },
+    "anthropic": {
+      "sources": [
+        {
+          "ref": "senshinya:Anthropic",
+          "counts": {
+            "domain": 1,
+            "domain_suffix": 2,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:anthropic",
+          "counts": {
+            "domain": 19,
+            "domain_suffix": 18,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 19,
+      "counts": {
+        "domain": 1,
+        "domain_suffix": 18
+      },
+      "srs_sha256": "38c418a09ab9e17187a9e71a9e0fc6af060131ee5704d7d05ccd8426cc78ab09",
+      "srs_bytes": 272
+    },
+    "claude": {
+      "sources": [
+        {
+          "ref": "senshinya:Claude",
+          "counts": {
+            "domain": 1,
+            "domain_suffix": 2,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 3,
+      "counts": {
+        "domain": 1,
+        "domain_suffix": 2
+      },
+      "srs_sha256": "5da36ff2112363d1ecceb0768c5ec3eace1b062b4594d4680d3915653e88450b",
+      "srs_bytes": 81
+    },
+    "gemini": {
+      "sources": [
+        {
+          "ref": "senshinya:Gemini",
+          "counts": {
+            "domain": 3,
+            "domain_suffix": 7,
+            "domain_keyword": 3,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 13,
+      "counts": {
+        "domain": 3,
+        "domain_suffix": 7,
+        "domain_keyword": 3
+      },
+      "srs_sha256": "129d108829f3e412cc1ee2b3139bbf01e4e4eb91e33ebf52fc159fd2150a5ba5",
+      "srs_bytes": 219
+    },
+    "telegram": {
+      "sources": [
+        {
+          "ref": "senshinya:Telegram",
+          "counts": {
+            "domain": 2,
+            "domain_suffix": 22,
+            "domain_keyword": 1,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:telegram",
+          "counts": {
+            "domain": 21,
+            "domain_suffix": 21,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 28,
+      "counts": {
+        "domain": 2,
+        "domain_suffix": 25,
+        "domain_keyword": 1
+      },
+      "srs_sha256": "abbec3a531b6962eac78ae279900d8c85537af65962ff05047e68ebfd4b62e59",
+      "srs_bytes": 299
+    },
+    "twitter": {
+      "sources": [
+        {
+          "ref": "senshinya:Twitter",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 26,
+            "domain_keyword": 1,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:twitter",
+          "counts": {
+            "domain": 24,
+            "domain_suffix": 24,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 28,
+      "counts": {
+        "domain_suffix": 27,
+        "domain_keyword": 1
+      },
+      "srs_sha256": "c8ab0d45ed4844a7f749ed2fd868e8649961b3da83b7b94090a9ab0a393deb5c",
+      "srs_bytes": 310
+    },
+    "facebook": {
+      "sources": [
+        {
+          "ref": "senshinya:Facebook",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 544,
+            "domain_keyword": 2,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:facebook",
+          "counts": {
+            "domain": 397,
+            "domain_suffix": 396,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 552,
+      "counts": {
+        "domain_suffix": 550,
+        "domain_keyword": 2
+      },
+      "srs_sha256": "8aaf8194815280b9809662b244c9e6afc7e454d985f87eb200283633f0bb0ec6",
+      "srs_bytes": 4321
+    },
+    "instagram": {
+      "sources": [
+        {
+          "ref": "senshinya:Instagram",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 3,
+            "domain_keyword": 1,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:instagram",
+          "counts": {
+            "domain": 74,
+            "domain_suffix": 74,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 76,
+      "counts": {
+        "domain_suffix": 75,
+        "domain_keyword": 1
+      },
+      "srs_sha256": "52a0963235236b2d60e28915473a44d6e4fb1400a1e71dbd97edabcc87bc841b",
+      "srs_bytes": 739
+    },
+    "github": {
+      "sources": [
+        {
+          "ref": "senshinya:GitHub",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 30,
+            "domain_keyword": 1,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:github",
+          "counts": {
+            "domain": 65,
+            "domain_suffix": 33,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 70,
+      "counts": {
+        "domain": 31,
+        "domain_suffix": 38,
+        "domain_keyword": 1
+      },
+      "srs_sha256": "5e19e888142caaa5cadb00dbdd065ae8a93b15ca16a76900b0f8d2c741cafbdc",
+      "srs_bytes": 870
+    },
+    "spotify": {
+      "sources": [
+        {
+          "ref": "senshinya:Spotify",
+          "counts": {
+            "domain": 6,
+            "domain_suffix": 20,
+            "domain_keyword": 1,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:spotify",
+          "counts": {
+            "domain": 28,
+            "domain_suffix": 18,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 33,
+      "counts": {
+        "domain": 8,
+        "domain_suffix": 24,
+        "domain_keyword": 1
+      },
+      "srs_sha256": "b5a07a03315763cf4d141076822790533f7358b117abe14a8e6fdaee4097c074",
+      "srs_bytes": 438
+    },
+    "paypal": {
+      "sources": [
+        {
+          "ref": "senshinya:PayPal",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 246,
+            "domain_keyword": 1,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:paypal",
+          "counts": {
+            "domain": 245,
+            "domain_suffix": 244,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 247,
+      "counts": {
+        "domain_suffix": 246,
+        "domain_keyword": 1
+      },
+      "srs_sha256": "0d9a2e45fdf2807854063316cde300cebee17c62d2eec9a8861214d70fd580de",
+      "srs_bytes": 2361
+    },
+    "speedtest": {
+      "sources": [
+        {
+          "ref": "senshinya:Speedtest",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 7,
+            "domain_keyword": 1,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:speedtest",
+          "counts": {
+            "domain": 20,
+            "domain_suffix": 19,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 24,
+      "counts": {
+        "domain": 1,
+        "domain_suffix": 22,
+        "domain_keyword": 1
+      },
+      "srs_sha256": "8c742a331ce23182c2477f59b6c2b4aa98777e97e049170fe9c9c8dec0c4234d",
+      "srs_bytes": 328
+    },
+    "apple": {
+      "sources": [
+        {
+          "ref": "senshinya:Apple",
+          "counts": {
+            "domain": 9,
+            "domain_suffix": 1550,
+            "domain_keyword": 7,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:apple",
+          "counts": {
+            "domain": 1789,
+            "domain_suffix": 1540,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 1820,
+      "counts": {
+        "domain": 254,
+        "domain_suffix": 1559,
+        "domain_keyword": 7
+      },
+      "srs_sha256": "c0c4f0563cecbb72c08f2a5f54abb75d23d8585d423a03a0c548a0a80f95c9e9",
+      "srs_bytes": 15962
+    },
+    "microsoft": {
+      "sources": [
+        {
+          "ref": "senshinya:Microsoft",
+          "counts": {
+            "domain": 1,
+            "domain_suffix": 663,
+            "domain_keyword": 4,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:microsoft",
+          "counts": {
+            "domain": 743,
+            "domain_suffix": 637,
+            "domain_keyword": 3,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 885,
+      "counts": {
+        "domain": 109,
+        "domain_suffix": 772,
+        "domain_keyword": 4
+      },
+      "srs_sha256": "3d9d627076bfce8f83598193d1f5a56eaee183863e4003cf0345bde385056966",
+      "srs_bytes": 7970
+    },
+    "google": {
+      "sources": [
+        {
+          "ref": "senshinya:Google",
+          "counts": {
+            "domain": 1,
+            "domain_suffix": 684,
+            "domain_keyword": 5,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "meta:google",
+          "counts": {
+            "domain": 1038,
+            "domain_suffix": 839,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 1101,
+      "counts": {
+        "domain": 185,
+        "domain_suffix": 911,
+        "domain_keyword": 5
+      },
+      "srs_sha256": "80d35f659d0cb3270e4be06461ad77a57a110dd1d084f8febadf7869ef2516b1",
+      "srs_bytes": 8285
+    },
+    "force-direct": {
+      "sources": [
+        {
+          "ref": "aethersailor:Custom_Direct",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 1134,
+            "domain_keyword": 3,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 1137,
+      "counts": {
+        "domain_suffix": 1134,
+        "domain_keyword": 3
+      },
+      "srs_sha256": "c5fd75a134048f464dec0fd58ae648feca397ffe6858e52eb5cabf98d346856d",
+      "srs_bytes": 7606
+    },
+    "force-proxy": {
+      "sources": [
+        {
+          "ref": "aethersailor:Custom_Proxy",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 17,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "loyalsoldier:gfw",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 4452,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 4464,
+      "counts": {
+        "domain_suffix": 4464
+      },
+      "srs_sha256": "d9983f643bb9a4f7dab72081b8f4a2fec5191ee85bca9c9a80f92565ae3957c8",
+      "srs_bytes": 28996
+    },
+    "direct-extra": {
+      "sources": [
+        {
+          "ref": "aethersailor:Game_Download_CDN",
+          "counts": {
+            "domain": 489,
+            "domain_suffix": 5,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        },
+        {
+          "ref": "aethersailor:Steam_CDN",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 3,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 494,
+      "counts": {
+        "domain": 489,
+        "domain_suffix": 5
+      },
+      "srs_sha256": "89128e8ec9066519c967379e38516e4ba4ca7f46457a9ae577c0a3b311d3daba",
+      "srs_bytes": 1867
+    },
+    "encrypted-dns": {
+      "sources": [
+        {
+          "ref": "aethersailor:Encrypted_DNS",
+          "counts": {
+            "domain": 10,
+            "domain_suffix": 3573,
+            "domain_keyword": 0,
+            "domain_regex": 0
+          }
+        }
+      ],
+      "total": 3583,
+      "counts": {
+        "domain": 10,
+        "domain_suffix": 3573
+      },
+      "srs_sha256": "32c660e52a058273c7c7070c2c90bc441f5613de87d4674a00abb78e27189af3",
+      "srs_bytes": 31810
+    }
+  },
+  "tests": {
+    "pass": 17,
+    "fail": 0
+  }
+}
