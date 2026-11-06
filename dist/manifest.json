@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T23:19:10.422Z",
+  "generated_at": "2026-11-06T05:56:12.592Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
@@ -26,6 +26,50 @@
       },
       "srs_sha256": "59a73c1957a0cf24a44a4df10a5e9d12bdd419d334168d7c6b438098d8905bb9",
       "srs_bytes": 495647
+    },
+    "cn-ip": {
+      "sources": [
+        {
+          "ref": "chinaip:china46",
+          "url": "https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china46.txt",
+          "upstream_sha256": "228c61217f4584fa3702ba3821f749bad46fe9c42d3d92e61e172bd74f41a214",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 0,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 9638
+          }
+        }
+      ],
+      "total": 9638,
+      "counts": {
+        "ip_cidr": 9638
+      },
+      "srs_sha256": "86619c12678a4ed33fd88ccbd276ab5765df2b29b9aeca3e1baa3127df3f7faf",
+      "srs_bytes": 36419
+    },
+    "private": {
+      "sources": [
+        {
+          "ref": "local:private",
+          "url": "file://supplements/{cat}.list",
+          "upstream_sha256": "ca0b982eb028e0b06f7bcbffbb183022d22a7ccafb67ff466ee098ab3950fdea",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 25,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 0
+          }
+        }
+      ],
+      "total": 25,
+      "counts": {
+        "domain_suffix": 25
+      },
+      "srs_sha256": "841e4f1d15db788b359679329de35af676ff3d63fd00a66303a4006bb76d6ed8",
+      "srs_bytes": 265
     },
     "netflix": {
       "sources": [
@@ -905,9 +949,193 @@
       "srs_bytes": 31810
     }
   },
+  "dat": {
+    "geosite": {
+      "file": "geosite.dat",
+      "sha256": "168ef9d01d3e7b2beb1f80e0beb5bd6e279b3ffced18076d625504ce91554620",
+      "bytes": 2283324,
+      "entries": 26,
+      "domains": 125984,
+      "keys": {
+        "cn": 110491,
+        "private": 25,
+        "netflix": 36,
+        "disney": 236,
+        "hbo": 90,
+        "hulu": 58,
+        "primevideo": 31,
+        "appletv": 7,
+        "youtube": 182,
+        "tiktok": 62,
+        "ai": 222,
+        "telegram": 28,
+        "twitter": 28,
+        "facebook": 552,
+        "instagram": 76,
+        "github": 70,
+        "spotify": 33,
+        "paypal": 247,
+        "speedtest": 24,
+        "apple": 1820,
+        "microsoft": 885,
+        "google": 1101,
+        "force-direct": 1139,
+        "force-proxy": 4464,
+        "direct-extra": 494,
+        "encrypted-dns": 3583
+      },
+      "by_type": {
+        "cn": {
+          "domain_suffix": 110207,
+          "domain": 271,
+          "domain_keyword": 13
+        },
+        "private": {
+          "domain_suffix": 25
+        },
+        "netflix": {
+          "domain_suffix": 30,
+          "domain": 2,
+          "domain_keyword": 4
+        },
+        "disney": {
+          "domain_suffix": 234,
+          "domain": 2
+        },
+        "hbo": {
+          "domain_suffix": 90
+        },
+        "hulu": {
+          "domain_suffix": 57,
+          "domain": 1
+        },
+        "primevideo": {
+          "domain_suffix": 16,
+          "domain": 14,
+          "domain_keyword": 1
+        },
+        "appletv": {
+          "domain_suffix": 1,
+          "domain": 6
+        },
+        "youtube": {
+          "domain_suffix": 180,
+          "domain": 1,
+          "domain_keyword": 1
+        },
+        "tiktok": {
+          "domain_suffix": 51,
+          "domain": 9,
+          "domain_keyword": 2
+        },
+        "ai": {
+          "domain_suffix": 188,
+          "domain": 34
+        },
+        "telegram": {
+          "domain_suffix": 25,
+          "domain": 2,
+          "domain_keyword": 1
+        },
+        "twitter": {
+          "domain_suffix": 27,
+          "domain_keyword": 1
+        },
+        "facebook": {
+          "domain_suffix": 550,
+          "domain_keyword": 2
+        },
+        "instagram": {
+          "domain_suffix": 75,
+          "domain_keyword": 1
+        },
+        "github": {
+          "domain_suffix": 38,
+          "domain": 31,
+          "domain_keyword": 1
+        },
+        "spotify": {
+          "domain_suffix": 24,
+          "domain": 8,
+          "domain_keyword": 1
+        },
+        "paypal": {
+          "domain_suffix": 246,
+          "domain_keyword": 1
+        },
+        "speedtest": {
+          "domain_suffix": 22,
+          "domain": 1,
+          "domain_keyword": 1
+        },
+        "apple": {
+          "domain_suffix": 1559,
+          "domain": 254,
+          "domain_keyword": 7
+        },
+        "microsoft": {
+          "domain_suffix": 772,
+          "domain": 109,
+          "domain_keyword": 4
+        },
+        "google": {
+          "domain_suffix": 911,
+          "domain": 185,
+          "domain_keyword": 5
+        },
+        "force-direct": {
+          "domain_suffix": 1136,
+          "domain_keyword": 3
+        },
+        "force-proxy": {
+          "domain_suffix": 4464
+        },
+        "direct-extra": {
+          "domain_suffix": 5,
+          "domain": 489
+        },
+        "encrypted-dns": {
+          "domain_suffix": 3573,
+          "domain": 10
+        }
+      },
+      "roundtrip": "ok"
+    },
+    "geoip": {
+      "file": "geoip.dat",
+      "sha256": "4f0a9f6e459178df22267f3be5838a1bad60d72449ec49cb432ab78751222927",
+      "bytes": 146227,
+      "entries": 3,
+      "cidrs": 10171,
+      "keys": {
+        "cn": 9638,
+        "netflix": 519,
+        "telegram": 14
+      },
+      "families": {
+        "cn": {
+          "v4": 6204,
+          "v6": 3434
+        },
+        "netflix": {
+          "v4": 251,
+          "v6": 268
+        },
+        "telegram": {
+          "v4": 9,
+          "v6": 5
+        }
+      },
+      "roundtrip": "ok"
+    }
+  },
   "thresholds": {
-    "checked": 27,
+    "checked": 29,
     "failed": 0
+  },
+  "dat_tests": {
+    "pass": 29,
+    "fail": 0
   },
   "tests": {
     "pass": 21,

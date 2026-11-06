@@ -46,6 +46,8 @@ jobs:
           name: rules-${{ github.run_id }}
           path: |
             dist/srs/
+            dist/geosite.dat
+            dist/geoip.dat
             dist/manifest.json
           retention-days: 7
 
@@ -55,9 +57,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           STAMP=$(date +%Y%m%d)
-          gh release create "rules-$STAMP" dist/srs/*.srs dist/manifest.json \
-            --title "rules $STAMP" --notes "sing-box $SING_BOX_VERSION；来源与条目数见 manifest.json" || \
-          gh release upload "rules-$STAMP" dist/srs/*.srs dist/manifest.json --clobber
+          gh release create "rules-$STAMP" dist/srs/*.srs dist/geosite.dat dist/geoip.dat dist/manifest.json \
+            --title "rules $STAMP" --notes "sing-box $SING_BOX_VERSION + v2ray geosite.dat/geoip.dat；来源与条目数见 manifest.json" || \
+          gh release upload "rules-$STAMP" dist/srs/*.srs dist/geosite.dat dist/geoip.dat dist/manifest.json --clobber
 
       - name: 清理旧 release（保留最近 ${{ env.KEEP_RELEASES }} 个）
         if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')

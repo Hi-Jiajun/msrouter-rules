@@ -36,12 +36,12 @@
   },
   {
     "domain": "openai.com",
-    "set": "openai",
+    "set": "ai",
     "expect": "in"
   },
   {
     "domain": "claude.ai",
-    "set": "anthropic",
+    "set": "ai",
     "expect": "in"
   },
   {

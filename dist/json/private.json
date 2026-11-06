@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain_suffix": [
+        "asusrouter.com",
+        "corp",
+        "hiwifi.com",
+        "home.arpa",
+        "in-addr.arpa",
+        "internal",
+        "intranet",
+        "ip6.arpa",
+        "lan",
+        "local",
+        "localdomain",
+        "localhost",
+        "miwifi.com",
+        "my.router",
+        "phicomm.me",
+        "plex.direct",
+        "private",
+        "router.asus.com",
+        "router.ctc",
+        "routerlogin.com",
+        "tendawifi.com",
+        "tplinkwifi.net",
+        "tplogin.cn",
+        "ts.net",
+        "zte.home"
+      ]
+    }
+  ]
+}

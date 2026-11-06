@@ -4,6 +4,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { execFileSync, spawnSync } from 'node:child_process';
+import {
+  encodeGeoSiteList, encodeGeoIpList, decodeGeoSiteList, decodeGeoIpList,
+  cidrToWire, cidrContains, matchDomain,
+} from './dat.mjs';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const CACHE = path.join(ROOT, 'cache');
@@ -112,6 +116,7 @@ async function main() {
 
   const manifest = { generated_at: new Date().toISOString(), sing_box: singbox(['version']).split('\n')[0].trim(), rule_sets: {} };
   const tags = Object.keys(CFG.rule_sets);
+  const builtRules = {};   // tag → 合并后的 rule，.srs 与 .dat 都从这里取，保证同源
   log(`共 ${tags.length} 个 rule_set`);
 
   for (const tag of tags) {
@@ -138,6 +143,7 @@ async function main() {
     for (const t of TYPES) if (merged[t]?.size) rule[t] = [...merged[t]].sort();
     const total = Object.values(rule).reduce((a, b) => a + b.length, 0);
     if (!total) throw new Error(`${tag} 合并后为空`);
+    builtRules[tag] = rule;
 
     const jsonPath = path.join(DIST, 'json', `${tag}.json`);
     fs.writeFileSync(jsonPath, JSON.stringify({ version: 2, rules: [rule] }, null, 2) + '\n');
@@ -152,6 +158,90 @@ async function main() {
       srs_bytes: fs.statSync(srsPath).size,
     };
     log(`  ✓ ${tag.padEnd(14)} ${String(total).padStart(6)} 条  ${String(manifest.rule_sets[tag].srs_bytes).padStart(7)} B  ← ${refs.join(' + ')}`);
+  }
+
+  // ── v2ray .dat：geosite.dat / geoip.dat，与 .srs 共用同一份合并结果 ──
+  // 类型映射按 v2ray 真实语义（v2fly/domain-list-community 的映射，Landscape 的
+  // DomainMatcher 也照此实现）：
+  //   domain_suffix → RootDomain(2)，domain → Full(3)，domain_keyword → Plain(0)
+  // Plain 是子串匹配，正好等价 sing-box 的 domain_keyword，所以 keyword 没有损失。
+  const SITE_TYPES = [['domain_suffix', 2], ['domain', 3], ['domain_keyword', 0], ['domain_regex', 1]];
+  const sha256 = buf => crypto.createHash('sha256').update(buf).digest('hex');
+  let datState = null;
+  if (CFG.dat) {
+    const geositeEntries = [];
+    for (const [key, tag] of Object.entries(CFG.dat.geosite || {})) {
+      const rule = builtRules[tag];
+      if (!rule) throw new Error(`dat.geosite 的 ${key} 指向未产出的 rule_set: ${tag}`);
+      const domains = [];
+      for (const [singboxType, type] of SITE_TYPES)
+        for (const value of rule[singboxType] || []) domains.push({ type, value });
+      domains.sort((a, b) => a.type - b.type || (a.value < b.value ? -1 : a.value > b.value ? 1 : 0));
+      if (!domains.length) throw new Error(`dat.geosite 的 ${key}（${tag}）没有域名条目`);
+      geositeEntries.push({ countryCode: key, domains });
+    }
+
+    const geoipEntries = [];
+    for (const [key, tag] of Object.entries(CFG.dat.geoip || {})) {
+      const rule = builtRules[tag];
+      if (!rule) throw new Error(`dat.geoip 的 ${key} 指向未产出的 rule_set: ${tag}`);
+      const cidrs = (rule.ip_cidr || []).map(cidrToWire);
+      cidrs.sort((a, b) => a.ip.length - b.ip.length || Buffer.compare(a.ip, b.ip) || a.prefix - b.prefix);
+      if (!cidrs.length) throw new Error(`dat.geoip 的 ${key}（${tag}）没有 ip_cidr 条目`);
+      geoipEntries.push({ countryCode: key, cidrs });
+    }
+
+    const geositeBuf = encodeGeoSiteList(geositeEntries);
+    const geoipBuf = encodeGeoIpList(geoipEntries);
+    fs.writeFileSync(path.join(DIST, 'geosite.dat'), geositeBuf);
+    fs.writeFileSync(path.join(DIST, 'geoip.dat'), geoipBuf);
+
+    // 读回校验：解码 → 重新编码必须与原文件逐字节一致，条目数必须与源一致
+    const backSites = decodeGeoSiteList(fs.readFileSync(path.join(DIST, 'geosite.dat')));
+    const backIps = decodeGeoIpList(fs.readFileSync(path.join(DIST, 'geoip.dat')));
+    if (!encodeGeoSiteList(backSites).equals(geositeBuf)) throw new Error('geosite.dat 读回后重新编码与原文不一致');
+    if (!encodeGeoIpList(backIps).equals(geoipBuf)) throw new Error('geoip.dat 读回后重新编码与原文不一致');
+    const siteMap = new Map(backSites.map(e => [e.countryCode, e.domains]));
+    const ipMap = new Map(backIps.map(e => [e.countryCode, e.cidrs]));
+    for (const e of geositeEntries)
+      if (siteMap.get(e.countryCode)?.length !== e.domains.length)
+        throw new Error(`geosite.dat 的 ${e.countryCode} 条目数与源不一致`);
+    for (const e of geoipEntries)
+      if (ipMap.get(e.countryCode)?.length !== e.cidrs.length)
+        throw new Error(`geoip.dat 的 ${e.countryCode} 条目数与源不一致`);
+
+    const byType = domains => Object.fromEntries(SITE_TYPES
+      .map(([name, type]) => [name, domains.filter(d => d.type === type).length])
+      .filter(([, n]) => n > 0));
+
+    manifest.dat = {
+      geosite: {
+        file: 'geosite.dat',
+        sha256: sha256(geositeBuf), bytes: geositeBuf.length,
+        entries: geositeEntries.length,
+        domains: geositeEntries.reduce((a, e) => a + e.domains.length, 0),
+        keys: Object.fromEntries(geositeEntries.map(e => [e.countryCode, e.domains.length])),
+        by_type: Object.fromEntries(geositeEntries.map(e => [e.countryCode, byType(e.domains)])),
+        roundtrip: 'ok',
+      },
+      geoip: {
+        file: 'geoip.dat',
+        sha256: sha256(geoipBuf), bytes: geoipBuf.length,
+        entries: geoipEntries.length,
+        cidrs: geoipEntries.reduce((a, e) => a + e.cidrs.length, 0),
+        keys: Object.fromEntries(geoipEntries.map(e => [e.countryCode, e.cidrs.length])),
+        families: Object.fromEntries(geoipEntries.map(e => [e.countryCode, {
+          v4: e.cidrs.filter(c => c.ip.length === 4).length,
+          v6: e.cidrs.filter(c => c.ip.length === 16).length,
+        }])),
+        roundtrip: 'ok',
+      },
+    };
+    datState = { siteMap, ipMap };
+    const gs = manifest.dat.geosite;
+    const gi = manifest.dat.geoip;
+    log(`  ✓ geosite.dat ${String(gs.domains).padStart(6)} 条 / ${gs.entries} 类  ${String(gs.bytes).padStart(7)} B  ${gs.sha256}`);
+    log(`  ✓ geoip.dat   ${String(gi.cidrs).padStart(6)} 条 / ${gi.entries} 类  ${String(gi.bytes).padStart(7)} B  ${gi.sha256}`);
   }
 
   // ── 条目数阈值：防止上游把某个分类几乎清空却仍能通过域名断言 ──
@@ -170,15 +260,46 @@ async function main() {
   let pass = 0, fail = 0;
   for (const c of cases) {
     const file = path.join(DIST, 'srs', `${c.set}.srs`);
+    // sing-box 对不存在的文件会在 stderr 打错误，按旧的「输出非空即命中」判断会误判为通过
+    if (!fs.existsSync(file)) { fail++; log(`  ✗ 断言引用了未产出的规则集 ${c.set}（${c.domain}）`); continue; }
     const out = singbox(['rule-set', 'match', '-f', 'binary', file, c.domain], { allowFail: true });
     const hit = out.trim().length > 0;
     const ok = c.expect === 'in' ? hit : !hit;
     if (ok) pass++; else { fail++; log(`  ✗ ${c.domain} 期望${c.expect === 'in' ? '命中' : '不命中'} ${c.set}`); }
   }
+  // ── .dat 断言：读回解码后按 v2ray 语义匹配 ──
+  let datPass = 0, datFail = 0;
+  const datTestsPath = path.join(ROOT, 'tests', 'dat.json');
+  if (datState && fs.existsSync(datTestsPath)) {
+    const dat = JSON.parse(fs.readFileSync(datTestsPath, 'utf8'));
+    const check = (ok, message) => { if (ok) datPass++; else { datFail++; log(`  ✗ ${message}`); } };
+
+    for (const { key, min } of dat.geosite_keys || []) {
+      const domains = datState.siteMap.get(key);
+      check(Boolean(domains), `geosite 缺少分类 ${key}`);
+      if (domains) check(domains.length >= min, `geosite ${key} 只有 ${domains.length} 条，低于阈值 ${min}`);
+    }
+    for (const { key, domain, expect } of dat.geosite_cases || []) {
+      const hit = matchDomain(domain, datState.siteMap.get(key) || []);
+      check(expect === 'in' ? hit : !hit, `geosite ${key} ${domain} 期望${expect === 'in' ? '命中' : '不命中'}`);
+    }
+    for (const { key, min } of dat.geoip_keys || []) {
+      const cidrs = datState.ipMap.get(key);
+      check(Boolean(cidrs), `geoip 缺少分类 ${key}`);
+      if (cidrs) check(cidrs.length >= min, `geoip ${key} 只有 ${cidrs.length} 条，低于阈值 ${min}`);
+    }
+    for (const { key, ip, expect } of dat.geoip_cases || []) {
+      const hit = (datState.ipMap.get(key) || []).some(cidr => cidrContains(cidr, ip));
+      check(expect === 'in' ? hit : !hit, `geoip ${key} ${ip} 期望${expect === 'in' ? '命中' : '不命中'}`);
+    }
+    manifest.dat_tests = { pass: datPass, fail: datFail };
+    log(`\ndat 断言 ${datPass} 通过 / ${datFail} 失败`);
+  }
+
   manifest.tests = { pass, fail };
   fs.writeFileSync(path.join(DIST, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
   log(`\n断言 ${pass} 通过 / ${fail} 失败`);
-  if (fail || thin) process.exit(1);
+  if (fail || thin || datFail) process.exit(1);
 }
 
 main().catch(e => { console.error('构建失败:', e.message); process.exit(1); });

@@ -1,3 +1,5 @@
 cache/
 dist/srs/
+dist/geosite.dat
+dist/geoip.dat
 node_modules/

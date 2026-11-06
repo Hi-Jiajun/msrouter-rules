@@ -1,0 +1,32 @@
+{
+  "note": "对生成的 v2ray .dat 的断言：用 tools/dat.mjs 的解码器读回后检查条目数下限与已知命中。min 取当前值的约 70%。",
+  "geosite_keys": [
+    { "key": "cn", "min": 80000 },
+    { "key": "private", "min": 17 },
+    { "key": "github", "min": 49 },
+    { "key": "netflix", "min": 25 },
+    { "key": "telegram", "min": 19 }
+  ],
+  "geosite_cases": [
+    { "key": "cn", "domain": "baidu.com", "expect": "in" },
+    { "key": "cn", "domain": "www.qq.com", "expect": "in" },
+    { "key": "cn", "domain": "netflix.com", "expect": "out" },
+    { "key": "github", "domain": "github.com", "expect": "in" },
+    { "key": "netflix", "domain": "netflix.com", "expect": "in" },
+    { "key": "private", "domain": "router.asus.com", "expect": "in" },
+    { "key": "private", "domain": "home.arpa", "expect": "in" },
+    { "key": "private", "domain": "baidu.com", "expect": "out" }
+  ],
+  "geoip_keys": [
+    { "key": "cn", "min": 4000 },
+    { "key": "netflix", "min": 300 },
+    { "key": "telegram", "min": 9 }
+  ],
+  "geoip_cases": [
+    { "key": "cn", "ip": "223.5.5.5", "expect": "in" },
+    { "key": "cn", "ip": "1.0.1.1", "expect": "in" },
+    { "key": "cn", "ip": "8.8.8.8", "expect": "out" },
+    { "key": "netflix", "ip": "45.57.0.1", "expect": "in" },
+    { "key": "telegram", "ip": "149.154.167.51", "expect": "in" }
+  ]
+}

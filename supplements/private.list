@@ -1,0 +1,40 @@
+# 本地产物：geosite 的 private 分类
+#
+# 只收两类，均不涉及任何公网业务域名：
+#   1. RFC 6761 / 6762 / 8375 的特殊用途域名，以及内网常用的私有 TLD
+#   2. 家用路由器 / 软路由的本地管理入口（登录页走代理只会打不开）
+# 格式同 Clash 规则（DOMAIN / DOMAIN-SUFFIX / DOMAIN-KEYWORD）。
+# 这份名单同时用于 sing-box 的 private.srs 和 v2ray geosite.dat 的 private 条目。
+
+# 特殊用途 / 私有 TLD
+DOMAIN-SUFFIX,localhost
+DOMAIN-SUFFIX,local
+DOMAIN-SUFFIX,localdomain
+DOMAIN-SUFFIX,lan
+DOMAIN-SUFFIX,home.arpa
+DOMAIN-SUFFIX,internal
+DOMAIN-SUFFIX,intranet
+DOMAIN-SUFFIX,corp
+DOMAIN-SUFFIX,private
+
+# 反向解析区（PTR 查询不应出网）
+DOMAIN-SUFFIX,in-addr.arpa
+DOMAIN-SUFFIX,ip6.arpa
+
+# 家用路由器 / 软路由管理入口
+DOMAIN-SUFFIX,tplogin.cn
+DOMAIN-SUFFIX,tplinkwifi.net
+DOMAIN-SUFFIX,miwifi.com
+DOMAIN-SUFFIX,routerlogin.com
+DOMAIN-SUFFIX,asusrouter.com
+DOMAIN-SUFFIX,router.asus.com
+DOMAIN-SUFFIX,tendawifi.com
+DOMAIN-SUFFIX,hiwifi.com
+DOMAIN-SUFFIX,phicomm.me
+DOMAIN-SUFFIX,router.ctc
+DOMAIN-SUFFIX,my.router
+DOMAIN-SUFFIX,zte.home
+
+# 局域网服务发现：Tailscale MagicDNS / Plex 本地证书
+DOMAIN-SUFFIX,ts.net
+DOMAIN-SUFFIX,plex.direct

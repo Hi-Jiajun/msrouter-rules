@@ -36,11 +36,22 @@
       "kind": "ripe-asn",
       "url": "https://stat.ripe.net/data/announced-prefixes/data.json?resource={cat}",
       "note": "RIPE Stat 的 AS 前缀表（v4+v6）"
+    },
+    "chinaip": {
+      "kind": "cidr-list",
+      "url": "https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china46.txt",
+      "note": "BGP 汇总的中国运营商网段（v4+v6），每日更新；china.txt 是纯 v4 版本"
     }
   },
   "rule_sets": {
     "cn-domains": {
       "take": "senshinya:ChinaMax"
+    },
+    "cn-ip": {
+      "take": "chinaip:china46"
+    },
+    "private": {
+      "take": "local:private"
     },
     "netflix": {
       "union": [
@@ -186,6 +197,42 @@
     },
     "encrypted-dns": {
       "take": "aethersailor:Encrypted_DNS"
+    }
+  },
+  "dat": {
+    "note": "v2ray 产物映射：键是 .dat 里的 country_code，值是 rule_set。geosite 取域名类条目，geoip 取 ip_cidr；两者与 .srs 用同一份合并结果。geolocation-!cn 是 cn 的补集概念，本仓库没有全量非 CN 域名源，故意不输出（消费端用 inverse 表达）。",
+    "geosite": {
+      "cn": "cn-domains",
+      "private": "private",
+      "netflix": "netflix",
+      "disney": "disney",
+      "hbo": "hbo",
+      "hulu": "hulu",
+      "primevideo": "primevideo",
+      "appletv": "appletv",
+      "youtube": "youtube",
+      "tiktok": "tiktok",
+      "ai": "ai",
+      "telegram": "telegram",
+      "twitter": "twitter",
+      "facebook": "facebook",
+      "instagram": "instagram",
+      "github": "github",
+      "spotify": "spotify",
+      "paypal": "paypal",
+      "speedtest": "speedtest",
+      "apple": "apple",
+      "microsoft": "microsoft",
+      "google": "google",
+      "force-direct": "force-direct",
+      "force-proxy": "force-proxy",
+      "direct-extra": "direct-extra",
+      "encrypted-dns": "encrypted-dns"
+    },
+    "geoip": {
+      "cn": "cn-ip",
+      "netflix": "netflix-ip",
+      "telegram": "telegram-ip"
     }
   },
   "options": {
