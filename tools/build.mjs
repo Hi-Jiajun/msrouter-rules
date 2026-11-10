@@ -26,6 +26,16 @@ function curl(url, out) {
   execFileSync('curl', ['-fsSL', '--retry', '3', '--max-time', '120', '-o', out, url], { stdio: 'pipe' });
   return out;
 }
+// rule-set match 专用：区分「命中」与「命令失败」。
+// sing-box 命中时退出码 0 并打印匹配项；文件损坏/参数错误时退出码非 0 并打印错误文本。
+// 旧实现只判断输出非空，会把错误文本误当成命中。
+function matchRuleSet(file, domain) {
+  const r = spawnSync(SING_BOX, ['rule-set', 'match', '-f', 'binary', file, domain], { encoding: 'utf8' });
+  const out = ((r.stdout || '') + (r.stderr || '')).trim();
+  if (r.status !== 0) return { ok: false, reason: out.split('\n')[0] || ('exit ' + r.status) };
+  return { ok: true, hit: out.length > 0 };
+}
+
 function singbox(args, opts = {}) {
   // 注意：sing-box rule-set match 的结果打印在 stderr，必须合并两路
   const r = spawnSync(SING_BOX, args, { encoding: 'utf8' });
@@ -262,9 +272,9 @@ async function main() {
     const file = path.join(DIST, 'srs', `${c.set}.srs`);
     // sing-box 对不存在的文件会在 stderr 打错误，按旧的「输出非空即命中」判断会误判为通过
     if (!fs.existsSync(file)) { fail++; log(`  ✗ 断言引用了未产出的规则集 ${c.set}（${c.domain}）`); continue; }
-    const out = singbox(['rule-set', 'match', '-f', 'binary', file, c.domain], { allowFail: true });
-    const hit = out.trim().length > 0;
-    const ok = c.expect === 'in' ? hit : !hit;
+    const m = matchRuleSet(file, c.domain);
+    if (!m.ok) { fail++; log(`  ✗ 断言执行失败 ${c.set}/${c.domain}: ${m.reason}`); continue; }
+    const ok = c.expect === 'in' ? m.hit : !m.hit;
     if (ok) pass++; else { fail++; log(`  ✗ ${c.domain} 期望${c.expect === 'in' ? '命中' : '不命中'} ${c.set}`); }
   }
   // ── .dat 断言：读回解码后按 v2ray 语义匹配 ──
