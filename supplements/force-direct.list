@@ -4,3 +4,8 @@
 # Windows Update 下载 CDN：走代理纯属浪费带宽，直连在国内可达
 DOMAIN-SUFFIX,windowsupdate.com
 DOMAIN-SUFFIX,delivery.mp.microsoft.com
+
+# Ollama：官网与模型下载走直连（2026-11-11 用户要求）
+# 直连在 DNS 层决定：命中 force-direct 后由 unbound 解析真实 IP，不产生 fake-IP
+DOMAIN-SUFFIX,ollama.com
+DOMAIN-SUFFIX,ollama.ai

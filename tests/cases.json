@@ -75,6 +75,21 @@
     "expect": "out"
   },
   {
+    "domain": "ollama.com",
+    "set": "force-direct",
+    "expect": "in"
+  },
+  {
+    "domain": "registry.ollama.ai",
+    "set": "force-direct",
+    "expect": "in"
+  },
+  {
+    "domain": "baidu.com",
+    "set": "force-direct",
+    "expect": "out"
+  },
+  {
     "domain": "dns.google",
     "set": "encrypted-dns",
     "expect": "in"

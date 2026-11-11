@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T11:53:04.085Z",
+  "generated_at": "2026-11-11T09:10:57.464Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
@@ -838,23 +838,23 @@
         {
           "ref": "local:force-direct",
           "url": "file://supplements/{cat}.list",
-          "upstream_sha256": "d4ed684e72e1b030eaf13cee250f2fc9c22178b622d11f5790880bbcba313d70",
+          "upstream_sha256": "4e8ed561500a89193b19581b30655ed2adc053e8fefbf90f70d6fb77bf9be30f",
           "counts": {
             "domain": 0,
-            "domain_suffix": 2,
+            "domain_suffix": 4,
             "domain_keyword": 0,
             "domain_regex": 0,
             "ip_cidr": 0
           }
         }
       ],
-      "total": 1139,
+      "total": 1141,
       "counts": {
-        "domain_suffix": 1136,
+        "domain_suffix": 1138,
         "domain_keyword": 3
       },
-      "srs_sha256": "9d58dca9b68c4e6242e8997da19766269cb411b6891fbc2385d68e428bb9c5d0",
-      "srs_bytes": 7665
+      "srs_sha256": "7d1dc5438bdda06d5d4d8d42f24e3bd0b2d325399cbe2a22d7cbc3c83da58995",
+      "srs_bytes": 7664
     },
     "force-proxy": {
       "sources": [
@@ -952,10 +952,10 @@
   "dat": {
     "geosite": {
       "file": "geosite.dat",
-      "sha256": "168ef9d01d3e7b2beb1f80e0beb5bd6e279b3ffced18076d625504ce91554620",
-      "bytes": 2283324,
+      "sha256": "eafeedc24c8b84bec80ba3167c975fb452977e5f25b964a39a5e6d437a53c3f1",
+      "bytes": 2283355,
       "entries": 26,
-      "domains": 125984,
+      "domains": 125986,
       "keys": {
         "cn": 110491,
         "private": 25,
@@ -979,7 +979,7 @@
         "apple": 1820,
         "microsoft": 885,
         "google": 1101,
-        "force-direct": 1139,
+        "force-direct": 1141,
         "force-proxy": 4464,
         "direct-extra": 494,
         "encrypted-dns": 3583
@@ -1084,7 +1084,7 @@
           "domain_keyword": 5
         },
         "force-direct": {
-          "domain_suffix": 1136,
+          "domain_suffix": 1138,
           "domain_keyword": 3
         },
         "force-proxy": {
@@ -1138,7 +1138,7 @@
     "fail": 0
   },
   "tests": {
-    "pass": 21,
+    "pass": 24,
     "fail": 0
   }
 }
