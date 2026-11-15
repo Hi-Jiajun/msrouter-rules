@@ -9,3 +9,6 @@ DOMAIN-SUFFIX,delivery.mp.microsoft.com
 # 直连在 DNS 层决定：命中 force-direct 后由 unbound 解析真实 IP，不产生 fake-IP
 DOMAIN-SUFFIX,ollama.com
 DOMAIN-SUFFIX,ollama.ai
+
+# 星茶 API 站：整域直连（2026-11-16 用户要求）
+DOMAIN-SUFFIX,xingchiapi.com

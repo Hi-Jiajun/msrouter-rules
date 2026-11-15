@@ -90,6 +90,21 @@
     "expect": "out"
   },
   {
+    "domain": "xingchiapi.com",
+    "set": "force-direct",
+    "expect": "in"
+  },
+  {
+    "domain": "api.xingchiapi.com",
+    "set": "force-direct",
+    "expect": "in"
+  },
+  {
+    "domain": "notxingchiapi.com",
+    "set": "force-direct",
+    "expect": "out"
+  },
+  {
     "domain": "dns.google",
     "set": "encrypted-dns",
     "expect": "in"
