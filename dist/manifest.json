@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T17:19:49.300Z",
+  "generated_at": "2026-11-15T18:52:26.714Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
@@ -838,9 +838,9 @@
         {
           "ref": "local:force-direct",
           "url": "file://supplements/{cat}.list",
-          "upstream_sha256": "59c865d64ccb55599836764ff6fc3e7355d7cb890c39cddb95dd089f149672e8",
+          "upstream_sha256": "cfc3e08073b83796ab680f91c101b2a67c0a0509a679f12528bff9d09d3cfac7",
           "counts": {
-            "domain": 0,
+            "domain": 1,
             "domain_suffix": 5,
             "domain_keyword": 0,
             "domain_regex": 0,
@@ -848,13 +848,14 @@
           }
         }
       ],
-      "total": 1142,
+      "total": 1143,
       "counts": {
+        "domain": 1,
         "domain_suffix": 1139,
         "domain_keyword": 3
       },
-      "srs_sha256": "94dce01bd3128b05bbcbac3392b94f4cbb9347530d9b041c3e166aae83ac4fdf",
-      "srs_bytes": 7656
+      "srs_sha256": "fff2c07a6b0f172e37941543970f394a45d7849838cffe3967c924a4471bce6f",
+      "srs_bytes": 7687
     },
     "force-proxy": {
       "sources": [
@@ -952,10 +953,10 @@
   "dat": {
     "geosite": {
       "file": "geosite.dat",
-      "sha256": "a191d7ea2ff952fbb50c2e7fd12ecdf2971271e78073756629bb27fba725563f",
-      "bytes": 2283375,
+      "sha256": "de5ecfc06752d59302885a55b343e220af2572de7034c8c1349f2873542c2cbe",
+      "bytes": 2283394,
       "entries": 26,
-      "domains": 125987,
+      "domains": 125988,
       "keys": {
         "cn": 110491,
         "private": 25,
@@ -979,7 +980,7 @@
         "apple": 1820,
         "microsoft": 885,
         "google": 1101,
-        "force-direct": 1142,
+        "force-direct": 1143,
         "force-proxy": 4464,
         "direct-extra": 494,
         "encrypted-dns": 3583
@@ -1085,6 +1086,7 @@
         },
         "force-direct": {
           "domain_suffix": 1139,
+          "domain": 1,
           "domain_keyword": 3
         },
         "force-proxy": {
@@ -1138,7 +1140,7 @@
     "fail": 0
   },
   "tests": {
-    "pass": 27,
+    "pass": 30,
     "fail": 0
   }
 }

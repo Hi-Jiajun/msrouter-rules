@@ -105,6 +105,21 @@
     "expect": "out"
   },
   {
+    "domain": "v.qwerw.cc.cd",
+    "set": "force-direct",
+    "expect": "in"
+  },
+  {
+    "domain": "qwerw.cc.cd",
+    "set": "force-direct",
+    "expect": "out"
+  },
+  {
+    "domain": "cc.cd",
+    "set": "force-direct",
+    "expect": "out"
+  },
+  {
     "domain": "dns.google",
     "set": "encrypted-dns",
     "expect": "in"

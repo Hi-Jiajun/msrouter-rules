@@ -2,6 +2,9 @@
   "version": 2,
   "rules": [
     {
+      "domain": [
+        "v.qwerw.cc.cd"
+      ],
       "domain_suffix": [
         "00333118.com",
         "0044696.com",

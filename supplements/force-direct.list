@@ -12,3 +12,6 @@ DOMAIN-SUFFIX,ollama.ai
 
 # 星茶 API 站：整域直连（2026-11-16 用户要求）
 DOMAIN-SUFFIX,xingchiapi.com
+
+# 单一主机名直连（2026-11-16 用户要求）：只匹配该主机，不含 qwerw.cc.cd 其它子域
+DOMAIN,v.qwerw.cc.cd
