@@ -45,7 +45,23 @@
   },
   "rule_sets": {
     "cn-domains": {
-      "take": "senshinya:ChinaMax"
+      "take": "senshinya:ChinaMax",
+      "exclude": [
+        "force-proxy",
+        "ai",
+        "github",
+        "youtube",
+        "telegram",
+        "netflix",
+        "disney",
+        "hbo",
+        "hulu",
+        "primevideo",
+        "tiktok",
+        "twitter",
+        "facebook",
+        "instagram"
+      ]
     },
     "cn-ip": {
       "take": "chinaip:china46"
@@ -177,7 +193,6 @@
       ]
     },
     "force-direct": {
-      "take": "aethersailor:Custom_Direct",
       "union": [
         "aethersailor:Custom_Direct",
         "local:force-direct"
@@ -192,7 +207,19 @@
     "direct-extra": {
       "union": [
         "aethersailor:Game_Download_CDN",
-        "aethersailor:Steam_CDN"
+        "aethersailor:Steam_CDN",
+        "meta:apple-cn",
+        "meta:apple@cn",
+        "meta:microsoft@cn",
+        "meta:category-games@cn",
+        "meta:category-game-platforms-download@cn"
+      ]
+    },
+    "fakeip-filter": {
+      "union": [
+        "local:fakeip-filter",
+        "local:private",
+        "meta:connectivity-check"
       ]
     },
     "encrypted-dns": {
@@ -227,6 +254,7 @@
       "force-direct": "force-direct",
       "force-proxy": "force-proxy",
       "direct-extra": "direct-extra",
+      "fakeip-filter": "fakeip-filter",
       "encrypted-dns": "encrypted-dns"
     },
     "geoip": {

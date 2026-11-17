@@ -46,6 +46,131 @@ function singbox(args, opts = {}) {
 const strip = v => String(v).replace(/^\+\./, '').replace(/^\*\./, '').replace(/^\./, '').toLowerCase();
 const blank = () => ({ domain: new Set(), domain_suffix: new Set(), domain_keyword: new Set(), ip_cidr: new Set() });
 
+/** Return true if domain matches any exact or parent-suffix rule across ruleSets (plus optional keyword). */
+function matchesDomainSets(domain, ruleSets, checkKeyword = false) {
+  for (const rs of ruleSets) {
+    if (rs.domain?.has(domain)) return true;
+    const parts = domain.split('.');
+    for (let i = 0; i < parts.length; i++) {
+      if (rs.domain_suffix?.has(parts.slice(i).join('.'))) return true;
+    }
+    if (checkKeyword && rs.domain_keyword) {
+      for (const kw of rs.domain_keyword) if (domain.includes(kw)) return true;
+    }
+  }
+  return false;
+}
+
+/** Prune domains/suffixes covered by keywords or ancestor suffixes via a reversed-label trie. */
+function pruneDomains(set) {
+  const keywords = [...set.domain_keyword];
+  const isKeywordCovered = d => keywords.some(kw => d.includes(kw));
+
+  const candidateSuffixes = [...set.domain_suffix]
+    .filter(s => s && !isKeywordCovered(s))
+    .sort((a, b) => a.split('.').length - b.split('.').length || (a < b ? -1 : a > b ? 1 : 0));
+
+  const root = { terminal: false, children: new Map() };
+  const keptSuffixes = new Set();
+  for (const s of candidateSuffixes) {
+    const rev = s.split('.').reverse();
+    let node = root;
+    let covered = false;
+    for (const label of rev) {
+      if (node.terminal) { covered = true; break; }
+      let next = node.children.get(label);
+      if (!next) { next = { terminal: false, children: new Map() }; node.children.set(label, next); }
+      node = next;
+    }
+    if (covered || node.terminal) continue;
+    node.terminal = true;
+    keptSuffixes.add(s);
+  }
+
+  const keptDomains = new Set();
+  for (const d of set.domain) {
+    if (!d || isKeywordCovered(d)) continue;
+    const rev = d.split('.').reverse();
+    let node = root;
+    let covered = false;
+    for (const label of rev) {
+      if (node.terminal) { covered = true; break; }
+      node = node.children.get(label);
+      if (!node) break;
+    }
+    if (covered || node?.terminal) continue;
+    keptDomains.add(d);
+  }
+
+  return { domain: keptDomains, domain_suffix: keptSuffixes, domain_keyword: new Set(keywords) };
+}
+
+function formatBigIntIp(val, bits) {
+  if (bits === 32) {
+    return [24n, 16n, 8n, 0n].map(shift => Number((val >> shift) & 0xffn)).join('.');
+  }
+  const groups = [];
+  for (let i = 7; i >= 0; i--) groups.push(Number((val >> BigInt(i * 16)) & 0xffffn));
+  let bestStart = -1, bestLen = 0, curStart = -1, curLen = 0;
+  for (let i = 0; i < 8; i++) {
+    if (groups[i] === 0) {
+      if (curStart === -1) { curStart = i; curLen = 1; } else curLen++;
+      if (curLen > bestLen) { bestStart = curStart; bestLen = curLen; }
+    } else {
+      curStart = -1;
+      curLen = 0;
+    }
+  }
+  if (bestLen < 2) return groups.map(g => g.toString(16)).join(':');
+  const left = groups.slice(0, bestStart).map(g => g.toString(16)).join(':');
+  const right = groups.slice(bestStart + bestLen).map(g => g.toString(16)).join(':');
+  return `${left}::${right}`;
+}
+
+/** Aggregate IPv4/IPv6 CIDRs via a BigInt binary prefix tree (drop covered + merge siblings). */
+function aggregateCidrs(cidrSet) {
+  if (!cidrSet.size) return new Set();
+  const roots = { 32: { leaf: false, c0: null, c1: null }, 128: { leaf: false, c0: null, c1: null } };
+  for (const text of cidrSet) {
+    const { ip, prefix } = cidrToWire(text);
+    const bits = ip.length * 8;
+    let val = 0n;
+    for (const b of ip) val = (val << 8n) | BigInt(b);
+    let cur = roots[bits];
+    let covered = false;
+    for (let i = 0; i < prefix; i++) {
+      if (cur.leaf) { covered = true; break; }
+      const bit = (val >> BigInt(bits - 1 - i)) & 1n;
+      if (bit === 0n) {
+        if (!cur.c0) cur.c0 = { leaf: false, c0: null, c1: null };
+        cur = cur.c0;
+      } else {
+        if (!cur.c1) cur.c1 = { leaf: false, c0: null, c1: null };
+        cur = cur.c1;
+      }
+    }
+    if (!covered) { cur.leaf = true; cur.c0 = null; cur.c1 = null; }
+  }
+  const compress = node => {
+    if (!node || node.leaf) return;
+    compress(node.c0);
+    compress(node.c1);
+    if (node.c0?.leaf && node.c1?.leaf) { node.leaf = true; node.c0 = null; node.c1 = null; }
+  };
+  const out = [];
+  const emit = (node, prefix, val, bits) => {
+    if (!node) return;
+    if (node.leaf) { out.push(`${formatBigIntIp(val, bits)}/${prefix}`); return; }
+    if (node.c0) emit(node.c0, prefix + 1, val, bits);
+    if (node.c1) emit(node.c1, prefix + 1, val | (1n << BigInt(bits - 1 - prefix)), bits);
+  };
+  for (const bits of [32, 128]) {
+    compress(roots[bits]);
+    emit(roots[bits], 0, 0n, bits);
+  }
+  return new Set(out);
+}
+
 // ── 上游适配器：返回 blank() 形状的集合 ──────────────────────────
 const adapters = {
   'singbox-json': (up, cat, file) => {
@@ -126,9 +251,12 @@ async function main() {
 
   const manifest = { generated_at: new Date().toISOString(), sing_box: singbox(['version']).split('\n')[0].trim(), rule_sets: {} };
   const tags = Object.keys(CFG.rule_sets);
-  const builtRules = {};   // tag → 合并后的 rule，.srs 与 .dat 都从这里取，保证同源
-  log(`共 ${tags.length} 个 rule_set`);
+  const rawMerged = {};    // Pass 1：原始合并集合（供 exclude 差集与保护校验使用）
+  const rawSources = {};   // tag → { refs, sources }
+  const builtRules = {};   // tag → 优化后的 rule，.srs 与 .dat 都从这里取，保证同源
+  log(`共 ${tags.length} 个 rule_set（两阶段构建：合并 → 差集/Trie 剪枝/CIDR 聚合）`);
 
+  // ── Pass 1：拉取并合并原始集合 ──────────────────────────────────
   for (const tag of tags) {
     const recipe = CFG.rule_sets[tag];
     const refs = recipe.union || [recipe.take];
@@ -139,18 +267,67 @@ async function main() {
       const { up, cat, file } = fetchRef(ref);
       const set = adapters[up.kind](up, cat, file);
       if (!set) { log(`  ! ${tag}: 上游 ${ref} 没有该分类，跳过`); continue; }
-      const upSha = (up.kind === 'geosite-db')
-        ? crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')
-        : crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+      const upSha = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
       sources.push({ ref, url: up.url, upstream_sha256: upSha,
                      counts: Object.fromEntries(TYPES.map(t => [t, set[t]?.size || 0])) });
       for (const t of TYPES) if (merged[t]) for (const v of set[t] || []) merged[t].add(v);
     }
 
-    // 后缀已覆盖的完整域名去掉
-    for (const d of merged.domain) if (merged.domain_suffix.has(d)) merged.domain.delete(d);
+    rawMerged[tag] = merged;
+    rawSources[tag] = { refs, sources };
+  }
+
+  // 受保护的直连白名单（force-direct ∪ direct-extra），exclude 差集不得删掉其中的项
+  const protectedSets = ['force-direct', 'direct-extra'].map(t => rawMerged[t]).filter(Boolean);
+
+  // ── Pass 2 & Pass 3：exclude 差集 → Trie 剪枝 → CIDR 聚合 → 编译 ──
+  for (const tag of tags) {
+    const recipe = CFG.rule_sets[tag];
+    const { refs, sources } = rawSources[tag];
+    const raw = rawMerged[tag];
+    const working = {
+      domain: new Set(raw.domain),
+      domain_suffix: new Set(raw.domain_suffix),
+      domain_keyword: new Set(raw.domain_keyword),
+      ip_cidr: new Set(raw.ip_cidr),
+    };
+    const rawTotal = working.domain.size + working.domain_suffix.size + working.domain_keyword.size + working.ip_cidr.size;
+
+    let excludedDomains = 0;
+    let protectedKept = 0;
+    if (recipe.exclude?.length) {
+      const exSets = recipe.exclude.map(ex => {
+        if (!rawMerged[ex]) throw new Error(`${tag}.exclude 引用了不存在的 rule_set: ${ex}`);
+        return rawMerged[ex];
+      });
+      for (const d of [...working.domain]) {
+        if (matchesDomainSets(d, exSets, false)) {
+          if (matchesDomainSets(d, protectedSets, true)) protectedKept++;
+          else { working.domain.delete(d); excludedDomains++; }
+        }
+      }
+      for (const s of [...working.domain_suffix]) {
+        if (matchesDomainSets(s, exSets, false)) {
+          if (matchesDomainSets(s, protectedSets, true)) protectedKept++;
+          else { working.domain_suffix.delete(s); excludedDomains++; }
+        }
+      }
+    }
+
+    const prePruneDomCount = working.domain.size + working.domain_suffix.size;
+    const pruned = pruneDomains(working);
+    const prunedDomains = prePruneDomCount - (pruned.domain.size + pruned.domain_suffix.size);
+
+    const preAggCidrCount = working.ip_cidr.size;
+    const aggregatedCidrs = aggregateCidrs(working.ip_cidr);
+    const collapsedCidrs = preAggCidrCount - aggregatedCidrs.size;
+
     const rule = {};
-    for (const t of TYPES) if (merged[t]?.size) rule[t] = [...merged[t]].sort();
+    if (pruned.domain.size) rule.domain = [...pruned.domain].sort();
+    if (pruned.domain_suffix.size) rule.domain_suffix = [...pruned.domain_suffix].sort();
+    if (pruned.domain_keyword.size) rule.domain_keyword = [...pruned.domain_keyword].sort();
+    if (aggregatedCidrs.size) rule.ip_cidr = [...aggregatedCidrs];
+
     const total = Object.values(rule).reduce((a, b) => a + b.length, 0);
     if (!total) throw new Error(`${tag} 合并后为空`);
     builtRules[tag] = rule;
@@ -162,13 +339,55 @@ async function main() {
     singbox(['rule-set', 'compile', jsonPath, '-o', srsPath]);
 
     manifest.rule_sets[tag] = {
-      sources, total,
+      sources, raw_total: rawTotal, total,
+      optimization: {
+        excluded_domains: excludedDomains,
+        protected_kept: protectedKept,
+        pruned_domains: prunedDomains,
+        aggregated_cidrs: collapsedCidrs,
+      },
       counts: Object.fromEntries(TYPES.filter(t => rule[t]).map(t => [t, rule[t].length])),
       srs_sha256: crypto.createHash('sha256').update(fs.readFileSync(srsPath)).digest('hex'),
       srs_bytes: fs.statSync(srsPath).size,
     };
-    log(`  ✓ ${tag.padEnd(14)} ${String(total).padStart(6)} 条  ${String(manifest.rule_sets[tag].srs_bytes).padStart(7)} B  ← ${refs.join(' + ')}`);
+    const optNotes = [];
+    if (excludedDomains) optNotes.push(`-${excludedDomains} ex`);
+    if (prunedDomains) optNotes.push(`-${prunedDomains} trie`);
+    if (collapsedCidrs) optNotes.push(`-${collapsedCidrs} cidr`);
+    const optStr = optNotes.length ? ` [${optNotes.join(', ')}]` : '';
+    log(`  ✓ ${tag.padEnd(14)} ${String(total).padStart(6)} 条  ${String(manifest.rule_sets[tag].srs_bytes).padStart(7)} B${optStr}  ← ${refs.join(' + ')}`);
   }
+
+  // ── 正交性门禁：force-proxy 域名不得残留在 cn-domains 中（除非被 force-direct/direct-extra 覆盖）──
+  const orthogonalityLeaks = [];
+  if (builtRules['cn-domains'] && builtRules['force-proxy']) {
+    const cnRule = builtRules['cn-domains'];
+    const cnExact = new Set(cnRule.domain || []);
+    const cnSuffix = new Set(cnRule.domain_suffix || []);
+    const fpRule = builtRules['force-proxy'];
+    const fpSet = { domain: new Set(fpRule.domain || []), domain_suffix: new Set(fpRule.domain_suffix || []) };
+
+    for (const d of cnExact) {
+      if (matchesDomainSets(d, [fpSet], false) && !matchesDomainSets(d, protectedSets, true)) {
+        orthogonalityLeaks.push(`cn-domains.domain=${d}`);
+      }
+    }
+    for (const s of cnSuffix) {
+      if (matchesDomainSets(s, [fpSet], false) && !matchesDomainSets(s, protectedSets, true)) {
+        orthogonalityLeaks.push(`cn-domains.domain_suffix=${s}`);
+      }
+    }
+    for (const entry of [...fpSet.domain, ...fpSet.domain_suffix]) {
+      if ((cnExact.has(entry) || cnSuffix.has(entry)) && !matchesDomainSets(entry, protectedSets, true)) {
+        orthogonalityLeaks.push(`force-proxy-entry-in-cn=${entry}`);
+      }
+    }
+  }
+  manifest.orthogonality = { checked: true, leaks: orthogonalityLeaks.length };
+  if (orthogonalityLeaks.length) {
+    throw new Error(`正交性校验失败（cn-domains 与 force-proxy 冲突 ${orthogonalityLeaks.length} 条）: ${orthogonalityLeaks.slice(0, 10).join(', ')}`);
+  }
+  log(`  ✓ 正交性门禁通过（cn-domains 与 force-proxy 未受保护重叠 = 0）`);
 
   // ── v2ray .dat：geosite.dat / geoip.dat，与 .srs 共用同一份合并结果 ──
   // 类型映射按 v2ray 真实语义（v2fly/domain-list-community 的映射，Landscape 的

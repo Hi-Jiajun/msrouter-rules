@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T18:52:26.714Z",
+  "generated_at": "2026-11-17T20:21:53.723Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
@@ -17,15 +17,22 @@
           }
         }
       ],
-      "total": 123244,
-      "counts": {
-        "domain": 271,
-        "domain_suffix": 110207,
-        "domain_keyword": 13,
-        "ip_cidr": 12753
+      "raw_total": 123244,
+      "total": 122810,
+      "optimization": {
+        "excluded_domains": 34,
+        "protected_kept": 16,
+        "pruned_domains": 333,
+        "aggregated_cidrs": 67
       },
-      "srs_sha256": "59a73c1957a0cf24a44a4df10a5e9d12bdd419d334168d7c6b438098d8905bb9",
-      "srs_bytes": 495647
+      "counts": {
+        "domain": 243,
+        "domain_suffix": 109868,
+        "domain_keyword": 13,
+        "ip_cidr": 12686
+      },
+      "srs_sha256": "375453464ee95b7b49fdb512e69cf4783591b5bf887c86e0911e8d9197353bf8",
+      "srs_bytes": 493173
     },
     "cn-ip": {
       "sources": [
@@ -42,7 +49,14 @@
           }
         }
       ],
+      "raw_total": 9638,
       "total": 9638,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 0,
+        "aggregated_cidrs": 0
+      },
       "counts": {
         "ip_cidr": 9638
       },
@@ -64,7 +78,14 @@
           }
         }
       ],
+      "raw_total": 25,
       "total": 25,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 0,
+        "aggregated_cidrs": 0
+      },
       "counts": {
         "domain_suffix": 25
       },
@@ -98,15 +119,22 @@
           }
         }
       ],
-      "total": 1155,
+      "raw_total": 1179,
+      "total": 1144,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 35,
+        "aggregated_cidrs": 0
+      },
       "counts": {
         "domain": 2,
-        "domain_suffix": 30,
+        "domain_suffix": 19,
         "domain_keyword": 4,
         "ip_cidr": 1119
       },
-      "srs_sha256": "98f6d1e930996cb5072bcdf765ba7db72dff2753e2c7a0939658175598b716eb",
-      "srs_bytes": 5304
+      "srs_sha256": "685e8db1875209dca92270af83bd4d3a9287bfec558115354e14c4b729225c98",
+      "srs_bytes": 5236
     },
     "netflix-ip": {
       "sources": [
@@ -123,9 +151,16 @@
           }
         }
       ],
-      "total": 519,
+      "raw_total": 519,
+      "total": 23,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 0,
+        "aggregated_cidrs": 496
+      },
       "counts": {
-        "ip_cidr": 519
+        "ip_cidr": 23
       },
       "srs_sha256": "570d800d8c4c14c3f867048b1b9c2ad3760782a6b15da9ed04a4b6b72949bf07",
       "srs_bytes": 212
@@ -157,13 +192,19 @@
           }
         }
       ],
-      "total": 236,
+      "raw_total": 458,
+      "total": 234,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 224,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain": 2,
         "domain_suffix": 234
       },
-      "srs_sha256": "2b49f94f3b2dce6409f38b074525439fc7403516eb7af2a5476af17cdc04cc65",
-      "srs_bytes": 2352
+      "srs_sha256": "cb6815364d98930e08187369d6316f89bc94233eaf22f04f1312a13b3b8452fb",
+      "srs_bytes": 2333
     },
     "hbo": {
       "sources": [
@@ -192,12 +233,19 @@
           }
         }
       ],
-      "total": 90,
-      "counts": {
-        "domain_suffix": 90
+      "raw_total": 154,
+      "total": 89,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 65,
+        "aggregated_cidrs": 0
       },
-      "srs_sha256": "a5ac2e4f0f54e8982ea29912f935f3a90d3a81cdefbad246484716f7bac34148",
-      "srs_bytes": 924
+      "counts": {
+        "domain_suffix": 89
+      },
+      "srs_sha256": "af8ce60d8853d757d0d751dbf3f576acef1c5122bf4494e2e7d9d42282b3c594",
+      "srs_bytes": 914
     },
     "hulu": {
       "sources": [
@@ -226,7 +274,14 @@
           }
         }
       ],
+      "raw_total": 106,
       "total": 58,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 48,
+        "aggregated_cidrs": 0
+      },
       "counts": {
         "domain": 1,
         "domain_suffix": 57
@@ -261,7 +316,14 @@
           }
         }
       ],
+      "raw_total": 45,
       "total": 31,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 14,
+        "aggregated_cidrs": 0
+      },
       "counts": {
         "domain": 14,
         "domain_suffix": 16,
@@ -285,7 +347,14 @@
           }
         }
       ],
+      "raw_total": 7,
       "total": 7,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 0,
+        "aggregated_cidrs": 0
+      },
       "counts": {
         "domain": 6,
         "domain_suffix": 1
@@ -320,15 +389,22 @@
           }
         }
       ],
-      "total": 185,
+      "raw_total": 361,
+      "total": 14,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 347,
+        "aggregated_cidrs": 0
+      },
       "counts": {
         "domain": 1,
-        "domain_suffix": 180,
+        "domain_suffix": 9,
         "domain_keyword": 1,
         "ip_cidr": 3
       },
-      "srs_sha256": "c525463863ec51bb49331c8425ae3678ecef950e3c7dca357fdb7817a9341ea3",
-      "srs_bytes": 1213
+      "srs_sha256": "d66bec006f179ca6f141b5536989b321a1cb2513735cb668ed0159c84fa9f478",
+      "srs_bytes": 192
     },
     "tiktok": {
       "sources": [
@@ -357,14 +433,21 @@
           }
         }
       ],
-      "total": 62,
+      "raw_total": 96,
+      "total": 32,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 64,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain": 9,
-        "domain_suffix": 51,
+        "domain": 7,
+        "domain_suffix": 23,
         "domain_keyword": 2
       },
-      "srs_sha256": "159deab3ce481c20f43737ae40f441fb58907c6c9f08331c0a3854e917730ea1",
-      "srs_bytes": 713
+      "srs_sha256": "a97178b39b64016131c8f2bd2a4ac58d799aa2dc5b63200920e619b04869c21e",
+      "srs_bytes": 397
     },
     "ai": {
       "sources": [
@@ -393,7 +476,14 @@
           }
         }
       ],
+      "raw_total": 401,
       "total": 222,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 179,
+        "aggregated_cidrs": 0
+      },
       "counts": {
         "domain": 34,
         "domain_suffix": 188
@@ -428,12 +518,19 @@
           }
         }
       ],
-      "total": 54,
+      "raw_total": 75,
+      "total": 41,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 21,
+        "aggregated_cidrs": 13
+      },
       "counts": {
         "domain": 2,
         "domain_suffix": 25,
         "domain_keyword": 1,
-        "ip_cidr": 26
+        "ip_cidr": 13
       },
       "srs_sha256": "abd3022506b7f27d6e8eba09c6e412ea49e5525918860a35b4ecd990d065625a",
       "srs_bytes": 444
@@ -453,9 +550,16 @@
           }
         }
       ],
-      "total": 14,
+      "raw_total": 14,
+      "total": 11,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 0,
+        "aggregated_cidrs": 3
+      },
       "counts": {
-        "ip_cidr": 14
+        "ip_cidr": 11
       },
       "srs_sha256": "95a0011cd94f862f0a4f8ae801d24b153bc632f97c80f73220a704ef09167217",
       "srs_bytes": 117
@@ -487,14 +591,21 @@
           }
         }
       ],
-      "total": 34,
+      "raw_total": 58,
+      "total": 24,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 34,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain_suffix": 27,
+        "domain_suffix": 17,
         "domain_keyword": 1,
         "ip_cidr": 6
       },
-      "srs_sha256": "60123171c174f954bb21db263f983e931ab689423bba1e4ceca76ff663e14a58",
-      "srs_bytes": 390
+      "srs_sha256": "0f41d3681c8f5b29361ba363927c566d458ff6245ceaaf0b6a7d80a3c5c112be",
+      "srs_bytes": 273
     },
     "facebook": {
       "sources": [
@@ -523,14 +634,21 @@
           }
         }
       ],
-      "total": 607,
+      "raw_total": 1004,
+      "total": 425,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 579,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain_suffix": 550,
+        "domain_suffix": 368,
         "domain_keyword": 2,
         "ip_cidr": 55
       },
-      "srs_sha256": "0394946f8cf45fde7099c8b7fc3f307db6ae33591f180d21789ef18139308482",
-      "srs_bytes": 4753
+      "srs_sha256": "6b00a1eff20313548c6b2aa55a398fd7bb73f9398d761d2b22626181900a8f9d",
+      "srs_bytes": 3006
     },
     "instagram": {
       "sources": [
@@ -559,13 +677,20 @@
           }
         }
       ],
-      "total": 76,
+      "raw_total": 150,
+      "total": 37,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 113,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain_suffix": 75,
+        "domain_suffix": 36,
         "domain_keyword": 1
       },
-      "srs_sha256": "52a0963235236b2d60e28915473a44d6e4fb1400a1e71dbd97edabcc87bc841b",
-      "srs_bytes": 739
+      "srs_sha256": "843b513002fb80149cac0c3769b667db5b145d6de65d6512940e28daa1df0506",
+      "srs_bytes": 340
     },
     "github": {
       "sources": [
@@ -594,14 +719,21 @@
           }
         }
       ],
-      "total": 70,
+      "raw_total": 104,
+      "total": 36,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 68,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain": 31,
-        "domain_suffix": 38,
+        "domain": 21,
+        "domain_suffix": 14,
         "domain_keyword": 1
       },
-      "srs_sha256": "5e19e888142caaa5cadb00dbdd065ae8a93b15ca16a76900b0f8d2c741cafbdc",
-      "srs_bytes": 870
+      "srs_sha256": "dd2d0398660e250767d3caf2daa7ca71755561322d2295aa19d11545dcf94270",
+      "srs_bytes": 305
     },
     "spotify": {
       "sources": [
@@ -630,15 +762,21 @@
           }
         }
       ],
-      "total": 35,
+      "raw_total": 55,
+      "total": 7,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 48,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain": 8,
-        "domain_suffix": 24,
+        "domain_suffix": 4,
         "domain_keyword": 1,
         "ip_cidr": 2
       },
-      "srs_sha256": "f67a6d7caee3d2bfc9ae38327f1ce8466973b941e127f6d7c4cf5f3616859449",
-      "srs_bytes": 460
+      "srs_sha256": "eab2ee0fc3daf4643bc04b6747d424917ec625410ba1cbb8cd3986d917424d85",
+      "srs_bytes": 107
     },
     "paypal": {
       "sources": [
@@ -667,13 +805,20 @@
           }
         }
       ],
-      "total": 247,
+      "raw_total": 492,
+      "total": 81,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 411,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain_suffix": 246,
+        "domain_suffix": 80,
         "domain_keyword": 1
       },
-      "srs_sha256": "0d9a2e45fdf2807854063316cde300cebee17c62d2eec9a8861214d70fd580de",
-      "srs_bytes": 2361
+      "srs_sha256": "6d59c3fd833122548bc3b58a5b674b2e4fd9e0f6b2c313c7e9debcaaab623be7",
+      "srs_bytes": 806
     },
     "speedtest": {
       "sources": [
@@ -702,14 +847,20 @@
           }
         }
       ],
-      "total": 24,
+      "raw_total": 43,
+      "total": 12,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 31,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain": 1,
-        "domain_suffix": 22,
+        "domain_suffix": 11,
         "domain_keyword": 1
       },
-      "srs_sha256": "8c742a331ce23182c2477f59b6c2b4aa98777e97e049170fe9c9c8dec0c4234d",
-      "srs_bytes": 328
+      "srs_sha256": "2d41c4d1175b2a745592911f811c6e74e207e276160286bbd9e32799ddc44940",
+      "srs_bytes": 166
     },
     "apple": {
       "sources": [
@@ -738,15 +889,22 @@
           }
         }
       ],
-      "total": 1833,
+      "raw_total": 3373,
+      "total": 1576,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 1797,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain": 254,
-        "domain_suffix": 1559,
+        "domain": 8,
+        "domain_suffix": 1548,
         "domain_keyword": 7,
         "ip_cidr": 13
       },
-      "srs_sha256": "03997d4d8878f27dd069a139661b16e7d975409ca6123014d8216a6dee57c89b",
-      "srs_bytes": 16151
+      "srs_sha256": "7586e5d76e783a96fe1b9bcb0ae4353aa43e7adcc7ed3270bc8d94a4168cbf9a",
+      "srs_bytes": 14453
     },
     "microsoft": {
       "sources": [
@@ -775,14 +933,21 @@
           }
         }
       ],
-      "total": 885,
+      "raw_total": 1519,
+      "total": 617,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 902,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain": 109,
-        "domain_suffix": 772,
+        "domain": 8,
+        "domain_suffix": 605,
         "domain_keyword": 4
       },
-      "srs_sha256": "3d9d627076bfce8f83598193d1f5a56eaee183863e4003cf0345bde385056966",
-      "srs_bytes": 7970
+      "srs_sha256": "1aeb2076f1e68636acb087306c93a96a4fa004765d01d21e68fe6946a907ae1e",
+      "srs_bytes": 5392
     },
     "google": {
       "sources": [
@@ -811,15 +976,21 @@
           }
         }
       ],
-      "total": 1106,
+      "raw_total": 1960,
+      "total": 544,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 1416,
+        "aggregated_cidrs": 0
+      },
       "counts": {
-        "domain": 185,
-        "domain_suffix": 911,
+        "domain_suffix": 534,
         "domain_keyword": 5,
         "ip_cidr": 5
       },
-      "srs_sha256": "7a637fa608d7dce93b09a2404d7cf81a3f72388becf11fc2851c0bda377e0ebb",
-      "srs_bytes": 8350
+      "srs_sha256": "7a08d26b1787f2cefe57d4b12186de2a0979b80729a8f538673870956d553790",
+      "srs_bytes": 4303
     },
     "force-direct": {
       "sources": [
@@ -848,14 +1019,21 @@
           }
         }
       ],
-      "total": 1143,
+      "raw_total": 1143,
+      "total": 1139,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 4,
+        "aggregated_cidrs": 0
+      },
       "counts": {
         "domain": 1,
-        "domain_suffix": 1139,
+        "domain_suffix": 1135,
         "domain_keyword": 3
       },
-      "srs_sha256": "fff2c07a6b0f172e37941543970f394a45d7849838cffe3967c924a4471bce6f",
-      "srs_bytes": 7687
+      "srs_sha256": "586d458cd0e6992d070c82d1d4ea9982076dafb80bae919c42e1e0b814ff4b9c",
+      "srs_bytes": 7641
     },
     "force-proxy": {
       "sources": [
@@ -884,12 +1062,19 @@
           }
         }
       ],
-      "total": 4464,
-      "counts": {
-        "domain_suffix": 4464
+      "raw_total": 4464,
+      "total": 4441,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 23,
+        "aggregated_cidrs": 0
       },
-      "srs_sha256": "d9983f643bb9a4f7dab72081b8f4a2fec5191ee85bca9c9a80f92565ae3957c8",
-      "srs_bytes": 28996
+      "counts": {
+        "domain_suffix": 4441
+      },
+      "srs_sha256": "73c09fe517a9d3d72cdc43bc8baf75a7cd82c2037ce3f38ea0d554a9278cc970",
+      "srs_bytes": 28790
     },
     "direct-extra": {
       "sources": [
@@ -916,15 +1101,137 @@
             "domain_regex": 0,
             "ip_cidr": 0
           }
+        },
+        {
+          "ref": "meta:apple-cn",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
+          "counts": {
+            "domain": 165,
+            "domain_suffix": 0,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 0
+          }
+        },
+        {
+          "ref": "meta:apple@cn",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
+          "counts": {
+            "domain": 297,
+            "domain_suffix": 61,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 0
+          }
+        },
+        {
+          "ref": "meta:microsoft@cn",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
+          "counts": {
+            "domain": 189,
+            "domain_suffix": 139,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 0
+          }
+        },
+        {
+          "ref": "meta:category-games@cn",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
+          "counts": {
+            "domain": 37,
+            "domain_suffix": 33,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 0
+          }
+        },
+        {
+          "ref": "meta:category-game-platforms-download@cn",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
+          "counts": {
+            "domain": 24,
+            "domain_suffix": 0,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 0
+          }
         }
       ],
-      "total": 494,
-      "counts": {
-        "domain": 489,
-        "domain_suffix": 5
+      "raw_total": 1242,
+      "total": 1004,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 238,
+        "aggregated_cidrs": 0
       },
-      "srs_sha256": "89128e8ec9066519c967379e38516e4ba4ca7f46457a9ae577c0a3b311d3daba",
-      "srs_bytes": 1867
+      "counts": {
+        "domain": 768,
+        "domain_suffix": 236
+      },
+      "srs_sha256": "a813ab29acb86e73bbff38a544402ba8c2acfce7bc00584ec976f6b293552b5b",
+      "srs_bytes": 5912
+    },
+    "fakeip-filter": {
+      "sources": [
+        {
+          "ref": "local:fakeip-filter",
+          "url": "file://supplements/{cat}.list",
+          "upstream_sha256": "be8aa7c4e1f27a84d15628cadcae717332c89133cef6549bc34c877bf10043b5",
+          "counts": {
+            "domain": 2,
+            "domain_suffix": 46,
+            "domain_keyword": 2,
+            "domain_regex": 0,
+            "ip_cidr": 0
+          }
+        },
+        {
+          "ref": "local:private",
+          "url": "file://supplements/{cat}.list",
+          "upstream_sha256": "ca0b982eb028e0b06f7bcbffbb183022d22a7ccafb67ff466ee098ab3950fdea",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 25,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 0
+          }
+        },
+        {
+          "ref": "meta:connectivity-check",
+          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
+          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
+          "counts": {
+            "domain": 28,
+            "domain_suffix": 11,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 0
+          }
+        }
+      ],
+      "raw_total": 106,
+      "total": 82,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 24,
+        "aggregated_cidrs": 0
+      },
+      "counts": {
+        "domain": 15,
+        "domain_suffix": 65,
+        "domain_keyword": 2
+      },
+      "srs_sha256": "f7d4ba75a19ff2ab348de2c4f0e56d107c9bb1643b6f3c537be94d3028e9d5a0",
+      "srs_bytes": 906
     },
     "encrypted-dns": {
       "sources": [
@@ -941,7 +1248,14 @@
           }
         }
       ],
+      "raw_total": 3583,
       "total": 3583,
+      "optimization": {
+        "excluded_domains": 0,
+        "protected_kept": 0,
+        "pruned_domains": 0,
+        "aggregated_cidrs": 0
+      },
       "counts": {
         "domain": 10,
         "domain_suffix": 3573
@@ -950,61 +1264,65 @@
       "srs_bytes": 31810
     }
   },
+  "orthogonality": {
+    "checked": true,
+    "leaks": 0
+  },
   "dat": {
     "geosite": {
       "file": "geosite.dat",
-      "sha256": "de5ecfc06752d59302885a55b343e220af2572de7034c8c1349f2873542c2cbe",
-      "bytes": 2283394,
-      "entries": 26,
-      "domains": 125988,
+      "sha256": "8748f7b4f239a6ecb46cbb2a89e0bccb5b5c34effc0a10eb850c8e26ad39db32",
+      "bytes": 2246568,
+      "entries": 27,
+      "domains": 124413,
       "keys": {
-        "cn": 110491,
+        "cn": 110124,
         "private": 25,
-        "netflix": 36,
-        "disney": 236,
-        "hbo": 90,
+        "netflix": 25,
+        "disney": 234,
+        "hbo": 89,
         "hulu": 58,
         "primevideo": 31,
         "appletv": 7,
-        "youtube": 182,
-        "tiktok": 62,
+        "youtube": 11,
+        "tiktok": 32,
         "ai": 222,
         "telegram": 28,
-        "twitter": 28,
-        "facebook": 552,
-        "instagram": 76,
-        "github": 70,
-        "spotify": 33,
-        "paypal": 247,
-        "speedtest": 24,
-        "apple": 1820,
-        "microsoft": 885,
-        "google": 1101,
-        "force-direct": 1143,
-        "force-proxy": 4464,
-        "direct-extra": 494,
+        "twitter": 18,
+        "facebook": 370,
+        "instagram": 37,
+        "github": 36,
+        "spotify": 5,
+        "paypal": 81,
+        "speedtest": 12,
+        "apple": 1563,
+        "microsoft": 617,
+        "google": 539,
+        "force-direct": 1139,
+        "force-proxy": 4441,
+        "direct-extra": 1004,
+        "fakeip-filter": 82,
         "encrypted-dns": 3583
       },
       "by_type": {
         "cn": {
-          "domain_suffix": 110207,
-          "domain": 271,
+          "domain_suffix": 109868,
+          "domain": 243,
           "domain_keyword": 13
         },
         "private": {
           "domain_suffix": 25
         },
         "netflix": {
-          "domain_suffix": 30,
+          "domain_suffix": 19,
           "domain": 2,
           "domain_keyword": 4
         },
         "disney": {
-          "domain_suffix": 234,
-          "domain": 2
+          "domain_suffix": 234
         },
         "hbo": {
-          "domain_suffix": 90
+          "domain_suffix": 89
         },
         "hulu": {
           "domain_suffix": 57,
@@ -1020,13 +1338,13 @@
           "domain": 6
         },
         "youtube": {
-          "domain_suffix": 180,
+          "domain_suffix": 9,
           "domain": 1,
           "domain_keyword": 1
         },
         "tiktok": {
-          "domain_suffix": 51,
-          "domain": 9,
+          "domain_suffix": 23,
+          "domain": 7,
           "domain_keyword": 2
         },
         "ai": {
@@ -1039,62 +1357,64 @@
           "domain_keyword": 1
         },
         "twitter": {
-          "domain_suffix": 27,
+          "domain_suffix": 17,
           "domain_keyword": 1
         },
         "facebook": {
-          "domain_suffix": 550,
+          "domain_suffix": 368,
           "domain_keyword": 2
         },
         "instagram": {
-          "domain_suffix": 75,
+          "domain_suffix": 36,
           "domain_keyword": 1
         },
         "github": {
-          "domain_suffix": 38,
-          "domain": 31,
+          "domain_suffix": 14,
+          "domain": 21,
           "domain_keyword": 1
         },
         "spotify": {
-          "domain_suffix": 24,
-          "domain": 8,
+          "domain_suffix": 4,
           "domain_keyword": 1
         },
         "paypal": {
-          "domain_suffix": 246,
+          "domain_suffix": 80,
           "domain_keyword": 1
         },
         "speedtest": {
-          "domain_suffix": 22,
-          "domain": 1,
+          "domain_suffix": 11,
           "domain_keyword": 1
         },
         "apple": {
-          "domain_suffix": 1559,
-          "domain": 254,
+          "domain_suffix": 1548,
+          "domain": 8,
           "domain_keyword": 7
         },
         "microsoft": {
-          "domain_suffix": 772,
-          "domain": 109,
+          "domain_suffix": 605,
+          "domain": 8,
           "domain_keyword": 4
         },
         "google": {
-          "domain_suffix": 911,
-          "domain": 185,
+          "domain_suffix": 534,
           "domain_keyword": 5
         },
         "force-direct": {
-          "domain_suffix": 1139,
+          "domain_suffix": 1135,
           "domain": 1,
           "domain_keyword": 3
         },
         "force-proxy": {
-          "domain_suffix": 4464
+          "domain_suffix": 4441
         },
         "direct-extra": {
-          "domain_suffix": 5,
-          "domain": 489
+          "domain_suffix": 236,
+          "domain": 768
+        },
+        "fakeip-filter": {
+          "domain_suffix": 65,
+          "domain": 15,
+          "domain_keyword": 2
         },
         "encrypted-dns": {
           "domain_suffix": 3573,
@@ -1105,14 +1425,14 @@
     },
     "geoip": {
       "file": "geoip.dat",
-      "sha256": "4f0a9f6e459178df22267f3be5838a1bad60d72449ec49cb432ab78751222927",
-      "bytes": 146227,
+      "sha256": "b94ad8673f14abc9b5b3e6fcb9c84284a18a1e431c2a4441bd44a0147bf894da",
+      "bytes": 138093,
       "entries": 3,
-      "cidrs": 10171,
+      "cidrs": 9672,
       "keys": {
         "cn": 9638,
-        "netflix": 519,
-        "telegram": 14
+        "netflix": 23,
+        "telegram": 11
       },
       "families": {
         "cn": {
@@ -1120,27 +1440,27 @@
           "v6": 3434
         },
         "netflix": {
-          "v4": 251,
-          "v6": 268
+          "v4": 16,
+          "v6": 7
         },
         "telegram": {
-          "v4": 9,
-          "v6": 5
+          "v4": 7,
+          "v6": 4
         }
       },
       "roundtrip": "ok"
     }
   },
   "thresholds": {
-    "checked": 29,
+    "checked": 30,
     "failed": 0
   },
   "dat_tests": {
-    "pass": 29,
+    "pass": 47,
     "fail": 0
   },
   "tests": {
-    "pass": 30,
+    "pass": 67,
     "fail": 0
   }
 }

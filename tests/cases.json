@@ -145,8 +145,193 @@
     "expect": "in"
   },
   {
+    "domain": "2a00:86c0::1",
+    "set": "netflix-ip",
+    "expect": "in"
+  },
+  {
     "domain": "223.5.5.5",
     "set": "netflix-ip",
+    "expect": "out"
+  },
+  {
+    "domain": "2001:67c:4e8::1",
+    "set": "telegram-ip",
+    "expect": "in"
+  },
+  {
+    "domain": "apps.apple.com",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "swcdn.apple.com",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "dl.delivery.mp.microsoft.com",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "download.windowsupdate.com",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "steamserver.net",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "alibaba.cdn.steampipe.steamcontent.com",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "epicgames-download1-1251447533.file.myqcloud.com",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "fonts.googleapis.com",
+    "set": "direct-extra",
+    "expect": "out"
+  },
+  {
+    "domain": "clientservices.googleapis.com",
+    "set": "direct-extra",
+    "expect": "out"
+  },
+  {
+    "domain": "cdn.ampproject.org",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "redirector.xn--ngstr-lra8j.com",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "kimi.ai",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "moonshot.ai",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "minimax.io",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "qoder.com",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "shanghaidisneyresort.com",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "tiktokrow-cdn.com",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "c.pki.goog",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "blzddist1-a.akamaihd.net",
+    "set": "cn-domains",
+    "expect": "in"
+  },
+  {
+    "domain": "steamcommunity-a.akamaihd.net",
+    "set": "cn-domains",
+    "expect": "in"
+  },
+  {
+    "domain": "time.apple.com",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "0.pool.ntp.org",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "msftconnecttest.com",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "captive.apple.com",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "stun.l.google.com",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "stun1.l.google.com",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "stun.example.org",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "mcdn.bilivideo.cn",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "nas.synology.me",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "derp.example.com",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "home.arpa",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "localhost.ptlogin2.qq.com",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "baidu.com",
+    "set": "fakeip-filter",
+    "expect": "out"
+  },
+  {
+    "domain": "github.com",
+    "set": "fakeip-filter",
+    "expect": "out"
+  },
+  {
+    "domain": "spiderpool.com",
+    "set": "fakeip-filter",
     "expect": "out"
   }
 ]

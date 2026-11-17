@@ -3,30 +3,46 @@
   "geosite_keys": [
     { "key": "cn", "min": 80000 },
     { "key": "private", "min": 17 },
-    { "key": "github", "min": 49 },
-    { "key": "netflix", "min": 25 },
-    { "key": "telegram", "min": 19 }
+    { "key": "github", "min": 25 },
+    { "key": "netflix", "min": 17 },
+    { "key": "telegram", "min": 19 },
+    { "key": "direct-extra", "min": 700 },
+    { "key": "fakeip-filter", "min": 57 }
   ],
   "geosite_cases": [
     { "key": "cn", "domain": "baidu.com", "expect": "in" },
     { "key": "cn", "domain": "www.qq.com", "expect": "in" },
     { "key": "cn", "domain": "netflix.com", "expect": "out" },
+    { "key": "cn", "domain": "kimi.ai", "expect": "out" },
+    { "key": "cn", "domain": "cdn.ampproject.org", "expect": "out" },
+    { "key": "cn", "domain": "c.pki.goog", "expect": "out" },
     { "key": "github", "domain": "github.com", "expect": "in" },
     { "key": "netflix", "domain": "netflix.com", "expect": "in" },
     { "key": "private", "domain": "router.asus.com", "expect": "in" },
     { "key": "private", "domain": "home.arpa", "expect": "in" },
-    { "key": "private", "domain": "baidu.com", "expect": "out" }
+    { "key": "private", "domain": "baidu.com", "expect": "out" },
+    { "key": "direct-extra", "domain": "apps.apple.com", "expect": "in" },
+    { "key": "direct-extra", "domain": "dl.delivery.mp.microsoft.com", "expect": "in" },
+    { "key": "direct-extra", "domain": "steamserver.net", "expect": "in" },
+    { "key": "fakeip-filter", "domain": "time.apple.com", "expect": "in" },
+    { "key": "fakeip-filter", "domain": "0.pool.ntp.org", "expect": "in" },
+    { "key": "fakeip-filter", "domain": "msftconnecttest.com", "expect": "in" },
+    { "key": "fakeip-filter", "domain": "stun.l.google.com", "expect": "in" },
+    { "key": "fakeip-filter", "domain": "baidu.com", "expect": "out" }
   ],
   "geoip_keys": [
     { "key": "cn", "min": 4000 },
-    { "key": "netflix", "min": 300 },
-    { "key": "telegram", "min": 9 }
+    { "key": "netflix", "min": 16 },
+    { "key": "telegram", "min": 7 }
   ],
   "geoip_cases": [
     { "key": "cn", "ip": "223.5.5.5", "expect": "in" },
     { "key": "cn", "ip": "1.0.1.1", "expect": "in" },
     { "key": "cn", "ip": "8.8.8.8", "expect": "out" },
     { "key": "netflix", "ip": "45.57.0.1", "expect": "in" },
-    { "key": "telegram", "ip": "149.154.167.51", "expect": "in" }
+    { "key": "netflix", "ip": "2a00:86c0::1", "expect": "in" },
+    { "key": "netflix", "ip": "223.5.5.5", "expect": "out" },
+    { "key": "telegram", "ip": "149.154.167.51", "expect": "in" },
+    { "key": "telegram", "ip": "2001:67c:4e8::1", "expect": "in" }
   ]
 }
