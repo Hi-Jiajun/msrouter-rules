@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T20:21:53.723Z",
+  "generated_at": "2026-11-17T22:51:31.820Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
@@ -1056,6 +1056,18 @@
           "counts": {
             "domain": 0,
             "domain_suffix": 4452,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 0
+          }
+        },
+        {
+          "ref": "local:force-proxy",
+          "url": "file://supplements/{cat}.list",
+          "upstream_sha256": "b86aaaa69a5d0e01f6d3d1fc1cef8e72b0c2754321837cc2ad652da72a18515a",
+          "counts": {
+            "domain": 0,
+            "domain_suffix": 0,
             "domain_keyword": 0,
             "domain_regex": 0,
             "ip_cidr": 0

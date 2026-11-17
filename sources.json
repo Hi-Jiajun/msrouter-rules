@@ -201,7 +201,8 @@
     "force-proxy": {
       "union": [
         "aethersailor:Custom_Proxy",
-        "loyalsoldier:gfw"
+        "loyalsoldier:gfw",
+        "local:force-proxy"
       ]
     },
     "direct-extra": {

@@ -1,0 +1,3 @@
+# 本地补充：上游未覆盖、经 OxiDNS 阶段④ 自学习与人工审阅确认应当走代理的域名
+# 格式同 Clash 规则（DOMAIN / DOMAIN-SUFFIX / DOMAIN-KEYWORD）
+# 注意：本仓库为公开仓，仅收录通用公共服务域名（优先聚合为根域 DOMAIN-SUFFIX），不写入私人子域。
