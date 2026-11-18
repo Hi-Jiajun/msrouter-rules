@@ -1,0 +1,9 @@
+# 本地补充：Apple / 高德等国内静态与定位 CDN 确定性直连白名单
+# 格式同 Clash 规则（DOMAIN / DOMAIN-SUFFIX / DOMAIN-KEYWORD）
+
+# Apple 媒体与 App Store 国内 CDN（防止上游波动导致回退至 Stage 3 代理）
+DOMAIN-SUFFIX,mzstatic.com
+DOMAIN-SUFFIX,aaplimg.com
+
+# Apple Maps / 定位国内高德调度入口
+DOMAIN,dispatcher.is.autonavi.com

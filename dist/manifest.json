@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T22:51:31.820Z",
+  "generated_at": "2026-11-18T05:05:27.053Z",
   "sing_box": "sing-box version 1.14.4",
   "rule_sets": {
     "cn-domains": {
@@ -18,21 +18,22 @@
         }
       ],
       "raw_total": 123244,
-      "total": 122810,
+      "total": 122737,
       "optimization": {
-        "excluded_domains": 34,
-        "protected_kept": 16,
+        "denied_entries": 32,
+        "excluded_domains": 75,
+        "protected_kept": 0,
         "pruned_domains": 333,
         "aggregated_cidrs": 67
       },
       "counts": {
-        "domain": 243,
-        "domain_suffix": 109868,
-        "domain_keyword": 13,
+        "domain": 192,
+        "domain_suffix": 109848,
+        "domain_keyword": 11,
         "ip_cidr": 12686
       },
-      "srs_sha256": "375453464ee95b7b49fdb512e69cf4783591b5bf887c86e0911e8d9197353bf8",
-      "srs_bytes": 493173
+      "srs_sha256": "f9d0d10ddf89c79ed92f71a9760632b6357b3ecfe669ffe183382471f3d086c4",
+      "srs_bytes": 492696
     },
     "cn-ip": {
       "sources": [
@@ -52,6 +53,7 @@
       "raw_total": 9638,
       "total": 9638,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 0,
@@ -81,6 +83,7 @@
       "raw_total": 25,
       "total": 25,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 0,
@@ -122,6 +125,7 @@
       "raw_total": 1179,
       "total": 1144,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 35,
@@ -154,6 +158,7 @@
       "raw_total": 519,
       "total": 23,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 0,
@@ -195,6 +200,7 @@
       "raw_total": 458,
       "total": 234,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 224,
@@ -236,6 +242,7 @@
       "raw_total": 154,
       "total": 89,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 65,
@@ -277,6 +284,7 @@
       "raw_total": 106,
       "total": 58,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 48,
@@ -319,6 +327,7 @@
       "raw_total": 45,
       "total": 31,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 14,
@@ -350,6 +359,7 @@
       "raw_total": 7,
       "total": 7,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 0,
@@ -392,6 +402,7 @@
       "raw_total": 361,
       "total": 14,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 347,
@@ -436,6 +447,7 @@
       "raw_total": 96,
       "total": 32,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 64,
@@ -466,19 +478,20 @@
         {
           "ref": "local:ai",
           "url": "file://supplements/{cat}.list",
-          "upstream_sha256": "9e599043962fff2e0b0d276f5be9bde943613e82083baa54ff65a3ca1799be92",
+          "upstream_sha256": "c6d3ba49a5204d57ff5fa5d236febf1c3a56780c4bc2a41dc568acf78a5ab603",
           "counts": {
             "domain": 0,
-            "domain_suffix": 9,
+            "domain_suffix": 13,
             "domain_keyword": 0,
             "domain_regex": 0,
             "ip_cidr": 0
           }
         }
       ],
-      "raw_total": 401,
-      "total": 222,
+      "raw_total": 405,
+      "total": 226,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 179,
@@ -486,10 +499,10 @@
       },
       "counts": {
         "domain": 34,
-        "domain_suffix": 188
+        "domain_suffix": 192
       },
-      "srs_sha256": "6b6ffe2c44a0d7a667ab645448e1e9fdcb4256e5293b2ea338489756ab8d2ed4",
-      "srs_bytes": 2101
+      "srs_sha256": "9049d3a222717364a7e9ecab7d17d631ebe038145dac229c496a84bb46cd8d10",
+      "srs_bytes": 2140
     },
     "telegram": {
       "sources": [
@@ -521,6 +534,7 @@
       "raw_total": 75,
       "total": 41,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 21,
@@ -553,6 +567,7 @@
       "raw_total": 14,
       "total": 11,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 0,
@@ -594,6 +609,7 @@
       "raw_total": 58,
       "total": 24,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 34,
@@ -637,6 +653,7 @@
       "raw_total": 1004,
       "total": 425,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 579,
@@ -680,6 +697,7 @@
       "raw_total": 150,
       "total": 37,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 113,
@@ -722,6 +740,7 @@
       "raw_total": 104,
       "total": 36,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 68,
@@ -765,6 +784,7 @@
       "raw_total": 55,
       "total": 7,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 48,
@@ -808,6 +828,7 @@
       "raw_total": 492,
       "total": 81,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 411,
@@ -850,6 +871,7 @@
       "raw_total": 43,
       "total": 12,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 31,
@@ -892,6 +914,7 @@
       "raw_total": 3373,
       "total": 1576,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 1797,
@@ -936,6 +959,7 @@
       "raw_total": 1519,
       "total": 617,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 902,
@@ -979,6 +1003,7 @@
       "raw_total": 1960,
       "total": 544,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 1416,
@@ -1009,9 +1034,9 @@
         {
           "ref": "local:force-direct",
           "url": "file://supplements/{cat}.list",
-          "upstream_sha256": "cfc3e08073b83796ab680f91c101b2a67c0a0509a679f12528bff9d09d3cfac7",
+          "upstream_sha256": "c026d6278cf10bc141e75be41798c4b1fccc3566a7d81f7f47669deeb67c1e4a",
           "counts": {
-            "domain": 1,
+            "domain": 0,
             "domain_suffix": 5,
             "domain_keyword": 0,
             "domain_regex": 0,
@@ -1019,21 +1044,21 @@
           }
         }
       ],
-      "raw_total": 1143,
-      "total": 1139,
+      "raw_total": 1142,
+      "total": 1127,
       "optimization": {
+        "denied_entries": 12,
         "excluded_domains": 0,
         "protected_kept": 0,
-        "pruned_domains": 4,
+        "pruned_domains": 3,
         "aggregated_cidrs": 0
       },
       "counts": {
-        "domain": 1,
-        "domain_suffix": 1135,
-        "domain_keyword": 3
+        "domain_suffix": 1126,
+        "domain_keyword": 1
       },
-      "srs_sha256": "586d458cd0e6992d070c82d1d4ea9982076dafb80bae919c42e1e0b814ff4b9c",
-      "srs_bytes": 7641
+      "srs_sha256": "dc82bab018161b6ddb51f484febe2def84bbce682b490a179183b3513eac5720",
+      "srs_bytes": 7557
     },
     "force-proxy": {
       "sources": [
@@ -1064,29 +1089,31 @@
         {
           "ref": "local:force-proxy",
           "url": "file://supplements/{cat}.list",
-          "upstream_sha256": "b86aaaa69a5d0e01f6d3d1fc1cef8e72b0c2754321837cc2ad652da72a18515a",
+          "upstream_sha256": "ac2731edca2c7d1b56fd3a542db57cec95f70c80934628a64ea0a094178fc3de",
           "counts": {
-            "domain": 0,
-            "domain_suffix": 0,
+            "domain": 2,
+            "domain_suffix": 32,
             "domain_keyword": 0,
             "domain_regex": 0,
             "ip_cidr": 0
           }
         }
       ],
-      "raw_total": 4464,
-      "total": 4441,
+      "raw_total": 4498,
+      "total": 4475,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 23,
         "aggregated_cidrs": 0
       },
       "counts": {
-        "domain_suffix": 4441
+        "domain": 2,
+        "domain_suffix": 4473
       },
-      "srs_sha256": "73c09fe517a9d3d72cdc43bc8baf75a7cd82c2037ce3f38ea0d554a9278cc970",
-      "srs_bytes": 28790
+      "srs_sha256": "167be766ed427a236b312fb9fcbb95d62848552f905e0b5bf50fef5453ac7b17",
+      "srs_bytes": 28999
     },
     "direct-extra": {
       "sources": [
@@ -1173,33 +1200,46 @@
             "domain_regex": 0,
             "ip_cidr": 0
           }
+        },
+        {
+          "ref": "local:direct-extra",
+          "url": "file://supplements/{cat}.list",
+          "upstream_sha256": "1dc49168883ccbe2f63bc5398252fd505631ce672dbe7b6f27fa9e6194b14127",
+          "counts": {
+            "domain": 1,
+            "domain_suffix": 2,
+            "domain_keyword": 0,
+            "domain_regex": 0,
+            "ip_cidr": 0
+          }
         }
       ],
-      "raw_total": 1242,
-      "total": 1004,
+      "raw_total": 1245,
+      "total": 976,
       "optimization": {
+        "denied_entries": 2,
         "excluded_domains": 0,
         "protected_kept": 0,
-        "pruned_domains": 238,
+        "pruned_domains": 267,
         "aggregated_cidrs": 0
       },
       "counts": {
-        "domain": 768,
-        "domain_suffix": 236
+        "domain": 738,
+        "domain_suffix": 238
       },
-      "srs_sha256": "a813ab29acb86e73bbff38a544402ba8c2acfce7bc00584ec976f6b293552b5b",
-      "srs_bytes": 5912
+      "srs_sha256": "ce1e0a529e358a93d3f100b1e594765b4fb036ddcc3da50067bbd87efb9310cb",
+      "srs_bytes": 5826
     },
     "fakeip-filter": {
       "sources": [
         {
           "ref": "local:fakeip-filter",
           "url": "file://supplements/{cat}.list",
-          "upstream_sha256": "be8aa7c4e1f27a84d15628cadcae717332c89133cef6549bc34c877bf10043b5",
+          "upstream_sha256": "8007042a0c1658c06a829c8ed73f833089c80926551a889f7a496618a3090bb6",
           "counts": {
             "domain": 2,
-            "domain_suffix": 46,
-            "domain_keyword": 2,
+            "domain_suffix": 27,
+            "domain_keyword": 0,
             "domain_regex": 0,
             "ip_cidr": 0
           }
@@ -1215,35 +1255,23 @@
             "domain_regex": 0,
             "ip_cidr": 0
           }
-        },
-        {
-          "ref": "meta:connectivity-check",
-          "url": "https://github.com/MetaCubeX/meta-rules-dat/releases/latest/download/geosite.db",
-          "upstream_sha256": "a0f96e4965c379f5e7142b292d4ff8c6aa4bb9ec104c7e787b7014af0c327bd0",
-          "counts": {
-            "domain": 28,
-            "domain_suffix": 11,
-            "domain_keyword": 0,
-            "domain_regex": 0,
-            "ip_cidr": 0
-          }
         }
       ],
-      "raw_total": 106,
-      "total": 82,
+      "raw_total": 50,
+      "total": 48,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
-        "pruned_domains": 24,
+        "pruned_domains": 2,
         "aggregated_cidrs": 0
       },
       "counts": {
-        "domain": 15,
-        "domain_suffix": 65,
-        "domain_keyword": 2
+        "domain": 2,
+        "domain_suffix": 46
       },
-      "srs_sha256": "f7d4ba75a19ff2ab348de2c4f0e56d107c9bb1643b6f3c537be94d3028e9d5a0",
-      "srs_bytes": 906
+      "srs_sha256": "2b1b7a8309d8805a5d34c721ff2daa854f5c0418b6085bf3fe67582a0d37b46e",
+      "srs_bytes": 517
     },
     "encrypted-dns": {
       "sources": [
@@ -1263,6 +1291,7 @@
       "raw_total": 3583,
       "total": 3583,
       "optimization": {
+        "denied_entries": 0,
         "excluded_domains": 0,
         "protected_kept": 0,
         "pruned_domains": 0,
@@ -1278,17 +1307,18 @@
   },
   "orthogonality": {
     "checked": true,
+    "checked_sets": 19,
     "leaks": 0
   },
   "dat": {
     "geosite": {
       "file": "geosite.dat",
-      "sha256": "8748f7b4f239a6ecb46cbb2a89e0bccb5b5c34effc0a10eb850c8e26ad39db32",
-      "bytes": 2246568,
+      "sha256": "369dfb4eec65a07efa0e6345df91eccf7fda233249c75b0ba7c76bbc4dc60591",
+      "bytes": 2243584,
       "entries": 27,
-      "domains": 124413,
+      "domains": 124304,
       "keys": {
-        "cn": 110124,
+        "cn": 110051,
         "private": 25,
         "netflix": 25,
         "disney": 234,
@@ -1298,7 +1328,7 @@
         "appletv": 7,
         "youtube": 11,
         "tiktok": 32,
-        "ai": 222,
+        "ai": 226,
         "telegram": 28,
         "twitter": 18,
         "facebook": 370,
@@ -1310,17 +1340,17 @@
         "apple": 1563,
         "microsoft": 617,
         "google": 539,
-        "force-direct": 1139,
-        "force-proxy": 4441,
-        "direct-extra": 1004,
-        "fakeip-filter": 82,
+        "force-direct": 1127,
+        "force-proxy": 4475,
+        "direct-extra": 976,
+        "fakeip-filter": 48,
         "encrypted-dns": 3583
       },
       "by_type": {
         "cn": {
-          "domain_suffix": 109868,
-          "domain": 243,
-          "domain_keyword": 13
+          "domain_suffix": 109848,
+          "domain": 192,
+          "domain_keyword": 11
         },
         "private": {
           "domain_suffix": 25
@@ -1360,7 +1390,7 @@
           "domain_keyword": 2
         },
         "ai": {
-          "domain_suffix": 188,
+          "domain_suffix": 192,
           "domain": 34
         },
         "telegram": {
@@ -1412,21 +1442,20 @@
           "domain_keyword": 5
         },
         "force-direct": {
-          "domain_suffix": 1135,
-          "domain": 1,
-          "domain_keyword": 3
+          "domain_suffix": 1126,
+          "domain_keyword": 1
         },
         "force-proxy": {
-          "domain_suffix": 4441
+          "domain_suffix": 4473,
+          "domain": 2
         },
         "direct-extra": {
-          "domain_suffix": 236,
-          "domain": 768
+          "domain_suffix": 238,
+          "domain": 738
         },
         "fakeip-filter": {
-          "domain_suffix": 65,
-          "domain": 15,
-          "domain_keyword": 2
+          "domain_suffix": 46,
+          "domain": 2
         },
         "encrypted-dns": {
           "domain_suffix": 3573,
@@ -1468,11 +1497,11 @@
     "failed": 0
   },
   "dat_tests": {
-    "pass": 47,
+    "pass": 57,
     "fail": 0
   },
   "tests": {
-    "pass": 67,
+    "pass": 87,
     "fail": 0
   }
 }

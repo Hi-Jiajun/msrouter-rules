@@ -90,34 +90,64 @@
     "expect": "out"
   },
   {
-    "domain": "xingchiapi.com",
+    "domain": "cdn.ynuf.aliapp.org",
     "set": "force-direct",
     "expect": "in"
   },
   {
-    "domain": "api.xingchiapi.com",
+    "domain": "akamaized.net",
     "set": "force-direct",
+    "expect": "out"
+  },
+  {
+    "domain": "ifconfig.co",
+    "set": "force-direct",
+    "expect": "out"
+  },
+  {
+    "domain": "tailscale.com",
+    "set": "force-direct",
+    "expect": "out"
+  },
+  {
+    "domain": "nas.synology.me",
+    "set": "force-direct",
+    "expect": "out"
+  },
+  {
+    "domain": "challenges.cloudflare.com",
+    "set": "force-proxy",
     "expect": "in"
   },
   {
-    "domain": "notxingchiapi.com",
-    "set": "force-direct",
-    "expect": "out"
-  },
-  {
-    "domain": "v.qwerw.cc.cd",
-    "set": "force-direct",
+    "domain": "np-edge.itunes.apple.com",
+    "set": "force-proxy",
     "expect": "in"
   },
   {
-    "domain": "qwerw.cc.cd",
-    "set": "force-direct",
-    "expect": "out"
+    "domain": "play-edge.itunes.apple.com",
+    "set": "force-proxy",
+    "expect": "in"
   },
   {
-    "domain": "cc.cd",
-    "set": "force-direct",
-    "expect": "out"
+    "domain": "models.dev",
+    "set": "ai",
+    "expect": "in"
+  },
+  {
+    "domain": "api.kilo.ai",
+    "set": "ai",
+    "expect": "in"
+  },
+  {
+    "domain": "usemagpie.ai",
+    "set": "ai",
+    "expect": "in"
+  },
+  {
+    "domain": "api.tavily.com",
+    "set": "ai",
+    "expect": "in"
   },
   {
     "domain": "dns.google",
@@ -250,14 +280,74 @@
     "expect": "out"
   },
   {
+    "domain": "aka.ms",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "nyti.ms",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "stripe.com",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "paypal.com",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "spotify.com",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "speedtest.net",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
     "domain": "blzddist1-a.akamaihd.net",
     "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "blzddist1-a.akamaihd.net",
+    "set": "direct-extra",
     "expect": "in"
+  },
+  {
+    "domain": "is1-ssl.mzstatic.com",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "iosapps.itunes.g.aaplimg.com",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "dispatcher.is.autonavi.com",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "np-edge.itunes.apple.com",
+    "set": "direct-extra",
+    "expect": "out"
+  },
+  {
+    "domain": "play-edge.itunes.apple.com",
+    "set": "direct-extra",
+    "expect": "out"
   },
   {
     "domain": "steamcommunity-a.akamaihd.net",
     "set": "cn-domains",
-    "expect": "in"
+    "expect": "out"
   },
   {
     "domain": "time.apple.com",
@@ -280,19 +370,29 @@
     "expect": "in"
   },
   {
-    "domain": "stun.l.google.com",
+    "domain": "stun.qq.com",
     "set": "fakeip-filter",
     "expect": "in"
+  },
+  {
+    "domain": "connectivitycheck.gstatic.com",
+    "set": "fakeip-filter",
+    "expect": "out"
+  },
+  {
+    "domain": "stun.l.google.com",
+    "set": "fakeip-filter",
+    "expect": "out"
   },
   {
     "domain": "stun1.l.google.com",
     "set": "fakeip-filter",
-    "expect": "in"
+    "expect": "out"
   },
   {
     "domain": "stun.example.org",
     "set": "fakeip-filter",
-    "expect": "in"
+    "expect": "out"
   },
   {
     "domain": "mcdn.bilivideo.cn",
@@ -302,12 +402,12 @@
   {
     "domain": "nas.synology.me",
     "set": "fakeip-filter",
-    "expect": "in"
+    "expect": "out"
   },
   {
     "domain": "derp.example.com",
     "set": "fakeip-filter",
-    "expect": "in"
+    "expect": "out"
   },
   {
     "domain": "home.arpa",

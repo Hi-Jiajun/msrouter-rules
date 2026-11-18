@@ -22,10 +22,10 @@
   "apple": 1100,
   "microsoft": 430,
   "google": 380,
-  "force-direct": 797,
+  "force-direct": 750,
   "force-proxy": 3100,
   "direct-extra": 700,
-  "fakeip-filter": 57,
+  "fakeip-filter": 30,
   "encrypted-dns": 2508,
   "telegram-ip": 7,
   "netflix-ip": 16

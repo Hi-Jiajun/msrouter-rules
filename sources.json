@@ -46,9 +46,20 @@
   "rule_sets": {
     "cn-domains": {
       "take": "senshinya:ChinaMax",
+      "deny": [
+        "exact_suffix:ms",
+        "exact_suffix:in.th",
+        "stripe.com",
+        "stripe.network",
+        "keyword:stripe",
+        "keyword:beplay",
+        "akamaized.net",
+        "akamaihd.net"
+      ],
       "exclude": [
         "force-proxy",
         "ai",
+        "google",
         "github",
         "youtube",
         "telegram",
@@ -57,10 +68,14 @@
         "hbo",
         "hulu",
         "primevideo",
+        "appletv",
         "tiktok",
         "twitter",
         "facebook",
-        "instagram"
+        "instagram",
+        "spotify",
+        "paypal",
+        "speedtest"
       ]
     },
     "cn-ip": {
@@ -196,6 +211,37 @@
       "union": [
         "aethersailor:Custom_Direct",
         "local:force-direct"
+      ],
+      "deny": [
+        "akamaized.net",
+        "akamaihd.net",
+        "stripe.com",
+        "stripe.network",
+        "keyword:stripe",
+        "beplay",
+        "keyword:beplay",
+        "ifconfig.co",
+        "ipapi.co",
+        "ipinfo.io",
+        "ip.sb",
+        "ident.me",
+        "icanhazip.com",
+        "checkip.amazonaws.com",
+        "ipify.org",
+        "api.ipify.org",
+        "checkip.dyndns.org",
+        "checkipv6.dyndns.org",
+        "api.myip.com",
+        "ip6.seeip.org",
+        "np-edge.itunes.apple.com",
+        "play-edge.itunes.apple.com",
+        "tailscale.com",
+        "keyword:synology",
+        "synology.com",
+        "synology.me",
+        "keyword:quickconnect",
+        "quickconnect.cn",
+        "quickconnect.to"
       ]
     },
     "force-proxy": {
@@ -213,14 +259,18 @@
         "meta:apple@cn",
         "meta:microsoft@cn",
         "meta:category-games@cn",
-        "meta:category-game-platforms-download@cn"
+        "meta:category-game-platforms-download@cn",
+        "local:direct-extra"
+      ],
+      "deny": [
+        "np-edge.itunes.apple.com",
+        "play-edge.itunes.apple.com"
       ]
     },
     "fakeip-filter": {
       "union": [
         "local:fakeip-filter",
-        "local:private",
-        "meta:connectivity-check"
+        "local:private"
       ]
     },
     "encrypted-dns": {

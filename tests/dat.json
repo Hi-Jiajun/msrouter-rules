@@ -7,7 +7,7 @@
     { "key": "netflix", "min": 17 },
     { "key": "telegram", "min": 19 },
     { "key": "direct-extra", "min": 700 },
-    { "key": "fakeip-filter", "min": 57 }
+    { "key": "fakeip-filter", "min": 30 }
   ],
   "geosite_cases": [
     { "key": "cn", "domain": "baidu.com", "expect": "in" },
@@ -16,18 +16,28 @@
     { "key": "cn", "domain": "kimi.ai", "expect": "out" },
     { "key": "cn", "domain": "cdn.ampproject.org", "expect": "out" },
     { "key": "cn", "domain": "c.pki.goog", "expect": "out" },
+    { "key": "cn", "domain": "aka.ms", "expect": "out" },
+    { "key": "cn", "domain": "stripe.com", "expect": "out" },
     { "key": "github", "domain": "github.com", "expect": "in" },
     { "key": "netflix", "domain": "netflix.com", "expect": "in" },
+    { "key": "ai", "domain": "models.dev", "expect": "in" },
+    { "key": "force-proxy", "domain": "challenges.cloudflare.com", "expect": "in" },
+    { "key": "force-proxy", "domain": "googleapis.cn", "expect": "in" },
     { "key": "private", "domain": "router.asus.com", "expect": "in" },
     { "key": "private", "domain": "home.arpa", "expect": "in" },
     { "key": "private", "domain": "baidu.com", "expect": "out" },
     { "key": "direct-extra", "domain": "apps.apple.com", "expect": "in" },
+    { "key": "direct-extra", "domain": "is1-ssl.mzstatic.com", "expect": "in" },
+    { "key": "direct-extra", "domain": "dispatcher.is.autonavi.com", "expect": "in" },
+    { "key": "direct-extra", "domain": "np-edge.itunes.apple.com", "expect": "out" },
     { "key": "direct-extra", "domain": "dl.delivery.mp.microsoft.com", "expect": "in" },
     { "key": "direct-extra", "domain": "steamserver.net", "expect": "in" },
     { "key": "fakeip-filter", "domain": "time.apple.com", "expect": "in" },
     { "key": "fakeip-filter", "domain": "0.pool.ntp.org", "expect": "in" },
     { "key": "fakeip-filter", "domain": "msftconnecttest.com", "expect": "in" },
-    { "key": "fakeip-filter", "domain": "stun.l.google.com", "expect": "in" },
+    { "key": "fakeip-filter", "domain": "stun.qq.com", "expect": "in" },
+    { "key": "fakeip-filter", "domain": "connectivitycheck.gstatic.com", "expect": "out" },
+    { "key": "fakeip-filter", "domain": "stun.l.google.com", "expect": "out" },
     { "key": "fakeip-filter", "domain": "baidu.com", "expect": "out" }
   ],
   "geoip_keys": [

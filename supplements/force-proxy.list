@@ -1,3 +1,45 @@
 # 本地补充：上游未覆盖、经 OxiDNS 阶段④ 自学习与人工审阅确认应当走代理的域名
 # 格式同 Clash 规则（DOMAIN / DOMAIN-SUFFIX / DOMAIN-KEYWORD）
 # 注意：本仓库为公开仓，仅收录通用公共服务域名（优先聚合为根域 DOMAIN-SUFFIX），不写入私人子域。
+
+# Cloudflare 验证 / 对象存储与公共静态 CDN
+DOMAIN-SUFFIX,challenges.cloudflare.com
+DOMAIN-SUFFIX,cloudflarestorage.com
+DOMAIN-SUFFIX,ldstatic.com
+
+# 智能家居 / 可观测与开源基础设施
+DOMAIN-SUFFIX,home-assistant.io
+DOMAIN-SUFFIX,hacs.xyz
+DOMAIN-SUFFIX,grafana.com
+DOMAIN-SUFFIX,archlinux.org
+DOMAIN-SUFFIX,debian.org
+DOMAIN-SUFFIX,armbian.com
+DOMAIN-SUFFIX,lineageos.org
+DOMAIN-SUFFIX,linaro.org
+DOMAIN-SUFFIX,sbcmirror.org
+DOMAIN-SUFFIX,sourceforge.net
+
+# 气象 / 公共 API / 遥测分析 / 网络工具
+DOMAIN-SUFFIX,open-meteo.com
+DOMAIN-SUFFIX,met.no
+DOMAIN-SUFFIX,aladhan.com
+DOMAIN-SUFFIX,sentry.io
+DOMAIN-SUFFIX,posthog.com
+DOMAIN-SUFFIX,ipwho.is
+
+# 影音媒体 / 歌词元数据 / 广告与生态边缘
+DOMAIN-SUFFIX,strem.io
+DOMAIN-SUFFIX,emby.media
+DOMAIN-SUFFIX,kodi.tv
+DOMAIN-SUFFIX,justwatch.com
+DOMAIN-SUFFIX,metahub.space
+DOMAIN-SUFFIX,lrclib.net
+DOMAIN-SUFFIX,betterlyrics.org
+DOMAIN-SUFFIX,binimum.org
+DOMAIN-SUFFIX,boidu.dev
+DOMAIN-SUFFIX,radio-browser.info
+DOMAIN-SUFFIX,cleanyourtv.wiki
+DOMAIN-SUFFIX,me.com
+DOMAIN-SUFFIX,doubleclick.net
+DOMAIN,np-edge.itunes.apple.com
+DOMAIN,play-edge.itunes.apple.com

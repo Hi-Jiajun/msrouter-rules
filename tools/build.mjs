@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import { execFileSync, spawnSync } from 'node:child_process';
 import {
   encodeGeoSiteList, encodeGeoIpList, decodeGeoSiteList, decodeGeoIpList,
@@ -46,8 +47,41 @@ function singbox(args, opts = {}) {
 const strip = v => String(v).replace(/^\+\./, '').replace(/^\*\./, '').replace(/^\./, '').toLowerCase();
 const blank = () => ({ domain: new Set(), domain_suffix: new Set(), domain_keyword: new Set(), ip_cidr: new Set() });
 
+/** Apply declarative deny filters to a rule set (exact, exact_suffix, keyword, or domain+subtree suffix). */
+export function applyDenyRules(set, denyList = []) {
+  let removed = 0;
+  for (const rawRule of denyList) {
+    const item = String(rawRule || '').trim();
+    if (!item) continue;
+    const colon = item.indexOf(':');
+    const mode = colon === -1 ? 'subtree' : item.slice(0, colon).toLowerCase();
+    const target = strip(colon === -1 ? item : item.slice(colon + 1));
+    if (!target) continue;
+
+    if (mode === 'exact' || mode === 'domain') {
+      if (set.domain.delete(target)) removed++;
+    } else if (mode === 'exact_suffix') {
+      if (set.domain_suffix.delete(target)) removed++;
+    } else if (mode === 'keyword') {
+      if (set.domain_keyword.delete(target)) removed++;
+    } else if (mode === 'subtree' || mode === 'suffix') {
+      const matchSubtree = v => v === target || v.endsWith(`.${target}`);
+      for (const d of [...set.domain]) {
+        if (matchSubtree(d)) { set.domain.delete(d); removed++; }
+      }
+      for (const s of [...set.domain_suffix]) {
+        if (matchSubtree(s)) { set.domain_suffix.delete(s); removed++; }
+      }
+      if (set.domain_keyword.delete(target)) removed++;
+    } else {
+      throw new Error(`未知 deny 规则前缀: ${rawRule}`);
+    }
+  }
+  return removed;
+}
+
 /** Return true if domain matches any exact or parent-suffix rule across ruleSets (plus optional keyword). */
-function matchesDomainSets(domain, ruleSets, checkKeyword = false) {
+export function matchesDomainSets(domain, ruleSets, checkKeyword = false) {
   for (const rs of ruleSets) {
     if (rs.domain?.has(domain)) return true;
     const parts = domain.split('.');
@@ -62,7 +96,7 @@ function matchesDomainSets(domain, ruleSets, checkKeyword = false) {
 }
 
 /** Prune domains/suffixes covered by keywords or ancestor suffixes via a reversed-label trie. */
-function pruneDomains(set) {
+export function pruneDomains(set) {
   const keywords = [...set.domain_keyword];
   const isKeywordCovered = d => keywords.some(kw => d.includes(kw));
 
@@ -128,7 +162,7 @@ function formatBigIntIp(val, bits) {
 }
 
 /** Aggregate IPv4/IPv6 CIDRs via a BigInt binary prefix tree (drop covered + merge siblings). */
-function aggregateCidrs(cidrSet) {
+export function aggregateCidrs(cidrSet) {
   if (!cidrSet.size) return new Set();
   const roots = { 32: { leaf: false, c0: null, c1: null }, 128: { leaf: false, c0: null, c1: null } };
   for (const text of cidrSet) {
@@ -223,13 +257,12 @@ const adapters = {
     return out;
   },
   'geosite-db': (up, cat, file) => {
-    const out = blank();
     const json = path.join(CACHE, 'meta', `${cat}.export.json`);
     if (!fs.existsSync(json) || process.env.FORCE_FETCH === '1') {
       mkdir(path.dirname(json));
-      singbox(['geosite', '-f', file, 'export', cat, '-o', json], { allowFail: true });
+      singbox(['geosite', '-f', file, 'export', cat, '-o', json]);
     }
-    if (!fs.existsSync(json)) return null; // meta 没有这个分类
+    if (!fs.existsSync(json)) throw new Error(`meta geosite 导出缺失: ${cat}`);
     return adapters['singbox-json'](up, cat, json);
   },
 };
@@ -256,7 +289,7 @@ async function main() {
   const builtRules = {};   // tag → 优化后的 rule，.srs 与 .dat 都从这里取，保证同源
   log(`共 ${tags.length} 个 rule_set（两阶段构建：合并 → 差集/Trie 剪枝/CIDR 聚合）`);
 
-  // ── Pass 1：拉取并合并原始集合 ──────────────────────────────────
+  // ── Pass 1：拉取、合并原始集合并执行声明式 deny 剥离 ───────────────
   for (const tag of tags) {
     const recipe = CFG.rule_sets[tag];
     const refs = recipe.union || [recipe.take];
@@ -266,24 +299,27 @@ async function main() {
     for (const ref of refs) {
       const { up, cat, file } = fetchRef(ref);
       const set = adapters[up.kind](up, cat, file);
-      if (!set) { log(`  ! ${tag}: 上游 ${ref} 没有该分类，跳过`); continue; }
+      if (!set) throw new Error(`${tag}: 上游 ${ref} 未返回有效规则集`);
       const upSha = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
       sources.push({ ref, url: up.url, upstream_sha256: upSha,
                      counts: Object.fromEntries(TYPES.map(t => [t, set[t]?.size || 0])) });
       for (const t of TYPES) if (merged[t]) for (const v of set[t] || []) merged[t].add(v);
     }
 
+    const preDenyTotal = merged.domain.size + merged.domain_suffix.size + merged.domain_keyword.size + merged.ip_cidr.size;
+    const deniedEntries = recipe.deny?.length ? applyDenyRules(merged, recipe.deny) : 0;
+
     rawMerged[tag] = merged;
-    rawSources[tag] = { refs, sources };
+    rawSources[tag] = { refs, sources, preDenyTotal, deniedEntries };
   }
 
-  // 受保护的直连白名单（force-direct ∪ direct-extra），exclude 差集不得删掉其中的项
+  // 受保护的直连白名单（经 deny 清洗后的 force-direct ∪ direct-extra），exclude 差集不得删掉其中的项
   const protectedSets = ['force-direct', 'direct-extra'].map(t => rawMerged[t]).filter(Boolean);
 
   // ── Pass 2 & Pass 3：exclude 差集 → Trie 剪枝 → CIDR 聚合 → 编译 ──
   for (const tag of tags) {
     const recipe = CFG.rule_sets[tag];
-    const { refs, sources } = rawSources[tag];
+    const { refs, sources, preDenyTotal, deniedEntries } = rawSources[tag];
     const raw = rawMerged[tag];
     const working = {
       domain: new Set(raw.domain),
@@ -291,7 +327,7 @@ async function main() {
       domain_keyword: new Set(raw.domain_keyword),
       ip_cidr: new Set(raw.ip_cidr),
     };
-    const rawTotal = working.domain.size + working.domain_suffix.size + working.domain_keyword.size + working.ip_cidr.size;
+    const rawTotal = preDenyTotal;
 
     let excludedDomains = 0;
     let protectedKept = 0;
@@ -301,13 +337,13 @@ async function main() {
         return rawMerged[ex];
       });
       for (const d of [...working.domain]) {
-        if (matchesDomainSets(d, exSets, false)) {
+        if (matchesDomainSets(d, exSets, true)) {
           if (matchesDomainSets(d, protectedSets, true)) protectedKept++;
           else { working.domain.delete(d); excludedDomains++; }
         }
       }
       for (const s of [...working.domain_suffix]) {
-        if (matchesDomainSets(s, exSets, false)) {
+        if (matchesDomainSets(s, exSets, true)) {
           if (matchesDomainSets(s, protectedSets, true)) protectedKept++;
           else { working.domain_suffix.delete(s); excludedDomains++; }
         }
@@ -341,6 +377,7 @@ async function main() {
     manifest.rule_sets[tag] = {
       sources, raw_total: rawTotal, total,
       optimization: {
+        denied_entries: deniedEntries,
         excluded_domains: excludedDomains,
         protected_kept: protectedKept,
         pruned_domains: prunedDomains,
@@ -351,6 +388,7 @@ async function main() {
       srs_bytes: fs.statSync(srsPath).size,
     };
     const optNotes = [];
+    if (deniedEntries) optNotes.push(`-${deniedEntries} deny`);
     if (excludedDomains) optNotes.push(`-${excludedDomains} ex`);
     if (prunedDomains) optNotes.push(`-${prunedDomains} trie`);
     if (collapsedCidrs) optNotes.push(`-${collapsedCidrs} cidr`);
@@ -358,36 +396,56 @@ async function main() {
     log(`  ✓ ${tag.padEnd(14)} ${String(total).padStart(6)} 条  ${String(manifest.rule_sets[tag].srs_bytes).padStart(7)} B${optStr}  ← ${refs.join(' + ')}`);
   }
 
-  // ── 正交性门禁：force-proxy 域名不得残留在 cn-domains 中（除非被 force-direct/direct-extra 覆盖）──
+  // ── 正交性门禁：cn-domains.exclude 中的纯代理分类不得在 cn-domains 残留未受保护条目或非 TLD 父后缀 ──
   const orthogonalityLeaks = [];
-  if (builtRules['cn-domains'] && builtRules['force-proxy']) {
+  const cnExcludeTags = CFG.rule_sets['cn-domains']?.exclude || ['force-proxy'];
+  if (builtRules['cn-domains']) {
     const cnRule = builtRules['cn-domains'];
     const cnExact = new Set(cnRule.domain || []);
     const cnSuffix = new Set(cnRule.domain_suffix || []);
-    const fpRule = builtRules['force-proxy'];
-    const fpSet = { domain: new Set(fpRule.domain || []), domain_suffix: new Set(fpRule.domain_suffix || []) };
 
-    for (const d of cnExact) {
-      if (matchesDomainSets(d, [fpSet], false) && !matchesDomainSets(d, protectedSets, true)) {
-        orthogonalityLeaks.push(`cn-domains.domain=${d}`);
+    for (const exTag of cnExcludeTags) {
+      const exRule = builtRules[exTag];
+      if (!exRule) continue;
+      const exSet = {
+        domain: new Set(exRule.domain || []),
+        domain_suffix: new Set(exRule.domain_suffix || []),
+        domain_keyword: new Set(exRule.domain_keyword || []),
+      };
+
+      for (const d of cnExact) {
+        if (matchesDomainSets(d, [exSet], true) && !matchesDomainSets(d, protectedSets, true)) {
+          orthogonalityLeaks.push(`cn-domains.domain=${d}(vs ${exTag})`);
+        }
       }
-    }
-    for (const s of cnSuffix) {
-      if (matchesDomainSets(s, [fpSet], false) && !matchesDomainSets(s, protectedSets, true)) {
-        orthogonalityLeaks.push(`cn-domains.domain_suffix=${s}`);
+      for (const s of cnSuffix) {
+        if (matchesDomainSets(s, [exSet], true) && !matchesDomainSets(s, protectedSets, true)) {
+          orthogonalityLeaks.push(`cn-domains.domain_suffix=${s}(vs ${exTag})`);
+        }
       }
-    }
-    for (const entry of [...fpSet.domain, ...fpSet.domain_suffix]) {
-      if ((cnExact.has(entry) || cnSuffix.has(entry)) && !matchesDomainSets(entry, protectedSets, true)) {
-        orthogonalityLeaks.push(`force-proxy-entry-in-cn=${entry}`);
+      for (const entry of [...exSet.domain, ...exSet.domain_suffix]) {
+        if (matchesDomainSets(entry, protectedSets, true)) continue;
+        if (cnExact.has(entry) || cnSuffix.has(entry)) {
+          orthogonalityLeaks.push(`${exTag}-entry-in-cn=${entry}`);
+        }
       }
     }
   }
-  manifest.orthogonality = { checked: true, leaks: orthogonalityLeaks.length };
+  // 额外校验：local:force-proxy 人工审阅代理条目不得被 Stage 2a (force-direct / direct-extra) 抢先拦截
+  const localFpPath = path.join(ROOT, 'supplements', 'force-proxy.list');
+  if (fs.existsSync(localFpPath)) {
+    const localFp = adapters['local'](CFG.upstreams.local, 'force-proxy', localFpPath);
+    for (const entry of [...localFp.domain, ...localFp.domain_suffix]) {
+      if (matchesDomainSets(entry, protectedSets, true)) {
+        orthogonalityLeaks.push(`local:force-proxy-shadowed-by-stage2a=${entry}`);
+      }
+    }
+  }
+  manifest.orthogonality = { checked: true, checked_sets: cnExcludeTags.length, leaks: orthogonalityLeaks.length };
   if (orthogonalityLeaks.length) {
-    throw new Error(`正交性校验失败（cn-domains 与 force-proxy 冲突 ${orthogonalityLeaks.length} 条）: ${orthogonalityLeaks.slice(0, 10).join(', ')}`);
+    throw new Error(`正交性校验失败（cn-domains 与纯代理分类冲突 ${orthogonalityLeaks.length} 条）: ${orthogonalityLeaks.slice(0, 10).join(', ')}`);
   }
-  log(`  ✓ 正交性门禁通过（cn-domains 与 force-proxy 未受保护重叠 = 0）`);
+  log(`  ✓ 正交性门禁通过（cn-domains vs ${cnExcludeTags.length} 个纯代理集未受保护冲突 = 0）`);
 
   // ── v2ray .dat：geosite.dat / geoip.dat，与 .srs 共用同一份合并结果 ──
   // 类型映射按 v2ray 真实语义（v2fly/domain-list-community 的映射，Landscape 的
@@ -531,4 +589,6 @@ async function main() {
   if (fail || thin || datFail) process.exit(1);
 }
 
-main().catch(e => { console.error('构建失败:', e.message); process.exit(1); });
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch(e => { console.error('构建失败:', e.message); process.exit(1); });
+}

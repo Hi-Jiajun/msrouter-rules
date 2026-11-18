@@ -17,47 +17,26 @@ DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,ntp.org
 DOMAIN-SUFFIX,time.apple.com
 DOMAIN-SUFFIX,time.windows.com
-DOMAIN-SUFFIX,time.cloudflare.com
 DOMAIN-SUFFIX,ntp.aliyun.com
 DOMAIN-SUFFIX,ntp.tencent.com
 DOMAIN-SUFFIX,ntp.ntsc.ac.cn
 DOMAIN-SUFFIX,cn.ntp.org.cn
 
-# ── 连通性探测 / Captive Portal ───────────────────────────────────
+# ── 国内与系统原生 Captive Portal 探测 ───────────────────────────
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
 DOMAIN-SUFFIX,captive.apple.com
-DOMAIN-SUFFIX,connectivitycheck.gstatic.com
 DOMAIN-SUFFIX,connectivitycheck.platform.hicloud.com
 DOMAIN-SUFFIX,connect.rom.miui.com
-DOMAIN-SUFFIX,network-test.debian.org
-DOMAIN-SUFFIX,nmcheck.gnome.org
 
-# ── STUN / TURN / WebRTC & 游戏 NAT ──────────────────────────────
-DOMAIN-SUFFIX,stun.l.google.com
-DOMAIN-SUFFIX,stun1.l.google.com
-DOMAIN-SUFFIX,stun2.l.google.com
-DOMAIN-SUFFIX,stun3.l.google.com
-DOMAIN-SUFFIX,stun4.l.google.com
-DOMAIN-SUFFIX,stun.cloudflare.com
+# ── 国内 STUN & Steam 下载 CDN ───────────────────────────────────
 DOMAIN-SUFFIX,stun.qq.com
 DOMAIN-SUFFIX,stun.miwifi.com
 DOMAIN-SUFFIX,stun.chat.bilibili.com
-DOMAIN-KEYWORD,stun.
-DOMAIN-SUFFIX,xboxlive.com
-DOMAIN-SUFFIX,srv.nintendo.net
-DOMAIN-SUFFIX,stun.playstation.net
 DOMAIN-SUFFIX,steamcontent.com
 DOMAIN-SUFFIX,steamserver.net
-DOMAIN-SUFFIX,pvp.net
 
-# ── 国内 PCDN / B站 / 路由器 DDNS / DERP ─────────────────────────
+# ── 国内 PCDN / 视频边缘节点 ─────────────────────────────────────
 DOMAIN-SUFFIX,mcdn.bilivideo.cn
 DOMAIN-SUFFIX,szbdyd.com
 DOMAIN-SUFFIX,pcdn.xmcdn.com
-DOMAIN-SUFFIX,synology.me
-DOMAIN-SUFFIX,quickconnect.cn
-DOMAIN-SUFFIX,quickconnect.to
-DOMAIN-SUFFIX,tailscale.com
-DOMAIN-KEYWORD,derp.
-DOMAIN-SUFFIX,derp

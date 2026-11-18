@@ -5,13 +5,10 @@
 DOMAIN-SUFFIX,windowsupdate.com
 DOMAIN-SUFFIX,delivery.mp.microsoft.com
 
-# Ollama：官网与模型下载走直连（2026-11-11 用户要求）
+# Ollama：官网与模型下载走直连
 # 直连在 DNS 层决定：命中 force-direct 后由 unbound 解析真实 IP，不产生 fake-IP
 DOMAIN-SUFFIX,ollama.com
 DOMAIN-SUFFIX,ollama.ai
 
-# 星茶 API 站：整域直连（2026-11-16 用户要求）
-DOMAIN-SUFFIX,xingchiapi.com
-
-# 单一主机名直连（2026-11-16 用户要求）：只匹配该主机，不含 qwerw.cc.cd 其它子域
-DOMAIN,v.qwerw.cc.cd
+# 阿里系国内应用分发 / 安全组件 CDN
+DOMAIN-SUFFIX,aliapp.org

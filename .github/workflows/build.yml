@@ -10,6 +10,7 @@ on:
 
 # 钉死版本：不同日期的 .srs 必须能装进同一个客户端，不能今天 1.14 明天 1.15
 env:
+  TZ: Asia/Shanghai
   SING_BOX_VERSION: v1.14.4
   KEEP_RELEASES: 30
 
@@ -37,7 +38,9 @@ jobs:
           "$BIN" version | head -1
 
       - name: 构建 + 断言 + 阈值检查
-        run: node tools/build.mjs
+        run: |
+          node tools/build.mjs
+          node --test
 
       - name: 上传产物（供排查）
         if: always()
@@ -67,5 +70,5 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release list --limit 200 --json tagName,createdAt \
-            --jq 'sort_by(.createdAt) | reverse | .[env.KEEP_RELEASES:] | .[].tagName' \
+            --jq 'sort_by(.createdAt) | reverse | .[(env.KEEP_RELEASES | tonumber):] | .[].tagName' \
           | while read -r tag; do [ -n "$tag" ] && gh release delete "$tag" --yes --cleanup-tag; done
