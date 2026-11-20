@@ -4,7 +4,8 @@
     {
       "domain": [
         "localhost.ptlogin2.qq.com",
-        "localhost.sec.qq.com"
+        "localhost.sec.qq.com",
+        "time.nist.gov"
       ],
       "domain_suffix": [
         "asusrouter.com",
@@ -37,6 +38,7 @@
         "phicomm.me",
         "plex.direct",
         "private",
+        "push.apple.com",
         "router.asus.com",
         "router.ctc",
         "routerlogin.com",

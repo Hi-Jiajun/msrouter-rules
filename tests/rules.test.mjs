@@ -3,7 +3,14 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { applyDenyRules, matchesDomainSets, pruneDomains, aggregateCidrs } from '../tools/build.mjs';
+import {
+  applyDenyRules,
+  matchesDomainSets,
+  pruneDomains,
+  aggregateCidrs,
+  stripInlineComment,
+  parseClashListText,
+} from '../tools/build.mjs';
 import { decodeGeoSiteList, matchDomain } from '../tools/dat.mjs';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
@@ -171,4 +178,81 @@ test('contract: fakeip-filter whitelist shrink & curated direct-extra / force-pr
   const manifest = JSON.parse(fs.readFileSync(path.join(DIST, 'manifest.json'), 'utf8'));
   assert.equal(manifest.orthogonality?.checked, true);
   assert.equal(manifest.orthogonality?.leaks, 0);
+});
+
+test('unit: stripInlineComment & parseClashListText strip trailing # comments cleanly', () => {
+  assert.equal(stripInlineComment('DOMAIN-SUFFIX,example.com # inline comment'), 'DOMAIN-SUFFIX,example.com');
+  assert.equal(stripInlineComment('  # full line comment'), '');
+  const parsed = parseClashListText([
+    '# header',
+    'DOMAIN,exact.example.com # exact note',
+    'DOMAIN-SUFFIX,suffix.example.org # suffix note',
+    'DOMAIN-KEYWORD,mykw # kw note',
+  ].join('\n'));
+  assert.deepEqual([...parsed.domain], ['exact.example.com']);
+  assert.deepEqual([...parsed.domain_suffix], ['suffix.example.org']);
+  assert.deepEqual([...parsed.domain_keyword], ['mykw']);
+});
+
+test('contract: Phase A dual-region Apple, APNs/NTP fakeip-filter, encrypted-dns precision & 48h public backflow', () => {
+  const fakeip = loadDistRule('fakeip-filter');
+  for (const kept of ['push.apple.com', '1-courier.push.apple.com', 'time.nist.gov']) {
+    assert.equal(matchesDomainSets(kept, [fakeip], true), true, `${kept} must be in fakeip-filter`);
+  }
+
+  const directExtra = loadDistRule('direct-extra');
+  for (const kept of ['is1-ssl.mzstatic.com', 'iosapps.itunes.g.aaplimg.com', 'cds-cdn.v.aaplimg.com', 'swcdn.apple.com', 'dispatcher.is.autonavi.com']) {
+    assert.equal(matchesDomainSets(kept, [directExtra], true), true, `${kept} must remain in direct-extra`);
+  }
+  const strippedAppleApis = [
+    'other.v.aaplimg.com',
+    'guzzoni.apple.com', 'guzzoni-apple-com.v.aaplimg.com', 'guzzoni.smoot.apple.com',
+    'probe.siri.apple.com', 'seed.siri.apple.com', 'seed-sequoia.siri.apple.com', 'seed-swallow.siri.apple.com',
+    'swallow.apple.com', 'swallow-apple-com.v.aaplimg.com', 'sequoia.apple.com',
+    'podcasts.apple.com', 'amp-api.podcasts.apple.com', 'podcasts.itunes.apple.com',
+    'amp-api.media.apple.com', 'music.apple.com', 'amp-api.music.apple.com',
+    'amp-api-edge.music.apple.com', 'play.music.apple.com', 'musicstatus.music.apple.com',
+  ];
+  for (const denied of strippedAppleApis) {
+    assert.equal(matchesDomainSets(denied, [directExtra], true), false, `${denied} must be excluded from direct-extra`);
+  }
+
+  const encryptedDns = loadDistRule('encrypted-dns');
+  for (const blocked of ['dns.alidns.com', 'doh.pub', 'dot.pub', 'dot.clashmi.app', 'dns.google']) {
+    assert.equal(matchesDomainSets(blocked, [encryptedDns], true), true, `${blocked} must remain in encrypted-dns`);
+  }
+  for (const unblocked of ['dnspod.com', 'www.dnspod.com', 'api.dnspod.com', 'alidns.com', 'www.alidns.com', 'mask.icloud.com', 'mask-h2.icloud.com']) {
+    assert.equal(matchesDomainSets(unblocked, [encryptedDns], true), false, `${unblocked} must not be blocked by encrypted-dns`);
+  }
+
+  const forceDirect = loadDistRule('force-direct');
+  for (const denied of ['adobe.com', 'firefly.adobe.com', 'opera.com', 'bunny.net', 'rewards.bing.com', 'chii.in', 'linux.sb', 'liveperson.net']) {
+    assert.equal(matchesDomainSets(denied, [forceDirect], true), false, `${denied} must be denied from force-direct`);
+  }
+
+  const forceProxy = loadDistRule('force-proxy');
+  for (const added of [
+    'apple-relay.cloudflare.com', 'apple-relay.fastly-edge.com', 'apple-relay.apple.com',
+    'pypi.org', 'files.pythonhosted.org', 'gitlab.com', 'stripe.com', 'stripe.network',
+    'cdnjs.cloudflare.com', 'download.proxmox.com', 'dl.flathub.org', 'r.jina.ai',
+  ]) {
+    assert.equal(matchesDomainSets(added, [forceProxy], true), true, `${added} must be in force-proxy`);
+  }
+  for (const excluded of ['cs-123.cloudshell.dev', 'flowercloud.net', 'epdg.epc.mnc002.mcc248.pub.3gppnetwork.org']) {
+    assert.equal(matchesDomainSets(excluded, [forceProxy], true), false, `${excluded} must not be added to force-proxy`);
+  }
+
+  const siteMap = new Map(decodeGeoSiteList(fs.readFileSync(path.join(DIST, 'geosite.dat'))).map(e => [e.countryCode, e.domains]));
+  assert.equal(matchDomain('1-courier.push.apple.com', siteMap.get('fakeip-filter') || []), true);
+  assert.equal(matchDomain('time.nist.gov', siteMap.get('fakeip-filter') || []), true);
+  assert.equal(matchDomain('guzzoni.apple.com', siteMap.get('direct-extra') || []), false);
+  assert.equal(matchDomain('amp-api.podcasts.apple.com', siteMap.get('direct-extra') || []), false);
+  assert.equal(matchDomain('cds-cdn.v.aaplimg.com', siteMap.get('direct-extra') || []), true);
+  assert.equal(matchDomain('mask.icloud.com', siteMap.get('encrypted-dns') || []), false);
+  assert.equal(matchDomain('dnspod.com', siteMap.get('encrypted-dns') || []), false);
+  assert.equal(matchDomain('dns.alidns.com', siteMap.get('encrypted-dns') || []), true);
+  assert.equal(matchDomain('dot.clashmi.app', siteMap.get('encrypted-dns') || []), true);
+  assert.equal(matchDomain('adobe.com', siteMap.get('force-direct') || []), false);
+  assert.equal(matchDomain('apple-relay.cloudflare.com', siteMap.get('force-proxy') || []), true);
+  assert.equal(matchDomain('pypi.org', siteMap.get('force-proxy') || []), true);
 });

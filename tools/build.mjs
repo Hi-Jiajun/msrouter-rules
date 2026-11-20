@@ -205,6 +205,30 @@ export function aggregateCidrs(cidrSet) {
   return new Set(out);
 }
 
+/** Strip leading/inline `#` comments from Clash list/payload lines. */
+export function stripInlineComment(line) {
+  let l = String(line || '').trim();
+  if (!l || l.startsWith('#') || l.startsWith(';') || l.startsWith('!') || l.startsWith('//')) return '';
+  const hashIdx = l.indexOf('#');
+  if (hashIdx !== -1) l = l.slice(0, hashIdx).trim();
+  return l;
+}
+
+/** Parse Clash rule list text (DOMAIN / DOMAIN-SUFFIX / DOMAIN-KEYWORD) with inline comment stripping. */
+export function parseClashListText(text) {
+  const out = blank();
+  for (const rawLine of String(text || '').split('\n')) {
+    const l = stripInlineComment(rawLine);
+    if (!l) continue;
+    const [kind, val] = l.split(',').map(s => s.trim());
+    if (!val) continue;
+    if (kind === 'DOMAIN') out.domain.add(strip(val));
+    else if (kind === 'DOMAIN-SUFFIX') out.domain_suffix.add(strip(val));
+    else if (kind === 'DOMAIN-KEYWORD') out.domain_keyword.add(strip(val));
+  }
+  return out;
+}
+
 // ── 上游适配器：返回 blank() 形状的集合 ──────────────────────────
 const adapters = {
   'singbox-json': (up, cat, file) => {
@@ -213,24 +237,12 @@ const adapters = {
     for (const t of TYPES) if (out[t] && !DROP.has(t)) for (const v of d.rules?.[0]?.[t] || []) out[t].add(strip(v));
     return out;
   },
-  'clash-list': (up, cat, file) => {
-    const out = blank();
-    for (let l of fs.readFileSync(file, 'utf8').split('\n')) {
-      l = l.trim();
-      if (!l || l.startsWith('#') || l.startsWith(';') || l.startsWith('!') || l.startsWith('//')) continue;
-      const [kind, val] = l.split(',').map(s => s.trim());
-      if (!val) continue;
-      if (kind === 'DOMAIN') out.domain.add(strip(val));
-      else if (kind === 'DOMAIN-SUFFIX') out.domain_suffix.add(strip(val));
-      else if (kind === 'DOMAIN-KEYWORD') out.domain_keyword.add(strip(val));
-    }
-    return out;
-  },
+  'clash-list': (up, cat, file) => parseClashListText(fs.readFileSync(file, 'utf8')),
   'clash-payload': (up, cat, file) => {
     const out = blank();
-    for (let l of fs.readFileSync(file, 'utf8').split('\n')) {
-      l = l.trim();
-      if (!l || l.startsWith('#') || l === 'payload:') continue;
+    for (const rawLine of fs.readFileSync(file, 'utf8').split('\n')) {
+      const l = stripInlineComment(rawLine);
+      if (!l || l === 'payload:') continue;
       const v = strip(l.replace(/^-\s*/, '').replace(/^'|'$/g, ''));
       if (v) out.domain_suffix.add(v);
     }
@@ -348,6 +360,13 @@ async function main() {
           else { working.domain_suffix.delete(s); excludedDomains++; }
         }
       }
+      for (const kw of [...working.domain_keyword]) {
+        const kwHit = exSets.some(rs => rs.domain_keyword?.has(kw) || matchesDomainSets(kw, [rs], false));
+        if (kwHit) {
+          if (protectedSets.some(rs => rs.domain_keyword?.has(kw) || matchesDomainSets(kw, [rs], false))) protectedKept++;
+          else { working.domain_keyword.delete(kw); excludedDomains++; }
+        }
+      }
     }
 
     const prePruneDomCount = working.domain.size + working.domain_suffix.size;
@@ -396,22 +415,25 @@ async function main() {
     log(`  ✓ ${tag.padEnd(14)} ${String(total).padStart(6)} 条  ${String(manifest.rule_sets[tag].srs_bytes).padStart(7)} B${optStr}  ← ${refs.join(' + ')}`);
   }
 
-  // ── 正交性门禁：cn-domains.exclude 中的纯代理分类不得在 cn-domains 残留未受保护条目或非 TLD 父后缀 ──
+  // ── 正交性门禁：cn-domains 关键字/后缀冲突 + Stage 2a 不得无故遮蔽 Stage 2b 纯代理集 + encrypted-dns 边界 ──
   const orthogonalityLeaks = [];
   const cnExcludeTags = CFG.rule_sets['cn-domains']?.exclude || ['force-proxy'];
+  const toSetObj = r => ({
+    domain: new Set(r?.domain || []),
+    domain_suffix: new Set(r?.domain_suffix || []),
+    domain_keyword: new Set(r?.domain_keyword || []),
+  });
+
   if (builtRules['cn-domains']) {
     const cnRule = builtRules['cn-domains'];
     const cnExact = new Set(cnRule.domain || []);
     const cnSuffix = new Set(cnRule.domain_suffix || []);
+    const cnKeyword = new Set(cnRule.domain_keyword || []);
 
     for (const exTag of cnExcludeTags) {
       const exRule = builtRules[exTag];
       if (!exRule) continue;
-      const exSet = {
-        domain: new Set(exRule.domain || []),
-        domain_suffix: new Set(exRule.domain_suffix || []),
-        domain_keyword: new Set(exRule.domain_keyword || []),
-      };
+      const exSet = toSetObj(exRule);
 
       for (const d of cnExact) {
         if (matchesDomainSets(d, [exSet], true) && !matchesDomainSets(d, protectedSets, true)) {
@@ -423,6 +445,12 @@ async function main() {
           orthogonalityLeaks.push(`cn-domains.domain_suffix=${s}(vs ${exTag})`);
         }
       }
+      for (const kw of cnKeyword) {
+        if ((exSet.domain_keyword.has(kw) || matchesDomainSets(kw, [exSet], false))
+            && !protectedSets.some(rs => rs.domain_keyword?.has(kw) || matchesDomainSets(kw, [rs], false))) {
+          orthogonalityLeaks.push(`cn-domains.domain_keyword=${kw}(vs ${exTag})`);
+        }
+      }
       for (const entry of [...exSet.domain, ...exSet.domain_suffix]) {
         if (matchesDomainSets(entry, protectedSets, true)) continue;
         if (cnExact.has(entry) || cnSuffix.has(entry)) {
@@ -431,13 +459,37 @@ async function main() {
       }
     }
   }
-  // 额外校验：local:force-proxy 人工审阅代理条目不得被 Stage 2a (force-direct / direct-extra) 抢先拦截
+  // 额外校验 1：local:force-proxy 人工审阅代理条目不得被 Stage 2a (force-direct / direct-extra) 抢先拦截
   const localFpPath = path.join(ROOT, 'supplements', 'force-proxy.list');
   if (fs.existsSync(localFpPath)) {
     const localFp = adapters['local'](CFG.upstreams.local, 'force-proxy', localFpPath);
     for (const entry of [...localFp.domain, ...localFp.domain_suffix]) {
       if (matchesDomainSets(entry, protectedSets, true)) {
         orthogonalityLeaks.push(`local:force-proxy-shadowed-by-stage2a=${entry}`);
+      }
+    }
+  }
+  // 额外校验 2：Stage 2a 上游合并直连集 (force-direct ∪ direct-extra) 不得遮蔽 Stage 2b 纯代理集（显式本地直连白名单除外）
+  const explicitLocalDirect = ['force-direct', 'direct-extra']
+    .map(name => path.join(ROOT, 'supplements', `${name}.list`))
+    .filter(p => fs.existsSync(p))
+    .map(p => adapters['local'](CFG.upstreams.local, path.basename(p, '.list'), p));
+  const stage2aBuilt = ['force-direct', 'direct-extra'].map(t => toSetObj(builtRules[t]));
+  for (const exTag of cnExcludeTags) {
+    const exRule = builtRules[exTag];
+    if (!exRule) continue;
+    for (const entry of [...(exRule.domain || []), ...(exRule.domain_suffix || [])]) {
+      if (matchesDomainSets(entry, stage2aBuilt, true) && !matchesDomainSets(entry, explicitLocalDirect, true)) {
+        orthogonalityLeaks.push(`stage2a-shadows-${exTag}=${entry}`);
+      }
+    }
+  }
+  // 额外校验 3：encrypted-dns 不得误杀通用整根域或 RFC 9462 iCloud Private Relay
+  if (builtRules['encrypted-dns']) {
+    const edSet = toSetObj(builtRules['encrypted-dns']);
+    for (const forbidden of ['dnspod.com', 'alidns.com', 'mask.icloud.com', 'mask-h2.icloud.com']) {
+      if (edSet.domain.has(forbidden) || edSet.domain_suffix.has(forbidden)) {
+        orthogonalityLeaks.push(`encrypted-dns-forbidden=${forbidden}`);
       }
     }
   }

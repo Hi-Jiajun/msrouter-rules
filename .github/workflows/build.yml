@@ -14,6 +14,11 @@ env:
   SING_BOX_VERSION: v1.14.4
   KEEP_RELEASES: 30
 
+# 串行化同分支构建与 Release 发布，避免 schedule 与轨 2 push 并发踩踏同一 latest 资产
+concurrency:
+  group: build-rules-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -54,15 +59,18 @@ jobs:
             dist/manifest.json
           retention-days: 7
 
-      - name: 发布
+      - name: 原子发布（先 --draft 全量上传再切换 latest，避免半更新窗口）
         if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'push')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          STAMP=$(date +%Y%m%d)
-          gh release create "rules-$STAMP" dist/srs/*.srs dist/geosite.dat dist/geoip.dat dist/manifest.json \
-            --title "rules $STAMP" --notes "sing-box $SING_BOX_VERSION + v2ray geosite.dat/geoip.dat；来源与条目数见 manifest.json" || \
-          gh release upload "rules-$STAMP" dist/srs/*.srs dist/geosite.dat dist/geoip.dat dist/manifest.json --clobber
+          STAMP=$(date +%Y%m%d-%H%M%S)
+          TAG="rules-$STAMP"
+          gh release create "$TAG" dist/srs/*.srs dist/geosite.dat dist/geoip.dat dist/manifest.json \
+            --draft \
+            --title "rules $STAMP" \
+            --notes "sing-box $SING_BOX_VERSION + v2ray geosite.dat/geoip.dat；来源与条目数见 manifest.json"
+          gh release edit "$TAG" --draft=false --latest
 
       - name: 清理旧 release（保留最近 ${{ env.KEEP_RELEASES }} 个）
         if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'push')

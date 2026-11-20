@@ -433,5 +433,80 @@
     "domain": "spiderpool.com",
     "set": "fakeip-filter",
     "expect": "out"
+  },
+  {
+    "domain": "1-courier.push.apple.com",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "time.nist.gov",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "cds-cdn.v.aaplimg.com",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "guzzoni.apple.com",
+    "set": "direct-extra",
+    "expect": "out"
+  },
+  {
+    "domain": "amp-api.podcasts.apple.com",
+    "set": "direct-extra",
+    "expect": "out"
+  },
+  {
+    "domain": "music.apple.com",
+    "set": "direct-extra",
+    "expect": "out"
+  },
+  {
+    "domain": "dnspod.com",
+    "set": "encrypted-dns",
+    "expect": "out"
+  },
+  {
+    "domain": "alidns.com",
+    "set": "encrypted-dns",
+    "expect": "out"
+  },
+  {
+    "domain": "dns.alidns.com",
+    "set": "encrypted-dns",
+    "expect": "in"
+  },
+  {
+    "domain": "dot.clashmi.app",
+    "set": "encrypted-dns",
+    "expect": "in"
+  },
+  {
+    "domain": "mask.icloud.com",
+    "set": "encrypted-dns",
+    "expect": "out"
+  },
+  {
+    "domain": "adobe.com",
+    "set": "force-direct",
+    "expect": "out"
+  },
+  {
+    "domain": "bunny.net",
+    "set": "force-direct",
+    "expect": "out"
+  },
+  {
+    "domain": "apple-relay.cloudflare.com",
+    "set": "force-proxy",
+    "expect": "in"
+  },
+  {
+    "domain": "pypi.org",
+    "set": "force-proxy",
+    "expect": "in"
   }
 ]

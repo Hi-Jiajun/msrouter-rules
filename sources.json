@@ -241,7 +241,14 @@
         "synology.me",
         "keyword:quickconnect",
         "quickconnect.cn",
-        "quickconnect.to"
+        "quickconnect.to",
+        "adobe.com",
+        "opera.com",
+        "bunny.net",
+        "rewards.bing.com",
+        "chii.in",
+        "linux.sb",
+        "liveperson.net"
       ]
     },
     "force-proxy": {
@@ -264,7 +271,26 @@
       ],
       "deny": [
         "np-edge.itunes.apple.com",
-        "play-edge.itunes.apple.com"
+        "play-edge.itunes.apple.com",
+        "guzzoni.apple.com",
+        "guzzoni-apple-com.v.aaplimg.com",
+        "guzzoni.smoot.apple.com",
+        "probe.siri.apple.com",
+        "seed.siri.apple.com",
+        "seed-sequoia.siri.apple.com",
+        "seed-swallow.siri.apple.com",
+        "swallow.apple.com",
+        "swallow-apple-com.v.aaplimg.com",
+        "sequoia.apple.com",
+        "podcasts.apple.com",
+        "amp-api.podcasts.apple.com",
+        "podcasts.itunes.apple.com",
+        "amp-api.media.apple.com",
+        "music.apple.com",
+        "amp-api.music.apple.com",
+        "amp-api-edge.music.apple.com",
+        "play.music.apple.com",
+        "musicstatus.music.apple.com"
       ]
     },
     "fakeip-filter": {
@@ -274,7 +300,16 @@
       ]
     },
     "encrypted-dns": {
-      "take": "aethersailor:Encrypted_DNS"
+      "union": [
+        "aethersailor:Encrypted_DNS",
+        "local:encrypted-dns"
+      ],
+      "deny": [
+        "exact_suffix:dnspod.com",
+        "exact_suffix:alidns.com",
+        "mask.icloud.com",
+        "mask-h2.icloud.com"
+      ]
     }
   },
   "dat": {

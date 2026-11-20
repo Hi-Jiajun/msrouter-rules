@@ -5,7 +5,23 @@
 # Cloudflare 验证 / 对象存储与公共静态 CDN
 DOMAIN-SUFFIX,challenges.cloudflare.com
 DOMAIN-SUFFIX,cloudflarestorage.com
+DOMAIN-SUFFIX,cdnjs.cloudflare.com
 DOMAIN-SUFFIX,ldstatic.com
+
+# Apple Intelligence / Private Relay 协同中继
+DOMAIN-SUFFIX,apple-relay.cloudflare.com
+DOMAIN-SUFFIX,apple-relay.fastly-edge.com
+DOMAIN-SUFFIX,apple-relay.apple.com
+
+# 开发生态 / 包源 / 支付 / 公共开源基础设施
+DOMAIN-SUFFIX,pypi.org
+DOMAIN-SUFFIX,files.pythonhosted.org
+DOMAIN-SUFFIX,gitlab.com
+DOMAIN-SUFFIX,stripe.com
+DOMAIN-SUFFIX,stripe.network
+DOMAIN-SUFFIX,download.proxmox.com
+DOMAIN-SUFFIX,dl.flathub.org
+DOMAIN-SUFFIX,r.jina.ai
 
 # 智能家居 / 可观测与开源基础设施
 DOMAIN-SUFFIX,home-assistant.io

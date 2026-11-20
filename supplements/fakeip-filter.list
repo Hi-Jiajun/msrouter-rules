@@ -17,10 +17,14 @@ DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,ntp.org
 DOMAIN-SUFFIX,time.apple.com
 DOMAIN-SUFFIX,time.windows.com
+DOMAIN,time.nist.gov
 DOMAIN-SUFFIX,ntp.aliyun.com
 DOMAIN-SUFFIX,ntp.tencent.com
 DOMAIN-SUFFIX,ntp.ntsc.ac.cn
 DOMAIN-SUFFIX,cn.ntp.org.cn
+
+# ── Apple APNs 推送持久长连接（消除 Wi-Fi/蜂窝切换 FakeIP 残留）────
+DOMAIN-SUFFIX,push.apple.com
 
 # ── 国内与系统原生 Captive Portal 探测 ───────────────────────────
 DOMAIN-SUFFIX,msftconnecttest.com

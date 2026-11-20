@@ -38,7 +38,19 @@
     { "key": "fakeip-filter", "domain": "stun.qq.com", "expect": "in" },
     { "key": "fakeip-filter", "domain": "connectivitycheck.gstatic.com", "expect": "out" },
     { "key": "fakeip-filter", "domain": "stun.l.google.com", "expect": "out" },
-    { "key": "fakeip-filter", "domain": "baidu.com", "expect": "out" }
+    { "key": "fakeip-filter", "domain": "baidu.com", "expect": "out" },
+    { "key": "fakeip-filter", "domain": "1-courier.push.apple.com", "expect": "in" },
+    { "key": "fakeip-filter", "domain": "time.nist.gov", "expect": "in" },
+    { "key": "direct-extra", "domain": "cds-cdn.v.aaplimg.com", "expect": "in" },
+    { "key": "direct-extra", "domain": "guzzoni.apple.com", "expect": "out" },
+    { "key": "direct-extra", "domain": "amp-api.podcasts.apple.com", "expect": "out" },
+    { "key": "encrypted-dns", "domain": "dns.alidns.com", "expect": "in" },
+    { "key": "encrypted-dns", "domain": "dot.clashmi.app", "expect": "in" },
+    { "key": "encrypted-dns", "domain": "dnspod.com", "expect": "out" },
+    { "key": "encrypted-dns", "domain": "mask.icloud.com", "expect": "out" },
+    { "key": "force-direct", "domain": "adobe.com", "expect": "out" },
+    { "key": "force-proxy", "domain": "apple-relay.cloudflare.com", "expect": "in" },
+    { "key": "force-proxy", "domain": "pypi.org", "expect": "in" }
   ],
   "geoip_keys": [
     { "key": "cn", "min": 4000 },

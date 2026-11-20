@@ -1,0 +1,10 @@
+# 本地补充：精准加密 DNS (DoH / DoT) 端点
+# 当 sources.json 剥离上游宽泛整根域（如 alidns.com / dnspod.com）后，由此文件保留其精确加密 DNS 子域，
+# 并补充现网捕获的遗漏 DoT/DoH 端点。
+# 注意：mask.icloud.com / mask-h2.icloud.com 交由 OxiDNS 返回 RFC 9462 NODATA，不放进本阻断表。
+
+# 阿里云公共 DoH / DoT（保留 www.alidns.com 正常访问）
+DOMAIN-SUFFIX,dns.alidns.com
+
+# 现网捕获遗漏 DoT 端点
+DOMAIN-SUFFIX,dot.clashmi.app
