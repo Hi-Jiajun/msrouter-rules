@@ -74,8 +74,7 @@
         "facebook",
         "instagram",
         "spotify",
-        "paypal",
-        "speedtest"
+        "paypal"
       ]
     },
     "cn-ip": {
@@ -310,6 +309,15 @@
         "mask.icloud.com",
         "mask-h2.icloud.com"
       ]
+    },
+    "ld-ecmp-cdn": {
+      "take": "local:ld-ecmp-cdn"
+    },
+    "ld-wan2-bulk": {
+      "take": "local:ld-wan2-bulk"
+    },
+    "ld-nat1-direct": {
+      "take": "local:ld-nat1-direct"
     }
   },
   "dat": {
@@ -341,7 +349,10 @@
       "force-proxy": "force-proxy",
       "direct-extra": "direct-extra",
       "fakeip-filter": "fakeip-filter",
-      "encrypted-dns": "encrypted-dns"
+      "encrypted-dns": "encrypted-dns",
+      "ld-ecmp-cdn": "ld-ecmp-cdn",
+      "ld-wan2-bulk": "ld-wan2-bulk",
+      "ld-nat1-direct": "ld-nat1-direct"
     },
     "geoip": {
       "cn": "cn-ip",

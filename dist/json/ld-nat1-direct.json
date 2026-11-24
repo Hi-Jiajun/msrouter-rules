@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain_suffix": [
+        "battle.net",
+        "ea.com",
+        "epicgames.com",
+        "global.stun.twilio.com",
+        "nintendo.net",
+        "parsec.app",
+        "playstation.net",
+        "pvp.net",
+        "riotgames.com",
+        "steamserver.net",
+        "stun.cloudflare.com",
+        "stun.l.google.com",
+        "stun.miwifi.com",
+        "stun.qq.com",
+        "stun1.l.google.com",
+        "stun2.l.google.com",
+        "stun3.l.google.com",
+        "stun4.l.google.com",
+        "tailscale.com",
+        "tailscale.io",
+        "ts.net",
+        "turn.cloudflare.com",
+        "ubisoft.com",
+        "ubisoftconnect.com",
+        "xboxlive.com",
+        "zerotier.com"
+      ]
+    }
+  ]
+}

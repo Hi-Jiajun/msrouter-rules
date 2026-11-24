@@ -14,6 +14,7 @@
         "connect.rom.miui.com",
         "connectivitycheck.platform.hicloud.com",
         "corp",
+        "global.stun.twilio.com",
         "hiwifi.com",
         "home.arpa",
         "in-addr.arpa",
@@ -45,7 +46,14 @@
         "steamcontent.com",
         "steamserver.net",
         "stun.chat.bilibili.com",
+        "stun.cloudflare.com",
+        "stun.l.google.com",
+        "stun.playstation.net",
         "stun.qq.com",
+        "stun1.l.google.com",
+        "stun2.l.google.com",
+        "stun3.l.google.com",
+        "stun4.l.google.com",
         "szbdyd.com",
         "tendawifi.com",
         "test",
@@ -54,6 +62,7 @@
         "tplinkwifi.net",
         "tplogin.cn",
         "ts.net",
+        "turn.cloudflare.com",
         "zte.home"
       ]
     }

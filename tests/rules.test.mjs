@@ -139,10 +139,10 @@ test('contract: public repo contains zero personal/private domains across source
 
 test('contract: fakeip-filter whitelist shrink & curated direct-extra / force-proxy / ai rules', () => {
   const fakeip = loadDistRule('fakeip-filter');
-  for (const removed of ['connectivitycheck.gstatic.com', 'stun.l.google.com', 'stun1.l.google.com', 'stun.cloudflare.com', 'tailscale.com', 'nas.synology.me', 'quickconnect.cn']) {
+  for (const removed of ['connectivitycheck.gstatic.com', 'tailscale.com', 'nas.synology.me', 'quickconnect.cn']) {
     assert.equal(matchesDomainSets(removed, [fakeip], true), false, `${removed} must be absent from fakeip-filter`);
   }
-  for (const kept of ['time.apple.com', '0.pool.ntp.org', 'msftconnecttest.com', 'captive.apple.com', 'stun.qq.com', 'mcdn.bilivideo.cn', 'home.arpa']) {
+  for (const kept of ['time.apple.com', '0.pool.ntp.org', 'msftconnecttest.com', 'captive.apple.com', 'stun.qq.com', 'stun.l.google.com', 'stun1.l.google.com', 'stun.cloudflare.com', 'mcdn.bilivideo.cn', 'home.arpa']) {
     assert.equal(matchesDomainSets(kept, [fakeip], true), true, `${kept} must remain in fakeip-filter`);
   }
 
@@ -255,4 +255,59 @@ test('contract: Phase A dual-region Apple, APNs/NTP fakeip-filter, encrypted-dns
   assert.equal(matchDomain('adobe.com', siteMap.get('force-direct') || []), false);
   assert.equal(matchDomain('apple-relay.cloudflare.com', siteMap.get('force-proxy') || []), true);
   assert.equal(matchDomain('pypi.org', siteMap.get('force-proxy') || []), true);
+});
+
+test('contract: ROUTING-P1 speedtest precision, STUN fakeip-filter & ld-* orthogonality vs 17 pure-proxy sets + force-proxy', () => {
+  const OXIDNS_PROXY_PURE_17 = [
+    'ai', 'google', 'github', 'youtube', 'telegram',
+    'netflix', 'disney', 'hbo', 'hulu', 'primevideo', 'appletv',
+    'tiktok', 'twitter', 'facebook', 'instagram', 'spotify', 'paypal',
+  ];
+  const stage2bSets = [...OXIDNS_PROXY_PURE_17, 'force-proxy'].map(loadDistRule);
+  const stage2DirectGuard = ['fakeip-filter', 'force-direct', 'direct-extra'].map(loadDistRule);
+
+  const cn = loadDistRule('cn-domains');
+  const directExtra = loadDistRule('direct-extra');
+  const forceDirect = loadDistRule('force-direct');
+  const speedtest = loadDistRule('speedtest');
+  const ldEcmp = loadDistRule('ld-ecmp-cdn');
+  const ldWan2 = loadDistRule('ld-wan2-bulk');
+  const ldNat1 = loadDistRule('ld-nat1-direct');
+
+  // 1) Speedtest portal & CN speedtest restored, while ooklaserver.net / fast.com / speed.cloudflare.com stay out of direct sets
+  assert.equal(matchesDomainSets('www.speedtest.net', [directExtra], true), true);
+  assert.equal(matchesDomainSets('speedtest.cn', [cn], true), true);
+  assert.equal(matchesDomainSets('test.speedtest.10086.cn', [cn], true), true);
+  for (const nodeDom of ['ooklaserver.net', 'paris1.prod.hosts.ooklaserver.net', 'fast.com', 'speed.cloudflare.com']) {
+    assert.equal(matchesDomainSets(nodeDom, [directExtra, forceDirect, cn], true), false, `${nodeDom} must not match static direct sets`);
+    assert.equal(matchesDomainSets(nodeDom, [speedtest], true), true, `${nodeDom} must remain in speedtest`);
+  }
+  assert.equal(matchesDomainSets('paris1.prod.hosts.ooklaserver.net', [ldEcmp], true), true);
+
+  // 2) Pure overseas domains must NEVER appear in ld-* physical routing sets
+  const forbiddenEcmp = [
+    'docker.io', 'ghcr.io', 'gcr.io', 'quay.io', 'objects.githubusercontent.com',
+    'dl.google.com', 'edgedl.me.gvt1.com', 'fast.com', 'speed.cloudflare.com', 'ibytedtos.com',
+  ];
+  for (const d of forbiddenEcmp) {
+    assert.equal(matchesDomainSets(d, [ldEcmp], true), false, `${d} must not be in ld-ecmp-cdn`);
+  }
+  for (const d of ['steamcommunity.com', 'steampowered.com', 'discord.gg', 'discord.media']) {
+    assert.equal(matchesDomainSets(d, [ldNat1], true), false, `${d} must not be in ld-nat1-direct`);
+  }
+
+  // 3) Zero unexpected overlap between ld-{ecmp-cdn,wan2-bulk,nat1-direct} and OxiDNS 17 geosite_proxy_pure + force-proxy:
+  //    Every entry in ld-* that touches Stage 2b MUST be explicitly protected ahead of Stage 2b by Stage 2.0/2a direct guard.
+  for (const [ldTag, ldSet] of [['ld-ecmp-cdn', ldEcmp], ['ld-wan2-bulk', ldWan2], ['ld-nat1-direct', ldNat1]]) {
+    assert.equal(ldSet.domain_keyword.size, 0, `${ldTag} must not use broad domain_keyword`);
+    for (const entry of [...ldSet.domain, ...ldSet.domain_suffix]) {
+      if (matchesDomainSets(entry, stage2bSets, true)) {
+        assert.equal(
+          matchesDomainSets(entry, stage2DirectGuard, true),
+          true,
+          `unexpected Stage 2b proxy overlap in ${ldTag}: ${entry} would receive FakeIP in OxiDNS`,
+        );
+      }
+    }
+  }
 });

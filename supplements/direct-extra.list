@@ -1,9 +1,38 @@
 # 本地补充：Apple / 高德等国内静态与定位 CDN 确定性直连白名单
 # 格式同 Clash 规则（DOMAIN / DOMAIN-SUFFIX / DOMAIN-KEYWORD）
 
-# Apple 媒体与 App Store 国内 CDN（收窄至 g.aaplimg.com，防止误伤 v.aaplimg.com 交互 API；cds-cdn.v.aaplimg.com 由 meta:apple-cn 覆盖）
+# Apple 媒体与系统应用国内高速下载 CDN（收窄至 g.aaplimg.com，防止误伤 v.aaplimg.com 交互 API；cds-cdn.v.aaplimg.com 由 meta:apple-cn 覆盖）
 DOMAIN-SUFFIX,mzstatic.com
 DOMAIN-SUFFIX,g.aaplimg.com
+DOMAIN-SUFFIX,appldnld.apple.com
+DOMAIN-SUFFIX,updates-http.cdn-apple.com
+DOMAIN-SUFFIX,swcdn.apple.com
+DOMAIN-SUFFIX,osxapps.itunes.apple.com
+DOMAIN-SUFFIX,iosapps.itunes.apple.com
 
 # Apple Maps / 定位国内高德调度入口
 DOMAIN,dispatcher.is.autonavi.com
+
+# Microsoft / Xbox / Steam 国内可达高速系统与游戏下载 CDN（防 Stage 3 mixed 或上游漂移误吞）
+DOMAIN-SUFFIX,windowsupdate.com
+DOMAIN-SUFFIX,update.microsoft.com
+DOMAIN-SUFFIX,download.microsoft.com
+DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com
+DOMAIN-SUFFIX,tlu.dl.delivery.mp.microsoft.com
+DOMAIN-SUFFIX,assets1.xboxlive.com
+DOMAIN-SUFFIX,assets2.xboxlive.com
+DOMAIN-SUFFIX,xvcf1.xboxlive.com
+DOMAIN-SUFFIX,xvcf2.xboxlive.com
+DOMAIN-SUFFIX,steamcontent.com
+DOMAIN-SUFFIX,dl.steam.clngaa.com
+DOMAIN-SUFFIX,st.dl.eccdnx.com
+DOMAIN-SUFFIX,st.dl.bscstorage.net
+
+# 测速门户与国内测速站（直连定位本地节点；严禁收录 ooklaserver.net / fast.com / speed.cloudflare.com，留给 Stage 4 按节点真实 IP 分流）
+DOMAIN-SUFFIX,speedtest.net
+DOMAIN-SUFFIX,ookla.com
+DOMAIN-SUFFIX,cdnst.net
+DOMAIN-SUFFIX,speedtest.cn
+DOMAIN-SUFFIX,globalspeed.cn
+DOMAIN-SUFFIX,test.ustc.edu.cn
+DOMAIN-SUFFIX,speed.neu.edu.cn

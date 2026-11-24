@@ -24,9 +24,12 @@
   "google": 380,
   "force-direct": 750,
   "force-proxy": 3100,
-  "direct-extra": 700,
-  "fakeip-filter": 30,
+  "direct-extra": 390,
+  "fakeip-filter": 40,
   "encrypted-dns": 2508,
+  "ld-ecmp-cdn": 45,
+  "ld-wan2-bulk": 18,
+  "ld-nat1-direct": 18,
   "telegram-ip": 7,
   "netflix-ip": 16
 }

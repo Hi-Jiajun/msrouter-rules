@@ -382,12 +382,12 @@
   {
     "domain": "stun.l.google.com",
     "set": "fakeip-filter",
-    "expect": "out"
+    "expect": "in"
   },
   {
     "domain": "stun1.l.google.com",
     "set": "fakeip-filter",
-    "expect": "out"
+    "expect": "in"
   },
   {
     "domain": "stun.example.org",
@@ -508,5 +508,145 @@
     "domain": "pypi.org",
     "set": "force-proxy",
     "expect": "in"
+  },
+  {
+    "domain": "www.speedtest.net",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "ookla.com",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "cdnst.net",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "speedtest.cn",
+    "set": "cn-domains",
+    "expect": "in"
+  },
+  {
+    "domain": "speedtest.cn",
+    "set": "direct-extra",
+    "expect": "in"
+  },
+  {
+    "domain": "test.speedtest.10086.cn",
+    "set": "cn-domains",
+    "expect": "in"
+  },
+  {
+    "domain": "paris1.prod.hosts.ooklaserver.net",
+    "set": "direct-extra",
+    "expect": "out"
+  },
+  {
+    "domain": "paris1.prod.hosts.ooklaserver.net",
+    "set": "force-direct",
+    "expect": "out"
+  },
+  {
+    "domain": "paris1.prod.hosts.ooklaserver.net",
+    "set": "cn-domains",
+    "expect": "out"
+  },
+  {
+    "domain": "paris1.prod.hosts.ooklaserver.net",
+    "set": "speedtest",
+    "expect": "in"
+  },
+  {
+    "domain": "paris1.prod.hosts.ooklaserver.net",
+    "set": "ld-ecmp-cdn",
+    "expect": "in"
+  },
+  {
+    "domain": "www.speedtest.net",
+    "set": "ld-ecmp-cdn",
+    "expect": "in"
+  },
+  {
+    "domain": "fast.com",
+    "set": "direct-extra",
+    "expect": "out"
+  },
+  {
+    "domain": "fast.com",
+    "set": "ld-ecmp-cdn",
+    "expect": "out"
+  },
+  {
+    "domain": "speed.cloudflare.com",
+    "set": "direct-extra",
+    "expect": "out"
+  },
+  {
+    "domain": "speed.cloudflare.com",
+    "set": "ld-ecmp-cdn",
+    "expect": "out"
+  },
+  {
+    "domain": "stun.l.google.com",
+    "set": "ld-nat1-direct",
+    "expect": "in"
+  },
+  {
+    "domain": "stun4.l.google.com",
+    "set": "fakeip-filter",
+    "expect": "in"
+  },
+  {
+    "domain": "stun4.l.google.com",
+    "set": "ld-nat1-direct",
+    "expect": "in"
+  },
+  {
+    "domain": "baidupcs.com",
+    "set": "ld-wan2-bulk",
+    "expect": "in"
+  },
+  {
+    "domain": "file.myqcloud.com",
+    "set": "ld-wan2-bulk",
+    "expect": "in"
+  },
+  {
+    "domain": "docker.io",
+    "set": "ld-ecmp-cdn",
+    "expect": "out"
+  },
+  {
+    "domain": "ghcr.io",
+    "set": "ld-ecmp-cdn",
+    "expect": "out"
+  },
+  {
+    "domain": "dl.google.com",
+    "set": "ld-ecmp-cdn",
+    "expect": "out"
+  },
+  {
+    "domain": "steamcommunity.com",
+    "set": "ld-nat1-direct",
+    "expect": "out"
+  },
+  {
+    "domain": "steampowered.com",
+    "set": "ld-nat1-direct",
+    "expect": "out"
+  },
+  {
+    "domain": "discord.gg",
+    "set": "ld-nat1-direct",
+    "expect": "out"
+  },
+  {
+    "domain": "discord.media",
+    "set": "ld-nat1-direct",
+    "expect": "out"
   }
 ]

@@ -1,0 +1,32 @@
+# Landscape 物理选路专用：Flow 4 WAN2 单线独享（单 IP 风控敏感的国内网盘与云对象存储）
+# 注意：仅供 Landscape DNS/BPF 物理选路使用（严禁加入 OxiDNS 或 geo-sync ALL_STATIC_CATS）
+
+# 国内网盘
+DOMAIN-SUFFIX,baidupcs.com
+DOMAIN-SUFFIX,pcs.baidu.com
+DOMAIN-SUFFIX,pan.baidu.com
+DOMAIN-SUFFIX,aliyundrive.com
+DOMAIN-SUFFIX,alipan.com
+DOMAIN-SUFFIX,alipan.net
+DOMAIN-SUFFIX,115.com
+DOMAIN-SUFFIX,115cdn.net
+DOMAIN-SUFFIX,115cdn.com
+DOMAIN-SUFFIX,quark.cn
+DOMAIN-SUFFIX,cloud.189.cn
+DOMAIN-SUFFIX,ctfile.com
+DOMAIN-SUFFIX,weiyun.com
+DOMAIN-SUFFIX,caiyun.139.com
+DOMAIN-SUFFIX,mcloud.139.com
+
+# 国内云对象存储
+DOMAIN-SUFFIX,aliyuncs.com
+DOMAIN-SUFFIX,myqcloud.com
+DOMAIN-SUFFIX,myhuaweicloud.com
+DOMAIN-SUFFIX,qiniucdn.com
+DOMAIN-SUFFIX,qbox.me
+DOMAIN-SUFFIX,clouddn.com
+DOMAIN-SUFFIX,upaiyun.com
+DOMAIN-SUFFIX,volces.com
+DOMAIN-SUFFIX,bcebos.com
+DOMAIN-SUFFIX,ksyun.com
+DOMAIN-SUFFIX,jdcloud-oss.com

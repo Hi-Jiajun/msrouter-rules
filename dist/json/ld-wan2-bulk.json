@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain_suffix": [
+        "115.com",
+        "115cdn.com",
+        "115cdn.net",
+        "alipan.com",
+        "alipan.net",
+        "aliyuncs.com",
+        "aliyundrive.com",
+        "baidupcs.com",
+        "bcebos.com",
+        "caiyun.139.com",
+        "cloud.189.cn",
+        "clouddn.com",
+        "ctfile.com",
+        "jdcloud-oss.com",
+        "ksyun.com",
+        "mcloud.139.com",
+        "myhuaweicloud.com",
+        "myqcloud.com",
+        "pan.baidu.com",
+        "pcs.baidu.com",
+        "qbox.me",
+        "qiniucdn.com",
+        "quark.cn",
+        "upaiyun.com",
+        "volces.com",
+        "weiyun.com"
+      ]
+    }
+  ]
+}

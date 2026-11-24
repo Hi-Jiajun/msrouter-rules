@@ -1,0 +1,33 @@
+# Landscape 物理选路专用：Flow 0 keep_going + allow_reuse_port=true (NAT1 全锥形打洞)
+# 注意：仅供 Landscape DNS/BPF 物理选路使用（严禁加入 OxiDNS 或 geo-sync ALL_STATIC_CATS）
+# 严禁混入 steamcommunity.com / steampowered.com / discord.gg / discord.media 等纯海外代理域名
+
+# STUN / TURN 与 P2P 异地组网直连打洞
+DOMAIN-SUFFIX,stun.l.google.com
+DOMAIN-SUFFIX,stun1.l.google.com
+DOMAIN-SUFFIX,stun2.l.google.com
+DOMAIN-SUFFIX,stun3.l.google.com
+DOMAIN-SUFFIX,stun4.l.google.com
+DOMAIN-SUFFIX,stun.miwifi.com
+DOMAIN-SUFFIX,stun.qq.com
+DOMAIN-SUFFIX,stun.cloudflare.com
+DOMAIN-SUFFIX,turn.cloudflare.com
+DOMAIN-SUFFIX,global.stun.twilio.com
+DOMAIN-SUFFIX,tailscale.com
+DOMAIN-SUFFIX,tailscale.io
+DOMAIN-SUFFIX,ts.net
+DOMAIN-SUFFIX,zerotier.com
+DOMAIN-SUFFIX,parsec.app
+
+# 主机与 PC 联机对战打洞
+DOMAIN-SUFFIX,steamserver.net
+DOMAIN-SUFFIX,xboxlive.com
+DOMAIN-SUFFIX,playstation.net
+DOMAIN-SUFFIX,nintendo.net
+DOMAIN-SUFFIX,riotgames.com
+DOMAIN-SUFFIX,pvp.net
+DOMAIN-SUFFIX,battle.net
+DOMAIN-SUFFIX,ea.com
+DOMAIN-SUFFIX,ubisoft.com
+DOMAIN-SUFFIX,ubisoftconnect.com
+DOMAIN-SUFFIX,epicgames.com

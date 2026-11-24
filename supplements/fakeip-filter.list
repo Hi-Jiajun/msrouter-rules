@@ -33,7 +33,16 @@ DOMAIN-SUFFIX,captive.apple.com
 DOMAIN-SUFFIX,connectivitycheck.platform.hicloud.com
 DOMAIN-SUFFIX,connect.rom.miui.com
 
-# ── 国内 STUN & Steam 下载 CDN ───────────────────────────────────
+# ── STUN / TURN 打洞探测与 Steam 下载 CDN（Stage 2.0 优先拿真 IP）──
+DOMAIN-SUFFIX,stun.l.google.com
+DOMAIN-SUFFIX,stun1.l.google.com
+DOMAIN-SUFFIX,stun2.l.google.com
+DOMAIN-SUFFIX,stun3.l.google.com
+DOMAIN-SUFFIX,stun4.l.google.com
+DOMAIN-SUFFIX,stun.cloudflare.com
+DOMAIN-SUFFIX,turn.cloudflare.com
+DOMAIN-SUFFIX,global.stun.twilio.com
+DOMAIN-SUFFIX,stun.playstation.net
 DOMAIN-SUFFIX,stun.qq.com
 DOMAIN-SUFFIX,stun.miwifi.com
 DOMAIN-SUFFIX,stun.chat.bilibili.com

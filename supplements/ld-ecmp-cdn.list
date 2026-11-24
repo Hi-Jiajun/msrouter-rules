@@ -1,0 +1,86 @@
+# Landscape 物理选路专用：Flow 5 双线 ECMP (2:3) 无状态大带宽下载与测速 CDN
+# 注意：仅供 Landscape DNS/BPF 物理选路使用（严禁加入 OxiDNS 或 geo-sync ALL_STATIC_CATS）
+# 严禁混入 OxiDNS Stage 2b 必返 FakeIP 的纯海外代理域名（如 docker.io / ghcr.io / fast.com / speed.cloudflare.com / dl.google.com 等）
+
+# 游戏下载 CDN（国内与双栖节点）
+DOMAIN-SUFFIX,steamcontent.com
+DOMAIN-SUFFIX,steamserver.net
+DOMAIN-SUFFIX,steamcdn-a.akamaihd.net
+DOMAIN-SUFFIX,dl.steam.clngaa.com
+DOMAIN-SUFFIX,st.dl.eccdnx.com
+DOMAIN-SUFFIX,st.dl.bscstorage.net
+DOMAIN-SUFFIX,trts.baishancdnx.cn
+DOMAIN-SUFFIX,content.steamchina.com
+DOMAIN-SUFFIX,xz.pphimalayanrt.com
+DOMAIN-SUFFIX,lv.queniujq.cn
+DOMAIN-SUFFIX,epicgames-download1.akamaized.net
+DOMAIN-SUFFIX,fastly-download.epicgames.com
+DOMAIN-SUFFIX,download.epicgames.com
+DOMAIN-SUFFIX,dl.playstation.net
+DOMAIN-SUFFIX,gst.prod.dl.playstation.net
+DOMAIN-SUFFIX,assets1.xboxlive.com
+DOMAIN-SUFFIX,assets2.xboxlive.com
+DOMAIN-SUFFIX,assets1.xboxlive.cn
+DOMAIN-SUFFIX,assets2.xboxlive.cn
+DOMAIN-SUFFIX,xvcf1.xboxlive.com
+DOMAIN-SUFFIX,xvcf2.xboxlive.com
+DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com
+DOMAIN-SUFFIX,tlu.dl.delivery.mp.microsoft.com
+DOMAIN-SUFFIX,atum.hac.lp1.d4c.nintendo.net
+DOMAIN-SUFFIX,origin-a.akamaihd.net
+DOMAIN-SUFFIX,ubisoftconnect.com
+DOMAIN-SUFFIX,uplaypc-s-ubisoft.cdn.ubionline.com.cn
+DOMAIN-SUFFIX,blzddist1-a.akamaihd.net
+DOMAIN-SUFFIX,blzddistkr1-a.akamaihd.net
+DOMAIN-SUFFIX,level3.blizzard.com
+DOMAIN-SUFFIX,necdn.leihuo.netease.com
+
+# 系统与应用更新国内可达 CDN
+DOMAIN-SUFFIX,appldnld.apple.com
+DOMAIN-SUFFIX,updates-http.cdn-apple.com
+DOMAIN-SUFFIX,swcdn.apple.com
+DOMAIN-SUFFIX,osxapps.itunes.apple.com
+DOMAIN-SUFFIX,iosapps.itunes.apple.com
+DOMAIN-SUFFIX,mzstatic.com
+DOMAIN-SUFFIX,g.aaplimg.com
+DOMAIN-SUFFIX,windowsupdate.com
+DOMAIN-SUFFIX,update.microsoft.com
+DOMAIN-SUFFIX,download.microsoft.com
+DOMAIN-SUFFIX,bigota.d.miui.com
+DOMAIN-SUFFIX,ultimateota.d.miui.com
+DOMAIN-SUFFIX,cdnorg.d.miui.com
+
+# 国内开源镜像源
+DOMAIN-SUFFIX,registry.npmmirror.com
+DOMAIN-SUFFIX,mirrors.tuna.tsinghua.edu.cn
+DOMAIN-SUFFIX,mirrors.ustc.edu.cn
+DOMAIN-SUFFIX,mirrors.aliyun.com
+DOMAIN-SUFFIX,mirrors.cloud.tencent.com
+DOMAIN-SUFFIX,mirrors.huaweicloud.com
+DOMAIN-SUFFIX,mirrors.bfsu.edu.cn
+DOMAIN-SUFFIX,mirrors.nju.edu.cn
+DOMAIN-SUFFIX,mirrors.zju.edu.cn
+DOMAIN-SUFFIX,mirrors.sjtug.sjtu.edu.cn
+
+# 测速门户、国内测速站与双栖测速节点（国内真 IP 走双线 ECMP，海外 FakeIP 自动由 index 100 进 sing-box）
+DOMAIN-SUFFIX,speedtest.net
+DOMAIN-SUFFIX,ookla.com
+DOMAIN-SUFFIX,cdnst.net
+DOMAIN-SUFFIX,ooklaserver.net
+DOMAIN-SUFFIX,speedtest.cn
+DOMAIN-SUFFIX,globalspeed.cn
+DOMAIN-SUFFIX,test.ustc.edu.cn
+DOMAIN-SUFFIX,speed.neu.edu.cn
+
+# B站 / 字节国内 / 腾讯静态视频与下载 CDN 及双栖 Akamai
+DOMAIN-SUFFIX,bilivideo.com
+DOMAIN-SUFFIX,bilivideo.cn
+DOMAIN-SUFFIX,hdslb.com
+DOMAIN-SUFFIX,akamaized.net
+DOMAIN-SUFFIX,bytecdn.cn
+DOMAIN-SUFFIX,byteimg.com
+DOMAIN-SUFFIX,pstatp.com
+DOMAIN-SUFFIX,v.smtcdns.com
+DOMAIN-SUFFIX,down.qq.com
+DOMAIN-SUFFIX,dldir1.qq.com
+DOMAIN-SUFFIX,dldir1v6.qq.com
